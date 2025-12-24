@@ -1,4 +1,5 @@
 const axios = require('axios');
+const readConfig = require('./readConfig.js')
 
 /**
  * 
@@ -34,6 +35,7 @@ async function retrieveRiverApiData(url) {
 
 // get the maxinum APR
 async function retrieveRiverStakingAPRAndAmount(url) {
+	let riverConfig = await readConfig.read();
 	let aprJsonArr = await retrieveRiverApiData(url);
 
 	// total staked amount
@@ -44,7 +46,7 @@ async function retrieveRiverStakingAPRAndAmount(url) {
 	let maxinumAPR = aprJsonArr.data[3].apr;
 
 	return {
-		'maxinumAPR': (maxinumAPR * 100).toFixed(2),
+		'maxinumAPR': (maxinumAPR * 100 * riverConfig.aprFactor).toFixed(2),
 		'totalStakedAmount': totalStakedAmount.toFixed(2)
 	};
 }
