@@ -1,9 +1,18 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const riverApi = require('./riverApi.js')
+const getRiverTweetData = require('./getRiverTweetData.js')
 
 const url = 'https://app.galxe.com/quest/River/GCr1ktYnFp?utm_source=Twitter&utm_medium=Social&utm_campaign=RiverQuest';
 const targetSelector = 'div.text-info-lighten1.text-size-14';
+
+function isNumeric(value) {
+  if (typeof value === "number") return !isNaN(value);
+  if (typeof value === "string" && value.trim() !== "") {
+    return !isNaN(value) && !isNaN(parseFloat(value));
+  }
+  return false;
+}
 
 async function fetchAndParseContent(url, selector) {
 	try {
@@ -160,7 +169,21 @@ riverApi.retrieveRiverStakingAPRAndAmount('https://api-airdrop.river.inc/staking
 					} else {
 						starRv = '😴';
 					}
-					console.log(`✅ 猪脚饭评分：${starRv}`);
+					console.log(`✅ 猪脚饭评分：${starRv}\n`);
+
+					// 获取指定推文的回复数
+					const tweetUrl = 'https://x.com/RiverdotInc/status/2003148910450352632';
+					getRiverTweetData.getReplyCount(tweetUrl).then(rpyCount => {
+						if (isNumeric(rpyCount)) {
+							console.log(`-------今日 ${currentDate} River圣诞抽奖分析🎄-------`)
+							console.log('✅ 有效期：2025/12/23 - 2025/12/25');
+							console.log('✅ 帖子回复数 ：'.concat(rpyCount));
+							let get50DollarRatio = 20 / parseFloat(rpyCount) * 100.00;
+							let getHoodiesRatio = 5 / parseFloat(rpyCount) * 100.00;
+							console.log('✅ 价值$50等值River中奖概率 ：'.concat(get50DollarRatio.toFixed(2)).concat('%'));
+							console.log('✅ 连帽衫中奖概率 ：'.concat(getHoodiesRatio.toFixed(2)).concat('%'));
+						}
+					})
 				}
 			});
 	})
