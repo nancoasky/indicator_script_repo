@@ -1,5 +1,5 @@
 const axios = require('axios');
-const readConfig = require('./readConfig.js')
+const util = require('./util.js')
 
 /**
  * 
@@ -35,7 +35,7 @@ async function retrieveRiverApiData(url) {
 
 // get the maxinum APR
 async function retrieveRiverStakingAPRAndAmount(url) {
-	let riverConfig = await readConfig.read();
+	let riverConfig = await util.readFileAsJson('river_env.json');
 	let aprJsonArr = await retrieveRiverApiData(url);
 
 	// total staked amount

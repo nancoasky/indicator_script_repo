@@ -2,30 +2,19 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const riverApi = require('./riverApi.js')
 const getRiverTweetData = require('./getRiverTweetData.js')
+const util = require('./util.js')
 
 // river银河任务网址
 const url = 'https://app.galxe.com/quest/River/GCr1ktYnFp?utm_source=Twitter&utm_medium=Social&utm_campaign=RiverQuest';
 const targetSelector = 'div.text-info-lighten1.text-size-14';
 
-/**
- * 判断是否为数值
- * @param {*} value 值
- * @returns true-是数值 false-非数值
- */
-function isNumeric(value) {
-	if (typeof value === "number") return !isNaN(value);
-	if (typeof value === "string" && value.trim() !== "") {
-		return !isNaN(value) && !isNaN(parseFloat(value));
-	}
-	return false;
-}
 
 /**
  * 获取指定网页的指定选择器的标签内容
  * @param {*} url 地址
  * @param {*} selector class名 
  * @returns 对应的内容
- */
+*/
 async function fetchAndParseContent(url, selector) {
 	try {
 		// 1. 使用 axios 获取页面的 HTML 内容
@@ -124,6 +113,7 @@ async function getTokenPrice(contractAddress, vsCurrencies = 'usd') {
 // 尝试获取美元 (usd) 和 BNB (bnb) 的价格
 var riverPriceInUsd = 0.00;
 var riverPtsPriceInUsd = 0.00;
+var currentDate = util.getCurrentDate();
 
 getTokenPrice(RIVER_CONTRACT_ADDRESS, 'usd,bnb')
 	.then(priceData => {
@@ -137,77 +127,82 @@ getTokenPrice(RIVER_PTS_CONTRACT_ADDRESS, 'usd,bnb')
 			riverPtsPriceInUsd = priceData['usd']
 		}
 	});
-// 获取当前日期
-const currentDate = new Date().toLocaleDateString('zh-CN', {
-	timeZone: 'Asia/Shanghai',
-	year: 'numeric',
-	month: '2-digit',
-	day: '2-digit'
-}).replace(/\//g, '-'); // 将默认的的斜杠/替换为- 
 
-// 获取river质押相关信息
-riverApi.retrieveRiverStakingAPRAndAmount('https://api-airdrop.river.inc/staking/estimate-apr')
-	.then(riverStakingJson => {
-		// 获取目前galxe上参与的人数
-		fetchAndParseContent(url, targetSelector)
-			.then(content => {
-				if (content) {
-					console.log(`-------今日 ${currentDate} River价格播报🎺-------`)
-					console.log('✅ River链上价格（USD）💰 ：'.concat('$').concat(riverPriceInUsd));
-					console.log('✅ RiverPts链上价格（USD）💰 ：'.concat('$').concat(riverPtsPriceInUsd).concat('\n'))
+util.readFileAsJson('river_env.json')
+	.then(riverConfig => {
+		util.readFileAsJson('to_be_compared.json').then(oldData => {
+			// 获取river质押相关信息
+			riverApi.retrieveRiverStakingAPRAndAmount('https://api-airdrop.river.inc/staking/estimate-apr')
+				.then(riverStakingJson => {
+					// 获取目前galxe上参与的人数
+					fetchAndParseContent(url, targetSelector)
+						.then(content => {
+							if (content) {
+								console.log(`-------今日 ${currentDate} River价格播报🎺-------`)
+								console.log('✅ River链上价格（USD）💰 ：'.concat('$').concat(riverPriceInUsd));
+								console.log('✅ RiverPts链上价格（USD）💰 ：'.concat('$').concat(riverPtsPriceInUsd).concat('\n'))
 
-					console.log(`-------今日 ${currentDate} River官方质押情况🎺-------`)
-					console.log('✅ River最高APR ：'.concat(riverStakingJson.maxinumAPR).concat('%'));
-					console.log('✅ River质押总数 ：'.concat(riverStakingJson.totalStakedAmount).concat('\n'));
+								console.log(`-------今日 ${currentDate} River官方质押情况🎺-------`)
+								console.log('✅ River最高APR ：'.concat(riverStakingJson.maxinumAPR).concat('%'));
+								console.log('✅ River质押总数 ：'.concat(riverStakingJson.totalStakedAmount)
+									.concat(util.formatCompareIndication(oldData.totalOfficialStakedAmount, riverStakingJson.totalStakedAmount))
+									.concat('\n'));
 
-					console.log(`-------今日 ${currentDate} 银河River质押收益分析📃-------`)
-					var avgRevenue = 10000 / parseFloat(content)
-					let avgCost = riverPriceInUsd * 10;
-					console.log('✅ River质押奖池🪣 ：$10000');
-					console.log('✅ 奖励发放品种🪙 ：$RIVER');
-					console.log('✅ 有效期：2025/12/09 00:00 - 2025/12/29 23:00 GMT+08:00');
-					console.log('✅ River质押参数人数🧑‍🤝‍🧑 ：'.concat(content));
-					console.log('✅ 质押成本（USD）👝 ：'.concat(avgCost));
-					console.log('✅ 猪脚饭收益（USD） 🍚 ：'.concat('$').concat(avgRevenue.toFixed(2)));
-					let starRv;
-					let anaRatio = avgRevenue / avgCost;
-					if (anaRatio >= 8) {
-						starRv = '🌟🌟🌟🌟🌟';
-					} else if (anaRatio >= 6) {
-						starRv = '🌟🌟🌟🌟';
-					} else if (anaRatio >= 4) {
-						starRv = '🌟🌟🌟';
-					} else if (anaRatio >= 2) {
-						starRv = '🌟🌟';
-					} else if (anaRatio >= 1) {
-						starRv = '🌟';
-					} else {
-						starRv = '😴';
-					}
-					console.log(`✅ 猪脚饭评分：${starRv}\n`);
+								if (riverConfig.enableReport2025GalxeStakingAction) {
+									console.log(`-------今日 ${currentDate} 银河River质押收益分析📃-------`)
+									var avgRevenue = 10000 / parseFloat(content)
+									let avgCost = riverPriceInUsd * 10;
+									console.log('✅ River质押奖池🪣 ：$10000');
+									console.log('✅ 奖励发放品种🪙 ：$RIVER');
+									console.log('✅ 有效期：2025/12/09 00:00 - 2025/12/29 23:00 GMT+08:00');
+									console.log('✅ River质押参数人数🧑‍🤝‍🧑 ：'
+										.concat(content)
+										.concat(util.formatCompareIndication(oldData.total2025GalxeStakingCount, content)));
+									console.log('✅ 质押成本（USD）👝 ：'.concat(avgCost));
+									console.log('✅ 猪脚饭收益（USD） 🍚 ：'.concat(avgRevenue.toFixed(2)));
+									let starRv;
+									let anaRatio = avgRevenue / avgCost;
+									if (anaRatio >= 8) {
+										starRv = '🌟🌟🌟🌟🌟';
+									} else if (anaRatio >= 6) {
+										starRv = '🌟🌟🌟🌟';
+									} else if (anaRatio >= 4) {
+										starRv = '🌟🌟🌟';
+									} else if (anaRatio >= 2) {
+										starRv = '🌟🌟';
+									} else if (anaRatio >= 1) {
+										starRv = '🌟';
+									} else {
+										starRv = '😴';
+									}
+									console.log(`✅ 猪脚饭评分：${starRv}\n`);
+								}
 
-					// 获取指定4FUN参与人数
-					riverApi.retrieve4FUNItemCount().then(river4funItems => {
-						console.log(`-------今日 ${currentDate} 4fun嘴撸分析📃-------`)
-						console.log(`✅ 嘴撸人数 💬：${river4funItems} \n`);
-						// 获取指定推文的回复数
-						const tweetUrl = 'https://x.com/RiverdotInc/status/2003148910450352632';
-						getRiverTweetData.getReplyCount(tweetUrl).then(rpyCount => {
-							if (isNumeric(rpyCount)) {
-								console.log(`-------今日 ${currentDate} River圣诞抽奖分析🎄-------`)
-								console.log('✅ 有效期：2025/12/23 - 2025/12/25');
-								console.log('✅ 帖子回复数 ：'.concat(rpyCount));
-								let get50DollarRatio = 20 / parseFloat(rpyCount) * 100.00;
-								let getHoodiesRatio = 5 / parseFloat(rpyCount) * 100.00;
-								console.log('✅ 价值$50等值River中奖概率 ：'.concat(get50DollarRatio.toFixed(2)).concat('%'));
-								console.log('✅ 连帽衫中奖概率 ：'.concat(getHoodiesRatio.toFixed(2)).concat('%'));
+								// 获取指定4FUN参与人数
+								riverApi.retrieve4FUNItemCount().then(river4funItems => {
+									let river4funItemsCmp = util.formatCompareIndication(oldData.river4funItems, river4funItems);
+									console.log(`-------今日 ${currentDate} 4fun嘴撸分析📃-------`)
+									console.log(`✅ 嘴撸人数 💬：${river4funItems}${river4funItemsCmp} \n`);
+									if (riverConfig.enableReport2025Christmas) {
+										// 获取指定推文的回复数
+										const tweetUrl = 'https://x.com/RiverdotInc/status/2003148910450352632';
+										getRiverTweetData.getReplyCount(tweetUrl).then(rpyCount => {
+											if (util.isNumeric(rpyCount)) {
+												console.log(`-------今日 ${currentDate} River圣诞抽奖分析🎄-------`)
+												console.log('✅ 有效期：2025/12/23 - 2025/12/25');
+												console.log('✅ 帖子回复数 ：'.concat(rpyCount));
+												let get50DollarRatio = 20 / parseFloat(rpyCount) * 100.00;
+												let getHoodiesRatio = 5 / parseFloat(rpyCount) * 100.00;
+												console.log('✅ 价值$50等值River中奖概率 ：'.concat(get50DollarRatio.toFixed(2)).concat('%'));
+												console.log('✅ 连帽衫中奖概率 ：'.concat(getHoodiesRatio.toFixed(2)).concat('%'));
+											}
+										})
+									}
+								});
 							}
-						})
-					});
-				}
-			});
-	})
-
-
+						});
+				});
+		});
+	});
 
 

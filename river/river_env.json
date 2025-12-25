@@ -1,3 +1,5 @@
 {
-	"aprFactor" : 2 
+	"aprFactor" : 2 ,
+	"enableReport2025Christmas" : false ,
+	"enableReport2025GalxeStakingAction" : true 
 }
