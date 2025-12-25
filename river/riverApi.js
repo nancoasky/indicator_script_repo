@@ -51,4 +51,19 @@ async function retrieveRiverStakingAPRAndAmount(url) {
 	};
 }
 
-module.exports = { retrieveRiverStakingAPRAndAmount };
+/**
+ * 获取指定4fun上的yap人数
+ * @param {*} url 地址
+ * @returns 人数
+ */
+async function retrieve4FUNItemCount() {
+	let fourfunApiURL = 'https://api-v2.satoshiprotocol.org/twitter/account-list?itemsPerPage=10&currentPage=1&sortBy=scoreRank&direction=asc';
+	let d = await retrieveRiverApiData(fourfunApiURL);
+	if (d) {
+		return d.totalItems;
+	} else {
+		return 0;
+	}
+}
+
+module.exports = { retrieveRiverStakingAPRAndAmount, retrieve4FUNItemCount };
