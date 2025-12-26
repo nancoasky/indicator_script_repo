@@ -60,3 +60,6 @@
 	"enableReport2025GalxeStakingAction" : true // 是否启用2025年银河质押活动分析输出
 }
 ```
+
+## 台账
+记录台账方便后续进行多维度的分析，台账[链接](https://docs.google.com/spreadsheets/d/1lQ6i7Qm19QGsQj-Z7Kz4bbIcmqdklSFdfdKRF5lpxjA/edit?gid=0#gid=0) 
