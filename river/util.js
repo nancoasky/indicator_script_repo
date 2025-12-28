@@ -27,6 +27,23 @@ function getCurrentDate() {
 	}).replace(/\//g, '-');
 }
 
+/**
+ * 转换ISO字符串为中国时区的日期
+ * @param {} isoString 2025-12-26T16:00:00.000Z
+ */
+function convertUTCAsChinaTime(isoString) {
+	// 格式化 ISO 字符串为中国时区的日期
+	const chinaDate = new Date(isoString).toLocaleDateString('zh-CN', {
+		timeZone: 'Asia/Shanghai',
+		year: 'numeric',
+		month: '2-digit',
+		day: '2-digit'
+	}).replace(/\//g, '-'); // 结果为 "2025-12-27"
+
+	return chinaDate;
+}
+
+
 
 /**
  * 读取对应配置
@@ -57,7 +74,7 @@ async function readFileAsJson(fileRelativePath) {
  */
 function formatCompareIndication(oldValue, newValue) {
 	const diff = newValue - oldValue;
-	
+
 	let format = new Intl.NumberFormat('en-US', {
 		signDisplay: 'always',    // 强制显示正负号
 		maximumFractionDigits: 10 // 设置保留的小数位数
@@ -73,4 +90,4 @@ function formatCompareIndication(oldValue, newValue) {
 	return '(' + format + ')';
 }
 
-module.exports = { isNumeric, getCurrentDate, readFileAsJson, formatCompareIndication };
+module.exports = { isNumeric, getCurrentDate, convertUTCAsChinaTime, readFileAsJson, formatCompareIndication };

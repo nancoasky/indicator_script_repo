@@ -66,4 +66,37 @@ async function retrieve4FUNItemCount() {
 	}
 }
 
-module.exports = { retrieveRiverStakingAPRAndAmount, retrieve4FUNItemCount };
+/**
+ * 获取指定的riverpts转换信息
+ * @returns 
+ */
+async function retrieveTodayPtsConversionInfo() {
+	let conversionPtsApiURL = 'https://api-airdrop.river.inc/s2/pts-conversion-chart?interval=1d';
+	let d = await retrieveRiverApiData(conversionPtsApiURL);
+	if (d) {
+		let dotList = d.data;
+		// 过滤出今天的数据
+		let todayChinaTime = util.getCurrentDate();
+		/**
+		 * {
+			"timestamp": "2025-12-26T16:00:00.000Z",
+			"ptsAmount": 4271719.47878052,
+			"tokensAmount": 5494.61779219,
+			"penaltyAmount": 4184.13431284,
+			"actualRate": 0.00196142,
+			"expectedRate": 0.0072222
+		}
+		 */
+		let satisfyTodayJson = dotList.filter(d => util.convertUTCAsChinaTime(d.timestamp) === todayChinaTime);
+
+		if (satisfyTodayJson) {
+			return satisfyTodayJson[0];
+		} else {
+			return null;
+		}
+	} else {
+		return null;
+	}
+}
+
+module.exports = { retrieveRiverStakingAPRAndAmount, retrieve4FUNItemCount, retrieveTodayPtsConversionInfo };

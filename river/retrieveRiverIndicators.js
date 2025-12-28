@@ -178,6 +178,17 @@ util.readFileAsJson('river_env.json')
 									console.log(`✅ 猪脚饭评分：${starRv}\n`);
 								}
 
+								// 获取指定的RiverPts转换信息
+								riverApi.retrieveTodayPtsConversionInfo().then(conversionInfo => {
+									if (conversionInfo) {
+										console.log(`-------今日 ${currentDate} pts转换分析📃-------`)
+										console.log(`✅ 积分兑换总量：${conversionInfo.ptsAmount} `);
+										console.log(`✅ 已兑换RIVER量：${conversionInfo.tokensAmount} `);
+										console.log(`✅ 理想最大兑换利率：${conversionInfo.expectedRate} `);
+										console.log(`✅ 实际最大兑换利率：${conversionInfo.actualRate}${util.formatCompareIndication(oldData.ptsActualRate, conversionInfo.actualRate)} \n`);
+									}
+								});
+
 								// 获取指定4FUN参与人数
 								riverApi.retrieve4FUNItemCount().then(river4funItems => {
 									let river4funItemsCmp = util.formatCompareIndication(oldData.river4funItems, river4funItems);
