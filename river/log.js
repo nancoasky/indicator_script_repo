@@ -72,11 +72,16 @@ function log2025GalxeStakingAction(currentDate, oldTotal2025GalxeStakingCount, n
  * @param {*} oldPtsActualRate 昨日真实兑换比例
  */
 function logPtsConversionInfo(currentDate, conversionInfo, oldPtsActualRate) {
+	console.log(`-------截止${currentDate} pts转换分析📃-------`)
+	console.log(`⏰ 积分兑换有效期：${conversionInfo.dynamicConversionStartTime} ~ ${conversionInfo.dynamicConversionEndTime} `);
+	console.log(`✅ 已转换积分总量：${conversionInfo.totalPtsConvertedAmount}`);
+	console.log(`✅ 已转换RIVER总量：${conversionInfo.totalRiverConvertedAmount} \n`);
+
 	console.log(`-------今日 ${currentDate} pts转换分析📃-------`)
-	console.log(`✅ 积分兑换总量：${conversionInfo.ptsAmount} `);
-	console.log(`✅ 已兑换RIVER量：${conversionInfo.tokensAmount} `);
-	console.log(`✅ 理想最大兑换利率：${conversionInfo.expectedRate} `);
-	console.log(`✅ 实际最大兑换利率：${conversionInfo.actualRate}${util.formatCompareIndication(oldPtsActualRate, conversionInfo.actualRate)} \n`);
+	console.log(`✅ 积分兑换总量：${conversionInfo.todayConversion.ptsAmount} `);
+	console.log(`✅ 已兑换RIVER量：${conversionInfo.todayConversion.tokensAmount} `);
+	console.log(`✅ 理想最大兑换利率：${conversionInfo.todayConversion.expectedRate} `);
+	console.log(`✅ 实际最大兑换利率：${conversionInfo.todayConversion.actualRate}${util.formatCompareIndication(oldPtsActualRate, conversionInfo.todayConversion.actualRate)} \n`);
 }
 
 /**

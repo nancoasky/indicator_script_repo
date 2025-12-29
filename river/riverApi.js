@@ -198,6 +198,10 @@ async function retrieveTodayPtsConversionInfo() {
 	let conversionPtsApiURL = 'https://api-airdrop.river.inc/s2/pts-conversion-chart?interval=1d';
 	let d = await retrieveRiverApiData(conversionPtsApiURL);
 	if (d) {
+		let conversionInfoJson = {};
+		conversionInfoJson.dynamicConversionStartTime = util.convertUTCAsChinaTime(d.referenceLines[1].timestamp);
+		conversionInfoJson.dynamicConversionEndTime = util.convertUTCAsChinaTime(d.referenceLines[3].timestamp);
+
 		let dotList = d.data;
 		// 过滤出今天的数据
 		let todayChinaTime = util.getCurrentDate();
@@ -211,13 +215,28 @@ async function retrieveTodayPtsConversionInfo() {
 			"expectedRate": 0.0072222
 		}
 		 */
-		let satisfyTodayJson = dotList.filter(d => util.convertUTCAsChinaTime(d.timestamp) === todayChinaTime);
-
-		if (satisfyTodayJson) {
-			return satisfyTodayJson[0];
-		} else {
-			return null;
+		let totalPtsConvertedAmount = 0;
+		let totalRiverConvertedAmount = 0;
+		let totalPenaltyAmount = 0;
+		let satisfyTodayJson;
+		for (let i = 0; i < dotList.length; i++) {
+			let d = dotList[i];
+			let convertedChinaTime = util.convertUTCAsChinaTime(d.timestamp);
+			totalPtsConvertedAmount += d.ptsAmount;
+			totalPenaltyAmount += d.penaltyAmount;
+			totalRiverConvertedAmount += d.tokensAmount;
+			if (todayChinaTime === convertedChinaTime) {
+				satisfyTodayJson = d;
+				break;
+			}
 		}
+		// console.log(`totalPenaltyAmount : ${totalPenaltyAmount}`)
+		// 组装返回的json对象
+		conversionInfoJson.totalPtsConvertedAmount = totalPtsConvertedAmount;
+		conversionInfoJson.totalRiverConvertedAmount = totalRiverConvertedAmount;
+		conversionInfoJson.todayConversion = satisfyTodayJson;
+
+		return conversionInfoJson;
 	} else {
 		return null;
 	}
