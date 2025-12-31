@@ -4,5 +4,5 @@
 	"riverStakingApiURL":"https://api-airdrop.river.inc/staking/estimate-apr",
 	"aprFactor" : 2 ,
 	"enableReport2025Christmas" : false ,
-	"enableReport2025GalxeStakingAction" : true 
+	"enableReport2025GalxeStakingAction" : false 
 }
