@@ -1,6 +1,8 @@
 {
-	"totalOfficialStakedAmount" : 194830.89, 
-	"total2025GalxeStakingCount" : 650, 
-	"river4funItems" : 108852 ,
-    "ptsActualRate" : 0.00245144
+	"oldriverPriceInUsd": "13.28",
+	"oldriverPtsPriceInUsd": "0.0025368",
+	"totalOfficialStakedAmount": 254780.2,
+	"total2025GalxeStakingCount": 650,
+	"river4funItems": 109349,
+	"ptsActualRate": 0.00287625
 }

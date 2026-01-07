@@ -4,11 +4,12 @@ const cheerio = require('cheerio');
 const puppeteer = require('puppeteer-core');
 
 /**
- * 获取指定推文的回复数
- * @param {*} url 帖文地址
- * @returns 回复数
+ * 通过puppteer组件来进行渲染获取页面元素
+ * @param {*} url 具体的外网地址
+ * @param {*} selector 选择器
+ * @returns 对应选择器下的元素
  */
-async function retrieveTwitterReplyCount(url) {
+async function retrievePageElementTextValueByPuppeteer(url, selector, timeout) {
 	// launch({ headless: true }) 表示不弹出浏览器窗口
 	const browser = await puppeteer.launch({
 		headless: "new",
@@ -23,23 +24,18 @@ async function retrieveTwitterReplyCount(url) {
 
 	try {
 		// console.debug("正在加载页面...");
-		await page.goto(url, { waitUntil: 'networkidle2' }); // 等待网络空闲
+		await page.goto(url, { waitUntil: 'domcontentloaded' }); // DOM 树加载完就走，不管图片和广告
 
 		// 等待推文内容渲染出来
-		const selector = 'article[data-testid="tweet"] [data-testid="reply"]';
-		await page.waitForSelector(selector, { timeout: 15000 });
+		await page.waitForSelector(selector, { timeout: timeout });
 
 		// 在页面上下文中执行脚本获取数据
-		const replyCount = await page.evaluate(() => {
-			const btn = document.querySelector('article[data-testid="tweet"] [data-testid="reply"]');
-			if (btn) {
-				// 优先取文本，如果没有文本则取 aria-label
-				return btn.innerText.trim() || btn.getAttribute('aria-label');
-			}
-			return "未找到";
-		});
+		const textValue = await page.evaluate((target) => {
+			const element = document.querySelector(target);
+			return element ? element.innerText.trim() : null;;
+		}, selector);
 
-		return replyCount;
+		return textValue;
 	} catch (error) {
 		console.error("获取失败，原因可能是：页面加载过慢、需要登录或被反爬虫拦截。");
 		// 调试用：保存截图看看页面卡在哪里了
@@ -48,6 +44,33 @@ async function retrieveTwitterReplyCount(url) {
 		await browser.close();
 	}
 }
+
+/**
+ * 获取指定推文的回复数
+ * @param {*} url 帖文地址
+ * @returns 回复数
+ */
+async function retrieveTwitterReplyCount(url) {
+	let textValue = await retrievePageElementTextValueByPuppeteer(url, 'article[data-testid="tweet"] [data-testid="reply"]', 15000);
+	return textValue || "未找到";
+}
+
+/**
+ * 获取指定的river质押收益率
+ * @returns 质押收益率
+ */
+async function retrieveMaxinumAPR() {
+	// let dataConfig = await util.readFileAsJson('river_env.json');
+	let url = 'https://app.river.inc/river';
+	let selector = 'span[class*="lg:text-[80px]"]';
+	let textValue = await retrievePageElementTextValueByPuppeteer(url, selector, 15000);
+	if (textValue) {
+		// 去除多余的%字符串
+		textValue = textValue.replace(/\s*%/g, '');
+	}
+	return textValue || "null";
+}
+
 /**
  * 
  * @param {*} url 请求路径
@@ -199,8 +222,8 @@ async function retrieveTodayPtsConversionInfo() {
 	let d = await retrieveRiverApiData(conversionPtsApiURL);
 	if (d) {
 		let conversionInfoJson = {};
-		conversionInfoJson.dynamicConversionStartTime = util.convertUTCAsChinaTime(d.referenceLines[1].timestamp);
-		conversionInfoJson.dynamicConversionEndTime = util.convertUTCAsChinaTime(d.referenceLines[3].timestamp);
+		conversionInfoJson.dynamicConversionStartTime = util.convertUTCAsChinaDate(d.referenceLines[1].timestamp);
+		conversionInfoJson.dynamicConversionEndTime = util.convertUTCAsChinaDate(d.referenceLines[3].timestamp);
 
 		let dotList = d.data;
 		// 过滤出今天的数据
@@ -221,7 +244,7 @@ async function retrieveTodayPtsConversionInfo() {
 		let satisfyTodayJson;
 		for (let i = 0; i < dotList.length; i++) {
 			let d = dotList[i];
-			let convertedChinaTime = util.convertUTCAsChinaTime(d.timestamp);
+			let convertedChinaTime = util.convertUTCAsChinaDate(d.timestamp);
 			totalPtsConvertedAmount += d.ptsAmount;
 			totalPenaltyAmount += d.penaltyAmount;
 			totalRiverConvertedAmount += d.tokensAmount;
@@ -242,11 +265,36 @@ async function retrieveTodayPtsConversionInfo() {
 	}
 }
 
+/**
+ * 检索river的2026年新年价格预测活动榜单前20
+ * @returns 20条最接近当前价格记录
+ * 
+ * {
+			"id": 3392,
+			"rank": 4,
+			"twitterUsername": "nancoasky",
+			"twitterName": "Patient♥微甜🚦",
+			"postLink": "https://x.com/nancoasky/status/2008105947584192749?s=20",
+			"predictPrice": "13.8",
+			"priceDiff": "5.0040964574",
+			"submitAt": "2026-01-05T09:19:01.000Z"
+		}
+ */
+async function retrieveRiver2026PredictPriceCampaign() {
+	let campaignApiURL = 'https://api-airdrop.river.inc/twitter-user-predict/list?itemsPerPage=20&currentPage=1';
+	let d = await retrieveRiverApiData(campaignApiURL);
+	if (d) {
+		return d.data;
+	}
+}
+
 module.exports = {
 	retrieveTwitterReplyCount,
+	retrieveMaxinumAPR,
 	retrieveTokenPriceByCoinGecko,
 	fetchAndParseContent,
 	retrieveRiverStakingAPRAndAmount,
 	retrieve4FUNItemCount,
-	retrieveTodayPtsConversionInfo
+	retrieveTodayPtsConversionInfo,
+	retrieveRiver2026PredictPriceCampaign
 };

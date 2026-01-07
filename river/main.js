@@ -8,7 +8,7 @@ const logUtil = require('./log.js')
 async function retrieveRiverIndicators() {
 	// 获取公用配置
 	let riverConfig = await util.readFileAsJson('river_env.json');
-	
+
 	// 获取river/riverpts的现货价格
 	let currentDate = util.getCurrentDate();
 	let riverPriceData = await riverApi.retrieveTokenPriceByCoinGecko(riverConfig.riverContractAddress, 'usd,bnb');
@@ -17,18 +17,25 @@ async function retrieveRiverIndicators() {
 	let riverPtsPriceInUsd = riverPtsPriceData['usd'];
 	// 获取昨日数据配置
 	let oldData = await util.readFileAsJson('to_be_compared.json');
+	// 获取river质押APR
+	let nowOfficialStakingMaxinumAPR = await riverApi.retrieveMaxinumAPR();
 	// 获取river质押相关信息
 	let riverStakingJson = await riverApi.retrieveRiverStakingAPRAndAmount(riverConfig.riverStakingApiURL);
-	// river银河任务网址
-	const url = 'https://app.galxe.com/quest/River/GCr1ktYnFp?utm_source=Twitter&utm_medium=Social&utm_campaign=RiverQuest';
-	const targetSelector = 'div.text-info-lighten1.text-size-14';
-	// 获取目前galxe上参与的人数
-	let nowTotal2025GalxeStakingCount = await riverApi.fetchAndParseContent(url, targetSelector);
 
 	// 打印相关信息
-	logUtil.logRiverPrice(currentDate, riverPriceInUsd, riverPtsPriceInUsd);
-	logUtil.logRiverOfficialStaking(currentDate, riverStakingJson.maxinumAPR, oldData.totalOfficialStakedAmount, riverStakingJson.totalStakedAmount);
+	logUtil.logRiverPrice(currentDate, oldData.oldriverPriceInUsd, oldData.oldriverPtsPriceInUsd, riverPriceInUsd, riverPtsPriceInUsd);
+	logUtil.logRiverOfficialStaking(currentDate, nowOfficialStakingMaxinumAPR, oldData.totalOfficialStakedAmount, riverStakingJson.totalStakedAmount);
+	if (riverConfig.enableReport2026PredictPriceCampaign) {
+		let predictionTop20Records = await riverApi.retrieveRiver2026PredictPriceCampaign();
+		logUtil.log2026NewYearPricePredictionAction(util.getCurrentChinaDateTime(), predictionTop20Records);
+	}
+
 	if (riverConfig.enableReport2025GalxeStakingAction) {
+		// river银河任务网址
+		const url = 'https://app.galxe.com/quest/River/GCr1ktYnFp?utm_source=Twitter&utm_medium=Social&utm_campaign=RiverQuest';
+		const targetSelector = 'div.text-info-lighten1.text-size-14';
+		// 获取目前galxe上参与的人数
+		let nowTotal2025GalxeStakingCount = await riverApi.fetchAndParseContent(url, targetSelector);
 		logUtil.log2025GalxeStakingAction(currentDate, oldData.total2025GalxeStakingCount, nowTotal2025GalxeStakingCount, riverPriceInUsd);
 	}
 	// 获取指定的RiverPts转换信息

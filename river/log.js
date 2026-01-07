@@ -7,10 +7,17 @@ const util = require('./util.js');
  * @param {*} riverPriceInUsd river现货价格
  * @param {*} riverPtsPriceInUsd riverpts现货价格
  */
-function logRiverPrice(currentDate, riverPriceInUsd, riverPtsPriceInUsd) {
+function logRiverPrice(currentDate, oldriverPriceInUsd, oldriverPtsPriceInUsd, riverPriceInUsd, riverPtsPriceInUsd) {
 	console.log(`-------今日 ${currentDate} River价格播报🎺-------`)
-	console.log('✅ River链上价格（USD）💰 ：'.concat('$').concat(riverPriceInUsd));
-	console.log('✅ RiverPts链上价格（USD）💰 ：'.concat('$').concat(riverPtsPriceInUsd).concat('\n'))
+	console.log('✅ River链上价格（USD）💰 ：'
+		.concat('$')
+		.concat(riverPriceInUsd)
+		.concat(util.formatCompareIndication(oldriverPriceInUsd, riverPriceInUsd)));
+	console.log('✅ RiverPts链上价格（USD）💰 ：'
+		.concat('$')
+		.concat(riverPtsPriceInUsd)
+		.concat(util.formatCompareIndication(oldriverPtsPriceInUsd, riverPtsPriceInUsd))
+		.concat('\n'))
 }
 
 /**
@@ -23,7 +30,7 @@ function logRiverPrice(currentDate, riverPriceInUsd, riverPtsPriceInUsd) {
 function logRiverOfficialStaking(currentDate, maxinumAPR, oldTotalOfficialStakedAmount, nowTotalStakedAmount) {
 	console.log(`-------今日 ${currentDate} River官方质押情况🎺-------`)
 	console.log('✅ River最高APR ：'.concat(maxinumAPR).concat('%'));
-	console.log('✅ River质押总数 ：'.concat(nowTotalStakedAmount)
+	console.log('✅ River质押总数 ：'.concat(util.formatDecimal(nowTotalStakedAmount))
 		.concat(util.formatCompareIndication(oldTotalOfficialStakedAmount, nowTotalStakedAmount))
 		.concat('\n'));
 }
@@ -74,12 +81,12 @@ function log2025GalxeStakingAction(currentDate, oldTotal2025GalxeStakingCount, n
 function logPtsConversionInfo(currentDate, conversionInfo, oldPtsActualRate) {
 	console.log(`-------截止${currentDate} pts转换分析📃-------`)
 	console.log(`⏰ 积分兑换有效期：${conversionInfo.dynamicConversionStartTime} ~ ${conversionInfo.dynamicConversionEndTime} `);
-	console.log(`✅ 已转换积分总量：${conversionInfo.totalPtsConvertedAmount}`);
-	console.log(`✅ 已转换RIVER总量：${conversionInfo.totalRiverConvertedAmount} \n`);
+	console.log(`✅ 已转换积分总量：${util.formatDecimal(conversionInfo.totalPtsConvertedAmount)}`);
+	console.log(`✅ 已转换RIVER总量：${util.formatDecimal(conversionInfo.totalRiverConvertedAmount)} \n`);
 
 	console.log(`-------今日 ${currentDate} pts转换分析📃-------`)
-	console.log(`✅ 积分兑换总量：${conversionInfo.todayConversion.ptsAmount} `);
-	console.log(`✅ 已兑换RIVER量：${conversionInfo.todayConversion.tokensAmount} `);
+	console.log(`✅ 积分兑换总量：${util.formatDecimal(conversionInfo.todayConversion.ptsAmount)} `);
+	console.log(`✅ 已兑换RIVER量：${util.formatDecimal(conversionInfo.todayConversion.tokensAmount)} `);
 	console.log(`✅ 理想最大兑换利率：${conversionInfo.todayConversion.expectedRate} `);
 	console.log(`✅ 实际最大兑换利率：${conversionInfo.todayConversion.actualRate}${util.formatCompareIndication(oldPtsActualRate, conversionInfo.todayConversion.actualRate)} \n`);
 }
@@ -92,7 +99,7 @@ function logPtsConversionInfo(currentDate, conversionInfo, oldPtsActualRate) {
  */
 function logRiver4Fun(currentDate, oldRiver4funItems, nowRiver4funItems) {
 	console.log(`-------今日 ${currentDate} 4fun嘴撸分析📃-------`)
-	console.log(`✅ 嘴撸人数 💬：${nowRiver4funItems}${util.formatCompareIndication(oldRiver4funItems, nowRiver4funItems)} \n`);
+	console.log(`✅ 嘴撸人数 💬：${util.formatDecimal(nowRiver4funItems)}${util.formatCompareIndication(oldRiver4funItems, nowRiver4funItems)} \n`);
 }
 
 /**
@@ -110,4 +117,43 @@ function log2025ChristmasAction(currentDate, rpyCount) {
 	console.log('✅ 连帽衫中奖概率 ：'.concat(getHoodiesRatio.toFixed(2)).concat('%'));
 }
 
-module.exports = { logRiverPrice, logRiverOfficialStaking, log2025GalxeStakingAction, logPtsConversionInfo, logRiver4Fun, log2025ChristmasAction };
+/**
+ * 打印2026年的新年价格预测活动
+ * @param {*} currentDatetime 当前时间
+ * @param {*} currentTopRecords 20条top记录
+ */
+function log2026NewYearPricePredictionAction(currentDatetime, currentTopRecords) {
+	console.log(`-------今日 ${currentDatetime} River价格预测活动分析🎺-------`)
+	console.log('✅ River竞猜奖池🪣 ：$2,026');
+	console.log('✅ 奖励发放品种🪙 ：$RIVER');
+	console.log('✅ 奖励发放人数🧑‍🤝‍🧑 ：20');
+	console.log('✅ 竞猜有效期：2026/01/02 - 2026/01/12');
+	console.log('✅ 竞猜评选结果依据：以 @CoinMarketCap 于2026/1/16 东八区早上8点的 $RIVER 收盘价为准');
+	console.log('✅ 目前榜单如下：');
+	let formatLog = '';
+	for (let i = 0; i < currentTopRecords.length; i++) {
+		let d = currentTopRecords[i];
+
+		let rankLogo = '🎩';
+		if (d.rank === 1) {
+			rankLogo = '🥇';
+		} else if (d.rank === 2) {
+			rankLogo = '🥈';
+		} else if (d.rank === 3) {
+			rankLogo = '🥉';
+		}
+		formatLog += `${rankLogo} 推名：${d.twitterName} `
+		// console.log(`${rankLogo} 推名：${d.twitterName} `);
+	}
+	console.log(`${formatLog}\n`);
+}
+
+module.exports = {
+	logRiverPrice,
+	logRiverOfficialStaking,
+	log2025GalxeStakingAction,
+	logPtsConversionInfo,
+	logRiver4Fun,
+	log2025ChristmasAction,
+	log2026NewYearPricePredictionAction
+};
