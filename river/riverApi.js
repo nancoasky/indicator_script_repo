@@ -13,7 +13,8 @@ async function retrievePageElementTextValueByPuppeteer(url, selector, timeout) {
 	// launch({ headless: true }) 表示不弹出浏览器窗口
 	const browser = await puppeteer.launch({
 		headless: "new",
-		executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+		channel: 'chrome',
+		// executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
 		args: ['--no-sandbox', '--disable-setuid-sandbox']
 	});
 
@@ -284,7 +285,10 @@ async function retrieveRiver2026PredictPriceCampaign() {
 	let campaignApiURL = 'https://api-airdrop.river.inc/twitter-user-predict/list?itemsPerPage=20&currentPage=1';
 	let d = await retrieveRiverApiData(campaignApiURL);
 	if (d) {
-		return d.data;
+		return {
+			'totalItems' : d.data,
+			'totalItemsSize' : d.totalItems
+		};
 	}
 }
 

@@ -120,21 +120,23 @@ function log2025ChristmasAction(currentDate, rpyCount) {
 /**
  * 打印2026年的新年价格预测活动
  * @param {*} currentDatetime 当前时间
- * @param {*} currentTopRecords 20条top记录
+ * @param {*} predictionTop20RecordJson 20条top记录信息
  */
-function log2026NewYearPricePredictionAction(currentDatetime, currentTopRecords) {
+function log2026NewYearPricePredictionAction(currentDatetime, predictionTop20RecordJson) {
 	console.log(`-------今日 ${currentDatetime} River价格预测活动分析🎺-------`)
 	console.log('✅ River竞猜奖池🪣 ：$2,026');
 	console.log('✅ 奖励发放品种🪙 ：$RIVER');
 	console.log('✅ 奖励发放人数🧑‍🤝‍🧑 ：20');
+	console.log('✅ 目前参与人数 ：'.concat(util.formatDecimal(predictionTop20RecordJson.totalItemsSize, 0, 0)));
+	let get101DollarRatio = 20 / parseFloat(predictionTop20RecordJson.totalItemsSize) * 100.00;
+	console.log('✅ 中奖概率 ：'.concat(get101DollarRatio.toFixed(2)).concat('%'));
 	console.log('✅ 竞猜有效期：2026/01/02 - 2026/01/12');
 	console.log('✅ 竞猜评选结果依据：以 @CoinMarketCap 于2026/1/16 东八区早上8点的 $RIVER 收盘价为准');
-	console.log('✅ 目前榜单如下：');
-	let formatLog = '';
-	for (let i = 0; i < currentTopRecords.length; i++) {
-		let d = currentTopRecords[i];
+	let formatLog = '✅ 目前榜单：';
+	for (let i = 0; i < predictionTop20RecordJson.totalItems.length; i++) {
+		let d = predictionTop20RecordJson.totalItems[i];
 
-		let rankLogo = '🎩';
+		let rankLogo = '🏁';
 		if (d.rank === 1) {
 			rankLogo = '🥇';
 		} else if (d.rank === 2) {
@@ -142,8 +144,10 @@ function log2026NewYearPricePredictionAction(currentDatetime, currentTopRecords)
 		} else if (d.rank === 3) {
 			rankLogo = '🥉';
 		}
-		formatLog += `${rankLogo} 推名：${d.twitterName} `
-		// console.log(`${rankLogo} 推名：${d.twitterName} `);
+		formatLog += `${rankLogo} ${d.twitterName} `;
+		if ((i + 1) % 10 == 0 || (i + 1) == 3) {
+			formatLog += '\n';
+		}
 	}
 	console.log(`${formatLog}\n`);
 }

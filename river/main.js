@@ -24,11 +24,11 @@ async function retrieveRiverIndicators() {
 
 	// 打印相关信息
 	logUtil.logRiverPrice(currentDate, oldData.oldriverPriceInUsd, oldData.oldriverPtsPriceInUsd, riverPriceInUsd, riverPtsPriceInUsd);
-	logUtil.logRiverOfficialStaking(currentDate, nowOfficialStakingMaxinumAPR, oldData.totalOfficialStakedAmount, riverStakingJson.totalStakedAmount);
 	if (riverConfig.enableReport2026PredictPriceCampaign) {
-		let predictionTop20Records = await riverApi.retrieveRiver2026PredictPriceCampaign();
-		logUtil.log2026NewYearPricePredictionAction(util.getCurrentChinaDateTime(), predictionTop20Records);
+		let predictionTop20RecordJson = await riverApi.retrieveRiver2026PredictPriceCampaign();
+		logUtil.log2026NewYearPricePredictionAction(util.getCurrentChinaDateTime(), predictionTop20RecordJson);
 	}
+	logUtil.logRiverOfficialStaking(currentDate, nowOfficialStakingMaxinumAPR, oldData.totalOfficialStakedAmount, riverStakingJson.totalStakedAmount);
 
 	if (riverConfig.enableReport2025GalxeStakingAction) {
 		// river银河任务网址
