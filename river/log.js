@@ -77,12 +77,13 @@ function log2025GalxeStakingAction(currentDate, oldTotal2025GalxeStakingCount, n
  * @param {*} currentDate 当前日期
  * @param {*} conversionInfo 积分对象
  * @param {*} oldPtsActualRate 昨日真实兑换比例
+ * @param {*} oldtotalRiverConvertedAmount 昨日兑换的river总量
  */
-function logPtsConversionInfo(currentDate, conversionInfo, oldPtsActualRate) {
+function logPtsConversionInfo(currentDate, conversionInfo, oldPtsActualRate, oldtotalRiverConvertedAmount) {
 	console.log(`-------截止${currentDate} pts转换分析📃-------`)
 	console.log(`⏰ 积分兑换有效期：${conversionInfo.dynamicConversionStartTime} ~ ${conversionInfo.dynamicConversionEndTime} `);
 	console.log(`✅ 已转换积分总量：${util.formatDecimal(conversionInfo.totalPtsConvertedAmount)}`);
-	console.log(`✅ 已转换RIVER总量：${util.formatDecimal(conversionInfo.totalRiverConvertedAmount)} \n`);
+	console.log(`✅ 已转换RIVER总量：${util.formatDecimal(conversionInfo.totalRiverConvertedAmount)}${util.formatCompareIndication(oldtotalRiverConvertedAmount, conversionInfo.totalRiverConvertedAmount)} \n`);
 
 	console.log(`-------今日 ${currentDate} pts转换分析📃-------`)
 	console.log(`✅ 积分兑换总量：${util.formatDecimal(conversionInfo.todayConversion.ptsAmount)} `);
@@ -99,7 +100,7 @@ function logPtsConversionInfo(currentDate, conversionInfo, oldPtsActualRate) {
  */
 function logRiver4Fun(currentDate, oldRiver4funItems, nowRiver4funItems) {
 	console.log(`-------今日 ${currentDate} 4fun嘴撸分析📃-------`)
-	console.log(`✅ 嘴撸人数 💬：${util.formatDecimal(nowRiver4funItems)}${util.formatCompareIndication(oldRiver4funItems, nowRiver4funItems)} \n`);
+	console.log(`✅ 嘴撸人数 💬：${util.formatDecimal(nowRiver4funItems, 0, 0)}${util.formatCompareIndication(oldRiver4funItems, nowRiver4funItems)} \n`);
 }
 
 /**
@@ -123,14 +124,28 @@ function log2025ChristmasAction(currentDate, rpyCount) {
  * @param {*} predictionTop20RecordJson 20条top记录信息
  */
 function log2026NewYearPricePredictionAction(currentDatetime, predictionTop20RecordJson) {
-	console.log(`-------今日 ${currentDatetime} River价格预测活动分析🎺-------`)
-	console.log('✅ River竞猜奖池🪣 ：$2,026');
-	console.log('✅ 奖励发放品种🪙 ：$RIVER');
-	console.log('✅ 奖励发放人数🧑‍🤝‍🧑 ：20');
-	console.log('✅ 目前参与人数 ：'.concat(util.formatDecimal(predictionTop20RecordJson.totalItemsSize, 0, 0)));
-	let get101DollarRatio = 20 / parseFloat(predictionTop20RecordJson.totalItemsSize) * 100.00;
-	console.log('✅ 中奖概率 ：'.concat(get101DollarRatio.toFixed(2)).concat('%'));
+	let totalParticipateCount = predictionTop20RecordJson.totalItemsSize;
+	// 愿景活动
+	console.log(`-------今日 ${currentDatetime} River愿景活动分析🎺-------`)
+	console.log('✅ 竞猜奖池🪣 ：$2,026');
+	console.log('✅ 奖励发放品种🪙 ：$USDT');
 	console.log('✅ 竞猜有效期：2026/01/02 - 2026/01/12');
+	console.log('✅ 奖励公布日期：2026/01/16');
+	console.log('✅ 奖励发放人数🧑‍🤝‍🧑 ：100');
+	console.log('✅ 目前参与人数 ：'.concat(util.formatDecimal(totalParticipateCount, 0, 0)));
+	let get20DollarRatio = 100 / parseFloat(totalParticipateCount - 20) * 100.00;
+	console.log('✅ 中奖概率 ：'.concat(get20DollarRatio.toFixed(2)).concat('%\n'));
+
+	// 价格竞猜活动
+	console.log(`-------今日 ${currentDatetime} River价格竞猜活动分析🎺-------`)
+	console.log('✅ 竞猜奖池🪣 ：$2,026');
+	console.log('✅ 奖励发放品种🪙 ：$RIVER');
+	console.log('✅ 竞猜有效期：2026/01/02 - 2026/01/12');
+	console.log('✅ 奖励公布日期：2026/01/16');
+	console.log('✅ 奖励发放人数🧑‍🤝‍🧑 ：20');
+	console.log('✅ 目前参与人数 ：'.concat(util.formatDecimal(totalParticipateCount, 0, 0)));
+	let get101DollarRatio = 20 / parseFloat(totalParticipateCount) * 100.00;
+	console.log('✅ 中奖概率 ：'.concat(get101DollarRatio.toFixed(2)).concat('%'));
 	console.log('✅ 竞猜评选结果依据：以 @CoinMarketCap 于2026/1/16 东八区早上8点的 $RIVER 收盘价为准');
 	let formatLog = '✅ 目前榜单：';
 	for (let i = 0; i < predictionTop20RecordJson.totalItems.length; i++) {

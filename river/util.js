@@ -130,8 +130,8 @@ async function readFileAsJson(fileRelativePath) {
 function formatDecimal(number, minimumFractionDigits, maximumFractionDigits) {
 	const formatter = new Intl.NumberFormat('en-US', {
 		style: 'decimal',         // 纯数字模式，不带货币符号
-		minimumFractionDigits: minimumFractionDigits ? minimumFractionDigits : 2, // 最小保留2位小数
-		maximumFractionDigits: maximumFractionDigits ? maximumFractionDigits : 2, // 最大保留2位小数
+		minimumFractionDigits: minimumFractionDigits == 0 ? minimumFractionDigits : 2, // 最小保留2位小数
+		maximumFractionDigits: maximumFractionDigits == 0 ? maximumFractionDigits : 2, // 最大保留2位小数
 	});
 
 	return formatter.format(number); // 输出: "1,234,567.89"

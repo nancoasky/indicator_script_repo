@@ -1,8 +1,9 @@
 {
-	"oldriverPriceInUsd": "13.28",
-	"oldriverPtsPriceInUsd": "0.0025368",
-	"totalOfficialStakedAmount": 254780.2,
+	"oldriverPriceInUsd": "18.69",
+	"oldriverPtsPriceInUsd": "0.00395161",
+	"totalOfficialStakedAmount": 271767.28,
 	"total2025GalxeStakingCount": 650,
-	"river4funItems": 109349,
-	"ptsActualRate": 0.00287625
+	"river4funItems": 109549,
+	"ptsActualRate": 0.00202475,
+	"oldtotalRiverConvertedAmount": "426171.66"
 }

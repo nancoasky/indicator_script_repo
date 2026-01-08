@@ -41,7 +41,7 @@ async function retrieveRiverIndicators() {
 	// 获取指定的RiverPts转换信息
 	let conversionInfo = await riverApi.retrieveTodayPtsConversionInfo();
 	if (conversionInfo) {
-		logUtil.logPtsConversionInfo(currentDate, conversionInfo, oldData.ptsActualRate);
+		logUtil.logPtsConversionInfo(currentDate, conversionInfo, oldData.ptsActualRate, oldData.oldtotalRiverConvertedAmount);
 	}
 	// 获取指定4FUN参与人数
 	let river4funItems = await riverApi.retrieve4FUNItemCount();
