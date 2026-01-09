@@ -120,11 +120,10 @@ function log2025ChristmasAction(currentDate, rpyCount) {
 
 /**
  * 打印2026年的新年价格预测活动
- * @param {*} riverPriceInUsd $RIVER 现货价格
  * @param {*} currentDatetime 当前时间
  * @param {*} predictionTop20RecordJson 20条top记录信息
  */
-function log2026NewYearPricePredictionAction(riverPriceInUsd, currentDatetime, predictionTop20RecordJson) {
+function log2026NewYearPricePredictionAction(currentDatetime, predictionTop20RecordJson) {
 	let totalParticipateCount = predictionTop20RecordJson.totalItemsSize;
 	// 愿景活动
 	console.log(`-------今日 ${currentDatetime} River愿景活动分析🎺-------`)
@@ -132,19 +131,18 @@ function log2026NewYearPricePredictionAction(riverPriceInUsd, currentDatetime, p
 	console.log('✅ 奖励发放品种🪙 ：$USDT');
 	console.log('✅ 竞猜有效期：2026/01/02 - 2026/01/12');
 	console.log('✅ 奖励公布日期：2026/01/16');
-	console.log('✅ 奖励发放人数🧑‍🤝‍🧑 ：100 , 人均奖励：$20.26');
+	console.log('✅ 奖励发放人数🧑‍🤝‍🧑 ：100');
 	console.log('✅ 目前参与人数 ：'.concat(util.formatDecimal(totalParticipateCount, 0, 0)));
 	let get20DollarRatio = 100 / parseFloat(totalParticipateCount - 20) * 100.00;
 	console.log('✅ 中奖概率 ：'.concat(get20DollarRatio.toFixed(2)).concat('%\n'));
 
 	// 价格竞猜活动
 	console.log(`-------今日 ${currentDatetime} River价格竞猜活动分析🎺-------`)
-	console.log('✅ 竞猜奖池🪣 ：2,026 $RIVER');
+	console.log('✅ 竞猜奖池🪣 ：$2,026');
 	console.log('✅ 奖励发放品种🪙 ：$RIVER');
 	console.log('✅ 竞猜有效期：2026/01/02 - 2026/01/12');
 	console.log('✅ 奖励公布日期：2026/01/16');
-	console.log('✅ 奖励发放人数🧑‍🤝‍🧑 ：20 , 人均奖励：101 $RIVER');
-	console.log('✅ 人均奖励🍚 ：101 $RIVER，价值 $'.concat(parseFloat(101 * riverPriceInUsd).toFixed(2)));
+	console.log('✅ 奖励发放人数🧑‍🤝‍🧑 ：20');
 	console.log('✅ 目前参与人数 ：'.concat(util.formatDecimal(totalParticipateCount, 0, 0)));
 	let get101DollarRatio = 20 / parseFloat(totalParticipateCount) * 100.00;
 	console.log('✅ 中奖概率 ：'.concat(get101DollarRatio.toFixed(2)).concat('%'));

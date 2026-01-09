@@ -26,7 +26,7 @@ async function retrieveRiverIndicators() {
 	logUtil.logRiverPrice(currentDate, oldData.oldriverPriceInUsd, oldData.oldriverPtsPriceInUsd, riverPriceInUsd, riverPtsPriceInUsd);
 	if (riverConfig.enableReport2026PredictPriceCampaign) {
 		let predictionTop20RecordJson = await riverApi.retrieveRiver2026PredictPriceCampaign();
-		logUtil.log2026NewYearPricePredictionAction(riverPriceInUsd, util.getCurrentChinaDateTime(), predictionTop20RecordJson);
+		logUtil.log2026NewYearPricePredictionAction(util.getCurrentChinaDateTime(), predictionTop20RecordJson);
 	}
 	logUtil.logRiverOfficialStaking(currentDate, nowOfficialStakingMaxinumAPR, oldData.totalOfficialStakedAmount, riverStakingJson.totalStakedAmount);
 
