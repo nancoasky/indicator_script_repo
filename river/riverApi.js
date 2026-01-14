@@ -86,7 +86,7 @@ async function retrieveRiverApiData(url) {
 				'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
 				'Accept': 'application/json',
 				'Accept-Language': 'zh-CN,zh;q=0.8,en;q=0.6',
-				'Connection': 'keep-alive',
+				// 'Connection': 'keep-alive',
 				'Origin': 'https://app.river.inc'
 			}
 		});

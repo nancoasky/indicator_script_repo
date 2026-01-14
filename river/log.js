@@ -73,6 +73,45 @@ function log2025GalxeStakingAction(currentDate, oldTotal2025GalxeStakingCount, n
 }
 
 /**
+ * 打印2026年开春的river银河铸造稳定币活动
+ * @param {*} currentDate 当前日期
+ * @param {*} oldTotal2026GalxeMintStatUSDCount 昨日质押人数
+ * @param {*} nowTotal2026GalxeMintStatUSDCount 今日质押人数
+ * @param {*} riverPtsPriceInUsd river现货价格
+ */
+function log2026GalxeMintSatUSDAction(currentDate, oldTotal2026GalxeMintStatUSDCount, nowTotal2026GalxeMintStatUSDCount, riverPtsPriceInUsd) {
+	console.log(`-------今日 ${currentDate} 银河River铸币活动分析📃-------`)
+	let avgPtsPerPerson = 1000000 / parseFloat(nowTotal2026GalxeMintStatUSDCount);
+	let avgRevenue = avgPtsPerPerson * riverPtsPriceInUsd
+	let avgCost = 10;
+	console.log('✅ 铸币奖池🪣 ：1,000,000');
+	console.log('✅ 奖励发放品种🪙 ：$RIVERPTS');
+	console.log('✅ 有效期：2026/01/13 21:00 - 2026/01/16 22:00 GMT+08:00');
+	console.log('✅ 参数人数🧑‍🤝‍🧑 ：'
+		.concat(util.formatDecimal(nowTotal2026GalxeMintStatUSDCount))
+		.concat(util.formatCompareIndication(oldTotal2026GalxeMintStatUSDCount, nowTotal2026GalxeMintStatUSDCount)));
+	console.log('✅ 铸币成本（USD）👝 ：'.concat(avgCost));
+	console.log('✅ 人均积分（PTS）👝 ：'.concat(avgPtsPerPerson.toFixed(2)));
+	console.log('✅ 猪脚饭收益（USD） 🍚 ：'.concat(avgRevenue.toFixed(2)));
+	let starRv;
+	let anaRatio = avgRevenue / avgCost;
+	if (anaRatio >= 8) {
+		starRv = '🌟🌟🌟🌟🌟';
+	} else if (anaRatio >= 6) {
+		starRv = '🌟🌟🌟🌟';
+	} else if (anaRatio >= 4) {
+		starRv = '🌟🌟🌟';
+	} else if (anaRatio >= 2) {
+		starRv = '🌟🌟';
+	} else if (anaRatio >= 1) {
+		starRv = '🌟';
+	} else {
+		starRv = '😴';
+	}
+	console.log(`✅ 猪脚饭评分：${starRv}\n`);
+}
+
+/**
  * 打印river的积分转换情况
  * @param {*} currentDate 当前日期
  * @param {*} conversionInfo 积分对象
@@ -171,6 +210,7 @@ module.exports = {
 	logRiverPrice,
 	logRiverOfficialStaking,
 	log2025GalxeStakingAction,
+	log2026GalxeMintSatUSDAction,
 	logPtsConversionInfo,
 	logRiver4Fun,
 	log2025ChristmasAction,

@@ -36,7 +36,15 @@ async function retrieveRiverIndicators() {
 		const targetSelector = 'div.text-info-lighten1.text-size-14';
 		// 获取目前galxe上参与的人数
 		let nowTotal2025GalxeStakingCount = await riverApi.fetchAndParseContent(url, targetSelector);
-		logUtil.log2025GalxeStakingAction(currentDate, oldData.total2025GalxeStakingCount, nowTotal2025GalxeStakingCount, riverPriceInUsd);
+		logUtil.log2025GalxeStakingAction(currentDate, util.parseAbbreviatedNumber(oldData.oldtotal2025GalxeStakingCount), nowTotal2025GalxeStakingCount, riverPriceInUsd);
+	}
+	if (riverConfig.enableReport2026GalxeMintSatUSDAction) {
+		// river银河任务网址
+		const url = 'https://app.galxe.com/quest/River/GCcqStYdaW';
+		const targetSelector = 'div.text-info-lighten1.text-size-14';
+		// 获取目前galxe上参与的人数
+		let nowTotal2026GalxeMintSatUSDCount = await riverApi.fetchAndParseContent(url, targetSelector);
+		logUtil.log2026GalxeMintSatUSDAction(currentDate, oldData.oldtotal2026GalxeMintSatUSDCount, util.parseAbbreviatedNumber(nowTotal2026GalxeMintSatUSDCount), riverPtsPriceInUsd);
 	}
 	// 获取指定的RiverPts转换信息
 	let conversionInfo = await riverApi.retrieveTodayPtsConversionInfo();

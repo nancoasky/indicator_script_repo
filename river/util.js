@@ -161,6 +161,38 @@ function formatCompareIndication(oldValue, newValue) {
 	return '(' + format + ')';
 }
 
+/**
+ * 将带有 K/M/B 单位的字符串转为数字
+ * @param {string} str 包含单位的字符串 (如 "1.2K", "5M", "1.1B")
+ * @returns {number} 转换后的真实数字
+ */
+function parseAbbreviatedNumber(str) {
+	if (typeof str !== 'string') return 0;
+
+	// 1. 去掉空格并将字符串转为大写
+	const cleanStr = str.trim().toUpperCase();
+
+	// 2. 定义单位对应的乘数 (K: 千, M: 百万, B: 十亿)
+	const multipliers = {
+		'K': 1000,
+		'M': 1000000,
+		'B': 1000000000
+	};
+
+	// 3. 使用正则提取数字部分和单位部分
+	// ([0-9.]+): 匹配数字或小数点
+	// ([KMB]?): 匹配 K, M, 或 B (可选)
+	const match = cleanStr.match(/^([0-9.]+)\s*([KMB]?)$/);
+
+	if (!match) return parseFloat(cleanStr) || 0;
+
+	const value = parseFloat(match[1]); // 提取数字，如 1.2
+	const unit = match[2];              // 提取单位，如 K
+
+	// 4. 计算最终结果
+	return unit ? value * multipliers[unit] : value;
+}
+
 module.exports = {
 	isNumeric,
 	getCurrentDate,
@@ -169,5 +201,6 @@ module.exports = {
 	convertUTCAsChinaDatetime,
 	readFileAsJson,
 	formatDecimal,
-	formatCompareIndication
+	formatCompareIndication,
+	parseAbbreviatedNumber
 };
