@@ -171,6 +171,7 @@ function log2026NewYearPricePredictionAction(currentDatetime, predictionTop20Rec
 	console.log('✅ 竞猜有效期：2026/01/02 - 2026/01/12');
 	console.log('✅ 奖励公布日期：2026/01/16');
 	console.log('✅ 奖励发放人数🧑‍🤝‍🧑 ：100');
+	console.log('✅ 猪脚饭收益（USD） 🍚 ：20.26');
 	console.log('✅ 目前参与人数 ：'.concat(util.formatDecimal(totalParticipateCount, 0, 0)));
 	let get20DollarRatio = 100 / parseFloat(totalParticipateCount - 20) * 100.00;
 	console.log('✅ 中奖概率 ：'.concat(get20DollarRatio.toFixed(2)).concat('%\n'));
@@ -182,6 +183,7 @@ function log2026NewYearPricePredictionAction(currentDatetime, predictionTop20Rec
 	console.log('✅ 竞猜有效期：2026/01/02 - 2026/01/12');
 	console.log('✅ 奖励公布日期：2026/01/16');
 	console.log('✅ 奖励发放人数🧑‍🤝‍🧑 ：20');
+	console.log('✅ 猪脚饭收益（USD） 🍚 ：101');
 	console.log('✅ 目前参与人数 ：'.concat(util.formatDecimal(totalParticipateCount, 0, 0)));
 	let get101DollarRatio = 20 / parseFloat(totalParticipateCount) * 100.00;
 	console.log('✅ 中奖概率 ：'.concat(get101DollarRatio.toFixed(2)).concat('%'));
