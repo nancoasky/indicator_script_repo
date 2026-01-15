@@ -187,7 +187,7 @@ function log2026NewYearPricePredictionAction(currentDatetime, predictionTop20Rec
 	console.log('✅ 目前参与人数 ：'.concat(util.formatDecimal(totalParticipateCount, 0, 0)));
 	let get101DollarRatio = 20 / parseFloat(totalParticipateCount) * 100.00;
 	console.log('✅ 中奖概率 ：'.concat(get101DollarRatio.toFixed(2)).concat('%'));
-	console.log('✅ 竞猜评选结果依据：以 @CoinMarketCap 于2026/1/16 东八区早上8点的 $RIVER 收盘价为准');
+	console.log('✅ 竞猜评选结果依据：以 @CoinMarketCap 于2026/1/15 东八区晚8点的 $RIVER 收盘价为准');
 	let formatLog = '✅ 目前榜单：';
 	for (let i = 0; i < predictionTop20RecordJson.totalItems.length; i++) {
 		let d = predictionTop20RecordJson.totalItems[i];
