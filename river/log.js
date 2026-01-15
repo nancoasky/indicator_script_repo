@@ -88,7 +88,7 @@ function log2026GalxeMintSatUSDAction(currentDate, oldTotal2026GalxeMintStatUSDC
 	console.log('✅ 奖励发放品种🪙 ：$RIVERPTS');
 	console.log('✅ 有效期：2026/01/13 21:00 - 2026/01/16 22:00 GMT+08:00');
 	console.log('✅ 参数人数🧑‍🤝‍🧑 ：'
-		.concat(util.formatDecimal(nowTotal2026GalxeMintStatUSDCount))
+		.concat(util.formatDecimal(nowTotal2026GalxeMintStatUSDCount, 0, 0))
 		.concat(util.formatCompareIndication(oldTotal2026GalxeMintStatUSDCount, nowTotal2026GalxeMintStatUSDCount)));
 	console.log('✅ 铸币成本（USD）👝 ：'.concat(avgCost));
 	console.log('✅ 人均积分（PTS）👝 ：'.concat(avgPtsPerPerson.toFixed(2)));
