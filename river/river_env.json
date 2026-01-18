@@ -5,6 +5,6 @@
 	"aprFactor": 2,
 	"enableReport2025Christmas": false,
 	"enableReport2025GalxeStakingAction": false,
-	"enableReport2026GalxeMintSatUSDAction": true,
-	"enableReport2026PredictPriceCampaign": true
+	"enableReport2026GalxeMintSatUSDAction": false,
+	"enableReport2026PredictPriceCampaign": false
 }
