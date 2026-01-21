@@ -122,7 +122,10 @@ function logPtsConversionInfo(currentDate, conversionInfo, oldPtsActualRate, old
 	console.log(`-------截止${currentDate} pts转换分析📃-------`)
 	console.log(`⏰ 积分兑换有效期：${conversionInfo.dynamicConversionStartTime} ~ ${conversionInfo.dynamicConversionEndTime} `);
 	console.log(`✅ 已转换积分总量：${util.formatDecimal(conversionInfo.totalPtsConvertedAmount)}`);
-	console.log(`✅ 已转换RIVER总量：${util.formatDecimal(conversionInfo.totalRiverConvertedAmount)}${util.formatCompareIndication(oldtotalRiverConvertedAmount, conversionInfo.totalRiverConvertedAmount)} \n`);
+	console.log(`✅ 已转换RIVER总量：${util.formatDecimal(conversionInfo.totalRiverConvertedAmount)}${util.formatCompareIndication(oldtotalRiverConvertedAmount, conversionInfo.totalRiverConvertedAmount)}`);
+
+	let conversionProgress = conversionInfo.totalRiverConvertedAmount * 100 / parseFloat(30000000)
+	console.log(`✅ 已转换进度(30M$RIVER)：${conversionProgress.toFixed(2)}% \n`);
 
 	console.log(`-------今日 ${currentDate} pts转换分析📃-------`)
 	console.log(`✅ 积分兑换总量：${util.formatDecimal(conversionInfo.todayConversion.ptsAmount)} `);
