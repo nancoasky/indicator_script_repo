@@ -27,12 +27,15 @@ function logRiverPrice(currentDate, oldriverPriceInUsd, oldriverPtsPriceInUsd, r
  * @param {*} oldTotalOfficialStakedAmount 昨日质押量 
  * @param {*} nowTotalStakedAmount 今日质押量
  */
-function logRiverOfficialStaking(currentDate, maxinumAPR, oldTotalOfficialStakedAmount, nowTotalStakedAmount) {
+function logRiverOfficialStaking(currentDate, maxinumAPR, oldTotalOfficialStakedAmount, riverStakingJson) {
 	console.log(`-------今日 ${currentDate} River官方质押情况🎺-------`)
 	console.log('✅ River最高APR ：'.concat(maxinumAPR).concat('%'));
-	console.log('✅ River质押总数 ：'.concat(util.formatDecimal(nowTotalStakedAmount))
-		.concat(util.formatCompareIndication(oldTotalOfficialStakedAmount, nowTotalStakedAmount))
-		.concat('\n'));
+	console.log('✅ River质押总数 ：'.concat(util.formatDecimal(riverStakingJson.totalStakedAmount))
+		.concat(util.formatCompareIndication(oldTotalOfficialStakedAmount, riverStakingJson.totalStakedAmount)));
+	console.log('🧺质押3月总量：'.concat(util.formatDecimal(riverStakingJson.threemTotalStakedAmout)));
+	console.log('🧺质押6月总量：'.concat(util.formatDecimal(riverStakingJson.sixmTotalStakedAmout)));
+	console.log('🧺质押9月总量：'.concat(util.formatDecimal(riverStakingJson.nicemTotalStakedAmout)));
+	console.log('🧺质押12月总量：'.concat(util.formatDecimal(riverStakingJson.twmTotalStakedAmout)).concat('\n'));
 }
 
 /**

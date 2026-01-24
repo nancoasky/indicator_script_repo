@@ -195,7 +195,11 @@ async function retrieveRiverStakingAPRAndAmount(url) {
 
 	return {
 		'maxinumAPR': (maxinumAPR * 100 * riverConfig.aprFactor).toFixed(2),
-		'totalStakedAmount': totalStakedAmount.toFixed(2)
+		'totalStakedAmount': totalStakedAmount.toFixed(2),
+		'threemTotalStakedAmout': aprJsonArr.data[0].stakedRiverAmount,
+		'sixmTotalStakedAmout': aprJsonArr.data[1].stakedRiverAmount,
+		'nicemTotalStakedAmout': aprJsonArr.data[2].stakedRiverAmount,
+		'twmTotalStakedAmout': aprJsonArr.data[3].stakedRiverAmount
 	};
 }
 
@@ -286,8 +290,8 @@ async function retrieveRiver2026PredictPriceCampaign() {
 	let d = await retrieveRiverApiData(campaignApiURL);
 	if (d) {
 		return {
-			'totalItems' : d.data,
-			'totalItemsSize' : d.totalItems
+			'totalItems': d.data,
+			'totalItemsSize': d.totalItems
 		};
 	}
 }
