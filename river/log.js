@@ -247,7 +247,7 @@ function log2026SuiCreationAction(currentDate, riverPtsPriceInUsd) {
 	let avgMin = 1000000 / parseFloat(200) * riverPtsPriceInUsd;
 	console.log(`✅ 猪脚饭🍚 ：
 ▸ 前20创作者人均：$100 等值RIVER
-▸ 前100～200创作者人均：10000～5000PTS 价值 ${avgMin.toFixed(2)} ~ ${avgMax.toFixed(2)}\n`);
+▸ 前100～200创作者人均：5000~10000PTS 价值 ${avgMin.toFixed(2)} ~ ${avgMax.toFixed(2)}\n`);
 }
 
 module.exports = {
