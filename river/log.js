@@ -32,10 +32,25 @@ function logRiverOfficialStaking(currentDate, maxinumAPR, oldTotalOfficialStaked
 	console.log('✅ River最高APR ：'.concat(maxinumAPR).concat('%'));
 	console.log('✅ River质押总数 ：'.concat(util.formatDecimal(riverStakingJson.totalStakedAmount))
 		.concat(util.formatCompareIndication(oldTotalOfficialStakedAmount, riverStakingJson.totalStakedAmount)));
-	console.log('🧺质押3月总量：'.concat(util.formatDecimal(riverStakingJson.threemTotalStakedAmout)));
-	console.log('🧺质押6月总量：'.concat(util.formatDecimal(riverStakingJson.sixmTotalStakedAmout)));
-	console.log('🧺质押9月总量：'.concat(util.formatDecimal(riverStakingJson.nicemTotalStakedAmout)));
-	console.log('🧺质押12月总量：'.concat(util.formatDecimal(riverStakingJson.twmTotalStakedAmout)).concat('\n'));
+	console.log('🧺质押3月总量：'.concat(util.formatDecimal(riverStakingJson.threemTotalStakedAmout))
+		.concat(' (🌟')
+		.concat((riverStakingJson.threemTotalStakedAmout * parseFloat(100) / riverStakingJson.totalStakedAmount).toFixed(2))
+		.concat('%)')
+	);
+	console.log('🧺质押6月总量：'.concat(util.formatDecimal(riverStakingJson.sixmTotalStakedAmout))
+		.concat(' (🌟')
+		.concat((riverStakingJson.sixmTotalStakedAmout * parseFloat(100) / riverStakingJson.totalStakedAmount).toFixed(2))
+		.concat('%)')
+	);
+	console.log('🧺质押9月总量：'.concat(util.formatDecimal(riverStakingJson.nicemTotalStakedAmout))
+		.concat(' (🌟')
+		.concat((riverStakingJson.nicemTotalStakedAmout * parseFloat(100) / riverStakingJson.totalStakedAmount).toFixed(2))
+		.concat('%)'));
+	console.log('🧺质押12月总量：'.concat(util.formatDecimal(riverStakingJson.twmTotalStakedAmout))
+		.concat(' (🌟')
+		.concat((riverStakingJson.twmTotalStakedAmout * parseFloat(100) / riverStakingJson.totalStakedAmount).toFixed(2))
+		.concat('%)')
+		.concat('\n'));
 }
 
 /**
@@ -214,6 +229,27 @@ function log2026NewYearPricePredictionAction(currentDatetime, predictionTop20Rec
 	console.log(`${formatLog}\n`);
 }
 
+/**
+ * 打印2026年的sui&river创意活动
+ * @param {*} currentDate 当前时间
+ * @param {*} predictionTop20RecordJson 20条top记录信息
+ */
+function log2026SuiCreationAction(currentDate, riverPtsPriceInUsd) {
+	// 
+	console.log(`-------今日 ${currentDate} River&Sui创意活动分析🎺-------`)
+	console.log('✅ 奖池🪣 ：$2,000RIVER&&100,000$RIVERPTS');
+	console.log('✅ 创作时间：2026/01/27 - 2026/01/31');
+	console.log('✅ 奖励公布日期：2026/02/02');
+	console.log(`✅ 奖励发放规则🧑‍🤝‍🧑 ：
+▸ 前20创作者，共享$2,000等值$RIVER
+▸ 前100～200创作者, 共享100,000$RiverPts`);
+	let avgMax = 1000000 / parseFloat(100) * riverPtsPriceInUsd;
+	let avgMin = 1000000 / parseFloat(200) * riverPtsPriceInUsd;
+	console.log(`✅ 猪脚饭🍚 ：
+▸ 前20创作者人均：$100 等值RIVER
+▸ 前100～200创作者人均：10000～5000PTS 价值 ${avgMin.toFixed(2)} ~ ${avgMax.toFixed(2)}\n`);
+}
+
 module.exports = {
 	logRiverPrice,
 	logRiverOfficialStaking,
@@ -222,5 +258,6 @@ module.exports = {
 	logPtsConversionInfo,
 	logRiver4Fun,
 	log2025ChristmasAction,
-	log2026NewYearPricePredictionAction
+	log2026NewYearPricePredictionAction,
+	log2026SuiCreationAction
 };
