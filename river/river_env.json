@@ -11,5 +11,5 @@
 	"enableReport2025GalxeStakingAction": false,
 	"enableReport2026GalxeMintSatUSDAction": false,
 	"enableReport2026PredictPriceCampaign": false,
-	"enableReport2026SuiCreationAction" : true
+	"enableReport2026SuiCreationAction" : false
 }
