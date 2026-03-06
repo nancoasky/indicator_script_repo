@@ -1,0 +1,1722 @@
+{
+    "data": [
+        {
+            "timestamp": "2025-09-22T16:00:00.000Z",
+            "ptsAmount": 2386355.53079075,
+            "tokensAmount": 224.90028079,
+            "penaltyAmount": 0,
+            "actualRate": 0.0001111,
+            "expectedRate": 0.0001111
+        },
+        {
+            "timestamp": "2025-09-23T16:00:00.000Z",
+            "ptsAmount": 807906.37554575,
+            "tokensAmount": 158.08468604,
+            "penaltyAmount": 0,
+            "actualRate": 0.0002222,
+            "expectedRate": 0.0002222
+        },
+        {
+            "timestamp": "2025-09-24T16:00:00.000Z",
+            "ptsAmount": 718439.98556506,
+            "tokensAmount": 234.9813816,
+            "penaltyAmount": 0,
+            "actualRate": 0.0003333,
+            "expectedRate": 0.0003333
+        },
+        {
+            "timestamp": "2025-09-25T16:00:00.000Z",
+            "ptsAmount": 193481.41846511,
+            "tokensAmount": 84.9608897,
+            "penaltyAmount": 0,
+            "actualRate": 0.0004444,
+            "expectedRate": 0.0004444
+        },
+        {
+            "timestamp": "2025-09-26T16:00:00.000Z",
+            "ptsAmount": 772772.82345115,
+            "tokensAmount": 409.15060867,
+            "penaltyAmount": 0,
+            "actualRate": 0.0005556,
+            "expectedRate": 0.0005556
+        },
+        {
+            "timestamp": "2025-09-27T16:00:00.000Z",
+            "ptsAmount": 745591.59580767,
+            "tokensAmount": 480.69095681,
+            "penaltyAmount": 0,
+            "actualRate": 0.0006667,
+            "expectedRate": 0.0006667
+        },
+        {
+            "timestamp": "2025-09-28T16:00:00.000Z",
+            "ptsAmount": 305100.6911951,
+            "tokensAmount": 233.89529933,
+            "penaltyAmount": 0,
+            "actualRate": 0.0007778,
+            "expectedRate": 0.0007778
+        },
+        {
+            "timestamp": "2025-09-29T16:00:00.000Z",
+            "ptsAmount": 190030.5627723,
+            "tokensAmount": 169.32525019,
+            "penaltyAmount": 0,
+            "actualRate": 0.0008889,
+            "expectedRate": 0.0008889
+        },
+        {
+            "timestamp": "2025-09-30T16:00:00.000Z",
+            "ptsAmount": 168539.24672933,
+            "tokensAmount": 168.72272119,
+            "penaltyAmount": 0,
+            "actualRate": 0.001,
+            "expectedRate": 0.001
+        },
+        {
+            "timestamp": "2025-10-01T16:00:00.000Z",
+            "ptsAmount": 118957.98049689,
+            "tokensAmount": 130.94676668,
+            "penaltyAmount": 0,
+            "actualRate": 0.0011111,
+            "expectedRate": 0.0011111
+        },
+        {
+            "timestamp": "2025-10-02T16:00:00.000Z",
+            "ptsAmount": 140870.06241441,
+            "tokensAmount": 170.5592568,
+            "penaltyAmount": 0,
+            "actualRate": 0.0012222,
+            "expectedRate": 0.0012222
+        },
+        {
+            "timestamp": "2025-10-03T16:00:00.000Z",
+            "ptsAmount": 746801.06633504,
+            "tokensAmount": 977.10018019,
+            "penaltyAmount": 0,
+            "actualRate": 0.0013333,
+            "expectedRate": 0.0013333
+        },
+        {
+            "timestamp": "2025-10-04T16:00:00.000Z",
+            "ptsAmount": 39233.51685037,
+            "tokensAmount": 56.79488189,
+            "penaltyAmount": 0,
+            "actualRate": 0.0014444,
+            "expectedRate": 0.0014444
+        },
+        {
+            "timestamp": "2025-10-05T16:00:00.000Z",
+            "ptsAmount": 75770.96559304,
+            "tokensAmount": 112.69418593,
+            "penaltyAmount": 0,
+            "actualRate": 0.0015556,
+            "expectedRate": 0.0015556
+        },
+        {
+            "timestamp": "2025-10-06T16:00:00.000Z",
+            "ptsAmount": 192040.5430019,
+            "tokensAmount": 317.8685797,
+            "penaltyAmount": 0,
+            "actualRate": 0.0016667,
+            "expectedRate": 0.0016667
+        },
+        {
+            "timestamp": "2025-10-07T16:00:00.000Z",
+            "ptsAmount": 66891.15547252,
+            "tokensAmount": 118.59879799,
+            "penaltyAmount": 0,
+            "actualRate": 0.0017778,
+            "expectedRate": 0.0017778
+        },
+        {
+            "timestamp": "2025-10-08T16:00:00.000Z",
+            "ptsAmount": 58908.93528401,
+            "tokensAmount": 112.90038356,
+            "penaltyAmount": 0,
+            "actualRate": 0.0018889,
+            "expectedRate": 0.0018889
+        },
+        {
+            "timestamp": "2025-10-09T16:00:00.000Z",
+            "ptsAmount": 20478.25007902,
+            "tokensAmount": 40.17728651,
+            "penaltyAmount": 0,
+            "actualRate": 0.002,
+            "expectedRate": 0.002
+        },
+        {
+            "timestamp": "2025-10-10T16:00:00.000Z",
+            "ptsAmount": 75043.668768,
+            "tokensAmount": 154.60344379,
+            "penaltyAmount": 0,
+            "actualRate": 0.0021111,
+            "expectedRate": 0.0021111
+        },
+        {
+            "timestamp": "2025-10-11T16:00:00.000Z",
+            "ptsAmount": 478562.54142437,
+            "tokensAmount": 1060.61757141,
+            "penaltyAmount": 0,
+            "actualRate": 0.0022222,
+            "expectedRate": 0.0022222
+        },
+        {
+            "timestamp": "2025-10-12T16:00:00.000Z",
+            "ptsAmount": 211589.70780185,
+            "tokensAmount": 497.5492312,
+            "penaltyAmount": 0,
+            "actualRate": 0.0023333,
+            "expectedRate": 0.0023333
+        },
+        {
+            "timestamp": "2025-10-13T16:00:00.000Z",
+            "ptsAmount": 34437.34120782,
+            "tokensAmount": 84.09749784,
+            "penaltyAmount": 0,
+            "actualRate": 0.0024444,
+            "expectedRate": 0.0024444
+        },
+        {
+            "timestamp": "2025-10-14T16:00:00.000Z",
+            "ptsAmount": 19828.5446,
+            "tokensAmount": 50.51038568,
+            "penaltyAmount": 0,
+            "actualRate": 0.0025556,
+            "expectedRate": 0.0025556
+        },
+        {
+            "timestamp": "2025-10-15T16:00:00.000Z",
+            "ptsAmount": 265685.88374641,
+            "tokensAmount": 708.76870793,
+            "penaltyAmount": 0,
+            "actualRate": 0.0026667,
+            "expectedRate": 0.0026667
+        },
+        {
+            "timestamp": "2025-10-16T16:00:00.000Z",
+            "ptsAmount": 970213.00345014,
+            "tokensAmount": 2682.16654891,
+            "penaltyAmount": 0,
+            "actualRate": 0.0027778,
+            "expectedRate": 0.0027778
+        },
+        {
+            "timestamp": "2025-10-17T16:00:00.000Z",
+            "ptsAmount": 1269458.05348261,
+            "tokensAmount": 3669.59195493,
+            "penaltyAmount": 0,
+            "actualRate": 0.0028889,
+            "expectedRate": 0.0028889
+        },
+        {
+            "timestamp": "2025-10-18T16:00:00.000Z",
+            "ptsAmount": 405521.36713876,
+            "tokensAmount": 1213.80311887,
+            "penaltyAmount": 0,
+            "actualRate": 0.003,
+            "expectedRate": 0.003
+        },
+        {
+            "timestamp": "2025-10-19T16:00:00.000Z",
+            "ptsAmount": 73817.32238842,
+            "tokensAmount": 228.34483325,
+            "penaltyAmount": 0,
+            "actualRate": 0.0031111,
+            "expectedRate": 0.0031111
+        },
+        {
+            "timestamp": "2025-10-20T16:00:00.000Z",
+            "ptsAmount": 3011585.11882956,
+            "tokensAmount": 9791.53659876,
+            "penaltyAmount": 0,
+            "actualRate": 0.0032222,
+            "expectedRate": 0.0032222
+        },
+        {
+            "timestamp": "2025-10-21T16:00:00.000Z",
+            "ptsAmount": 3290670.63894591,
+            "tokensAmount": 10745.24578852,
+            "penaltyAmount": 0,
+            "actualRate": 0.0033333,
+            "expectedRate": 0.0033333
+        },
+        {
+            "timestamp": "2025-10-22T16:00:00.000Z",
+            "ptsAmount": 1905146.74658838,
+            "tokensAmount": 6551.40096724,
+            "penaltyAmount": 0,
+            "actualRate": 0.0034444,
+            "expectedRate": 0.0034444
+        },
+        {
+            "timestamp": "2025-10-23T16:00:00.000Z",
+            "ptsAmount": 2194052.68258321,
+            "tokensAmount": 7802.52089801,
+            "penaltyAmount": 0,
+            "actualRate": 0.0035556,
+            "expectedRate": 0.0035556
+        },
+        {
+            "timestamp": "2025-10-24T16:00:00.000Z",
+            "ptsAmount": 632310.87787397,
+            "tokensAmount": 2299.21727494,
+            "penaltyAmount": 0,
+            "actualRate": 0.0036667,
+            "expectedRate": 0.0036667
+        },
+        {
+            "timestamp": "2025-10-25T16:00:00.000Z",
+            "ptsAmount": 4290.83123591,
+            "tokensAmount": 16.12354785,
+            "penaltyAmount": 0,
+            "actualRate": 0.0037778,
+            "expectedRate": 0.0037778
+        },
+        {
+            "timestamp": "2025-10-26T16:00:00.000Z",
+            "ptsAmount": 943515.86280692,
+            "tokensAmount": 3648.39703224,
+            "penaltyAmount": 0,
+            "actualRate": 0.0038889,
+            "expectedRate": 0.0038889
+        },
+        {
+            "timestamp": "2025-10-27T16:00:00.000Z",
+            "ptsAmount": 1161864.63834348,
+            "tokensAmount": 4647.88600733,
+            "penaltyAmount": 0,
+            "actualRate": 0.004,
+            "expectedRate": 0.004
+        },
+        {
+            "timestamp": "2025-10-28T16:00:00.000Z",
+            "ptsAmount": 40861.1198083,
+            "tokensAmount": 168.18321185,
+            "penaltyAmount": 0,
+            "actualRate": 0.0041111,
+            "expectedRate": 0.0041111
+        },
+        {
+            "timestamp": "2025-10-29T16:00:00.000Z",
+            "ptsAmount": 207567.44126141,
+            "tokensAmount": 868.30247851,
+            "penaltyAmount": 0,
+            "actualRate": 0.0042222,
+            "expectedRate": 0.0042222
+        },
+        {
+            "timestamp": "2025-10-30T16:00:00.000Z",
+            "ptsAmount": 28647.40651749,
+            "tokensAmount": 124.60535505,
+            "penaltyAmount": 0,
+            "actualRate": 0.0043333,
+            "expectedRate": 0.0043333
+        },
+        {
+            "timestamp": "2025-10-31T16:00:00.000Z",
+            "ptsAmount": 84772.62280957,
+            "tokensAmount": 373.97305292,
+            "penaltyAmount": 0,
+            "actualRate": 0.0044444,
+            "expectedRate": 0.0044444
+        },
+        {
+            "timestamp": "2025-11-01T16:00:00.000Z",
+            "ptsAmount": 926684.24840505,
+            "tokensAmount": 4245.75683926,
+            "penaltyAmount": 0,
+            "actualRate": 0.0045556,
+            "expectedRate": 0.0045556
+        },
+        {
+            "timestamp": "2025-11-02T16:00:00.000Z",
+            "ptsAmount": 498288.29976383,
+            "tokensAmount": 2309.82226192,
+            "penaltyAmount": 0,
+            "actualRate": 0.0046667,
+            "expectedRate": 0.0046667
+        },
+        {
+            "timestamp": "2025-11-03T16:00:00.000Z",
+            "ptsAmount": 1571929.99298211,
+            "tokensAmount": 7492.81975826,
+            "penaltyAmount": 0,
+            "actualRate": 0.0047778,
+            "expectedRate": 0.0047778
+        },
+        {
+            "timestamp": "2025-11-04T16:00:00.000Z",
+            "ptsAmount": 783911.11826122,
+            "tokensAmount": 3808.091103,
+            "penaltyAmount": 0,
+            "actualRate": 0.0048889,
+            "expectedRate": 0.0048889
+        },
+        {
+            "timestamp": "2025-11-05T16:00:00.000Z",
+            "ptsAmount": 54363.16919002,
+            "tokensAmount": 270.79148134,
+            "penaltyAmount": 0,
+            "actualRate": 0.005,
+            "expectedRate": 0.005
+        },
+        {
+            "timestamp": "2025-11-06T16:00:00.000Z",
+            "ptsAmount": 24715340.07608478,
+            "tokensAmount": 125061.59278138,
+            "penaltyAmount": 0,
+            "actualRate": 0.0051111,
+            "expectedRate": 0.0051111
+        },
+        {
+            "timestamp": "2025-11-07T16:00:00.000Z",
+            "ptsAmount": 3486.37474598,
+            "tokensAmount": 18.12362255,
+            "penaltyAmount": 0,
+            "actualRate": 0.0052222,
+            "expectedRate": 0.0052222
+        },
+        {
+            "timestamp": "2025-11-08T16:00:00.000Z",
+            "ptsAmount": 10981456.36095572,
+            "tokensAmount": 58589.93869468,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-09T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-10T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-11T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-12T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-13T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-14T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-15T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-16T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-17T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-18T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-19T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-20T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-21T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-22T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-23T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-24T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-25T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-26T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-27T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-28T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-29T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-11-30T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-12-01T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-12-02T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-12-03T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-12-04T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-12-05T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-12-06T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-12-07T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-12-08T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-12-09T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": 0.0053333,
+            "expectedRate": 0.0053333
+        },
+        {
+            "timestamp": "2025-12-10T16:00:00.000Z",
+            "ptsAmount": 2083167.32796521,
+            "tokensAmount": 4040.66180829,
+            "penaltyAmount": 1772.07352545,
+            "actualRate": 0.00486349,
+            "expectedRate": 0.0054444
+        },
+        {
+            "timestamp": "2025-12-11T16:00:00.000Z",
+            "ptsAmount": 2783802.06046948,
+            "tokensAmount": 4212.97529142,
+            "penaltyAmount": 2493.70517409,
+            "actualRate": 0.00245175,
+            "expectedRate": 0.0055556
+        },
+        {
+            "timestamp": "2025-12-12T16:00:00.000Z",
+            "ptsAmount": 2956973.37093142,
+            "tokensAmount": 3840.40108618,
+            "penaltyAmount": 3009.7639155,
+            "actualRate": 0.00242225,
+            "expectedRate": 0.0056667
+        },
+        {
+            "timestamp": "2025-12-13T16:00:00.000Z",
+            "ptsAmount": 2336935.35047437,
+            "tokensAmount": 3637.13465676,
+            "penaltyAmount": 2547.2562448,
+            "actualRate": 0.00263038,
+            "expectedRate": 0.0057778
+        },
+        {
+            "timestamp": "2025-12-14T16:00:00.000Z",
+            "ptsAmount": 2565366.47482217,
+            "tokensAmount": 4337.75323446,
+            "penaltyAmount": 2645.91469906,
+            "actualRate": 0.0027411,
+            "expectedRate": 0.0058889
+        },
+        {
+            "timestamp": "2025-12-15T16:00:00.000Z",
+            "ptsAmount": 2713232.48260939,
+            "tokensAmount": 4230.88566303,
+            "penaltyAmount": 2837.83824082,
+            "actualRate": 0.00267124,
+            "expectedRate": 0.006
+        },
+        {
+            "timestamp": "2025-12-16T16:00:00.000Z",
+            "ptsAmount": 2858021.53964592,
+            "tokensAmount": 4655.52178966,
+            "penaltyAmount": 2766.68473221,
+            "actualRate": 0.00271004,
+            "expectedRate": 0.0061111
+        },
+        {
+            "timestamp": "2025-12-17T16:00:00.000Z",
+            "ptsAmount": 2751960.77898689,
+            "tokensAmount": 5101.58670826,
+            "penaltyAmount": 2191.54825956,
+            "actualRate": 0.00272623,
+            "expectedRate": 0.0062222
+        },
+        {
+            "timestamp": "2025-12-18T16:00:00.000Z",
+            "ptsAmount": 2420281.46987059,
+            "tokensAmount": 4908.14900294,
+            "penaltyAmount": 2552.01514903,
+            "actualRate": 0.00314187,
+            "expectedRate": 0.0063333
+        },
+        {
+            "timestamp": "2025-12-19T16:00:00.000Z",
+            "ptsAmount": 2188213.00837157,
+            "tokensAmount": 4217.99342347,
+            "penaltyAmount": 2653.02802456,
+            "actualRate": 0.00321803,
+            "expectedRate": 0.0064444
+        },
+        {
+            "timestamp": "2025-12-20T16:00:00.000Z",
+            "ptsAmount": 2057593.76381374,
+            "tokensAmount": 3891.79377011,
+            "penaltyAmount": 2705.8430323,
+            "actualRate": 0.00320756,
+            "expectedRate": 0.0065556
+        },
+        {
+            "timestamp": "2025-12-21T16:00:00.000Z",
+            "ptsAmount": 2790509.70685682,
+            "tokensAmount": 4902.83751592,
+            "penaltyAmount": 3678.5592889,
+            "actualRate": 0.00316784,
+            "expectedRate": 0.0066667
+        },
+        {
+            "timestamp": "2025-12-22T16:00:00.000Z",
+            "ptsAmount": 1996975.30886798,
+            "tokensAmount": 4083.85203738,
+            "penaltyAmount": 2524.40372502,
+            "actualRate": 0.00327503,
+            "expectedRate": 0.0067778
+        },
+        {
+            "timestamp": "2025-12-23T16:00:00.000Z",
+            "ptsAmount": 5509650.08488181,
+            "tokensAmount": 7142.92926069,
+            "penaltyAmount": 4205.92345092,
+            "actualRate": 0.00273702,
+            "expectedRate": 0.0068889
+        },
+        {
+            "timestamp": "2025-12-24T16:00:00.000Z",
+            "ptsAmount": 5141942.52455031,
+            "tokensAmount": 7070.49455329,
+            "penaltyAmount": 3435.51154062,
+            "actualRate": 0.00212202,
+            "expectedRate": 0.007
+        },
+        {
+            "timestamp": "2025-12-25T16:00:00.000Z",
+            "ptsAmount": 4816577.280943,
+            "tokensAmount": 6593.02291138,
+            "penaltyAmount": 4102.04053998,
+            "actualRate": 0.00231368,
+            "expectedRate": 0.0071111
+        },
+        {
+            "timestamp": "2025-12-26T16:00:00.000Z",
+            "ptsAmount": 4510452.79310263,
+            "tokensAmount": 5781.32952717,
+            "penaltyAmount": 4418.05081088,
+            "actualRate": 0.00228781,
+            "expectedRate": 0.0072222
+        },
+        {
+            "timestamp": "2025-12-27T16:00:00.000Z",
+            "ptsAmount": 4973916.91443497,
+            "tokensAmount": 6710.37113865,
+            "penaltyAmount": 4529.76592878,
+            "actualRate": 0.00229602,
+            "expectedRate": 0.0073333
+        },
+        {
+            "timestamp": "2025-12-28T16:00:00.000Z",
+            "ptsAmount": 3857776.19992086,
+            "tokensAmount": 6224.62172437,
+            "penaltyAmount": 3596.4596075,
+            "actualRate": 0.00254824,
+            "expectedRate": 0.0074444
+        },
+        {
+            "timestamp": "2025-12-29T16:00:00.000Z",
+            "ptsAmount": 3495905.28686304,
+            "tokensAmount": 6410.83549007,
+            "penaltyAmount": 3515.94884814,
+            "actualRate": 0.00285785,
+            "expectedRate": 0.0075556
+        },
+        {
+            "timestamp": "2025-12-30T16:00:00.000Z",
+            "ptsAmount": 4526242.27786373,
+            "tokensAmount": 7854.52361211,
+            "penaltyAmount": 4144.14727415,
+            "actualRate": 0.00276986,
+            "expectedRate": 0.0076667
+        },
+        {
+            "timestamp": "2025-12-31T16:00:00.000Z",
+            "ptsAmount": 6067275.37075272,
+            "tokensAmount": 7519.46817019,
+            "penaltyAmount": 4761.56064413,
+            "actualRate": 0.00219964,
+            "expectedRate": 0.0077778
+        },
+        {
+            "timestamp": "2026-01-01T16:00:00.000Z",
+            "ptsAmount": 6938695.49508472,
+            "tokensAmount": 8809.02809002,
+            "penaltyAmount": 4295.1061106,
+            "actualRate": 0.00197969,
+            "expectedRate": 0.0078889
+        },
+        {
+            "timestamp": "2026-01-02T16:00:00.000Z",
+            "ptsAmount": 5975575.24476586,
+            "tokensAmount": 7697.51838246,
+            "penaltyAmount": 4407.76017734,
+            "actualRate": 0.00213969,
+            "expectedRate": 0.008
+        },
+        {
+            "timestamp": "2026-01-03T16:00:00.000Z",
+            "ptsAmount": 4922151.40118091,
+            "tokensAmount": 7570.61504375,
+            "penaltyAmount": 4516.81661907,
+            "actualRate": 0.00257841,
+            "expectedRate": 0.0081111
+        },
+        {
+            "timestamp": "2026-01-04T16:00:00.000Z",
+            "ptsAmount": 5733148.30890658,
+            "tokensAmount": 8012.08654487,
+            "penaltyAmount": 5037.33889809,
+            "actualRate": 0.00247103,
+            "expectedRate": 0.0082222
+        },
+        {
+            "timestamp": "2026-01-05T16:00:00.000Z",
+            "ptsAmount": 5617835.89920392,
+            "tokensAmount": 8675.99322031,
+            "penaltyAmount": 4829.40228537,
+            "actualRate": 0.00253775,
+            "expectedRate": 0.0083333
+        },
+        {
+            "timestamp": "2026-01-06T16:00:00.000Z",
+            "ptsAmount": 4398712.42149122,
+            "tokensAmount": 7176.04131517,
+            "penaltyAmount": 4049.13526274,
+            "actualRate": 0.00258686,
+            "expectedRate": 0.0084444
+        },
+        {
+            "timestamp": "2026-01-07T16:00:00.000Z",
+            "ptsAmount": 4277996.28727314,
+            "tokensAmount": 7447.13397592,
+            "penaltyAmount": 4765.32801549,
+            "actualRate": 0.0028932,
+            "expectedRate": 0.0085556
+        },
+        {
+            "timestamp": "2026-01-08T16:00:00.000Z",
+            "ptsAmount": 4347073.15919296,
+            "tokensAmount": 7774.46261507,
+            "penaltyAmount": 4791.4632266,
+            "actualRate": 0.00294848,
+            "expectedRate": 0.0086667
+        },
+        {
+            "timestamp": "2026-01-09T16:00:00.000Z",
+            "ptsAmount": 3542408.39673216,
+            "tokensAmount": 6984.41325704,
+            "penaltyAmount": 4530.79039756,
+            "actualRate": 0.00330156,
+            "expectedRate": 0.0087778
+        },
+        {
+            "timestamp": "2026-01-10T16:00:00.000Z",
+            "ptsAmount": 3924371.35024691,
+            "tokensAmount": 8885.04415145,
+            "penaltyAmount": 3772.30431106,
+            "actualRate": 0.00325651,
+            "expectedRate": 0.0088889
+        },
+        {
+            "timestamp": "2026-01-11T16:00:00.000Z",
+            "ptsAmount": 4279681.43213756,
+            "tokensAmount": 8999.0500147,
+            "penaltyAmount": 3900.87749326,
+            "actualRate": 0.00311755,
+            "expectedRate": 0.009
+        },
+        {
+            "timestamp": "2026-01-12T16:00:00.000Z",
+            "ptsAmount": 4464511.29587971,
+            "tokensAmount": 8871.59563442,
+            "penaltyAmount": 4941.42654502,
+            "actualRate": 0.00320203,
+            "expectedRate": 0.0091111
+        },
+        {
+            "timestamp": "2026-01-13T16:00:00.000Z",
+            "ptsAmount": 4694860.20118736,
+            "tokensAmount": 8564.00623244,
+            "penaltyAmount": 5495.08338007,
+            "actualRate": 0.00308448,
+            "expectedRate": 0.0092222
+        },
+        {
+            "timestamp": "2026-01-14T16:00:00.000Z",
+            "ptsAmount": 5918588.50279984,
+            "tokensAmount": 9540.38329309,
+            "penaltyAmount": 4008.32729483,
+            "actualRate": 0.00262008,
+            "expectedRate": 0.0093333
+        },
+        {
+            "timestamp": "2026-01-15T16:00:00.000Z",
+            "ptsAmount": 5288702.24750798,
+            "tokensAmount": 10045.90361927,
+            "penaltyAmount": 4789.79461331,
+            "actualRate": 0.00286585,
+            "expectedRate": 0.0094444
+        },
+        {
+            "timestamp": "2026-01-16T16:00:00.000Z",
+            "ptsAmount": 4333080.77039316,
+            "tokensAmount": 7954.97423899,
+            "penaltyAmount": 5376.72164983,
+            "actualRate": 0.00312278,
+            "expectedRate": 0.0095556
+        },
+        {
+            "timestamp": "2026-01-17T16:00:00.000Z",
+            "ptsAmount": 4193732.10408955,
+            "tokensAmount": 8899.19321967,
+            "penaltyAmount": 5396.09209388,
+            "actualRate": 0.00344019,
+            "expectedRate": 0.0096667
+        },
+        {
+            "timestamp": "2026-01-18T16:00:00.000Z",
+            "ptsAmount": 4490642.38199624,
+            "tokensAmount": 8648.84551627,
+            "penaltyAmount": 5931.80353827,
+            "actualRate": 0.00329027,
+            "expectedRate": 0.0097778
+        },
+        {
+            "timestamp": "2026-01-19T16:00:00.000Z",
+            "ptsAmount": 4545011.57448599,
+            "tokensAmount": 8276.65536513,
+            "penaltyAmount": 6200.87042611,
+            "actualRate": 0.0032331,
+            "expectedRate": 0.0098889
+        },
+        {
+            "timestamp": "2026-01-20T16:00:00.000Z",
+            "ptsAmount": 5414653.87192273,
+            "tokensAmount": 9741.41678602,
+            "penaltyAmount": 6293.18007661,
+            "actualRate": 0.00307936,
+            "expectedRate": 0.01
+        },
+        {
+            "timestamp": "2026-01-21T16:00:00.000Z",
+            "ptsAmount": 6977184.11294955,
+            "tokensAmount": 10221.46644181,
+            "penaltyAmount": 7015.67432039,
+            "actualRate": 0.00258725,
+            "expectedRate": 0.0102222
+        },
+        {
+            "timestamp": "2026-01-22T16:00:00.000Z",
+            "ptsAmount": 7207780.76651133,
+            "tokensAmount": 11448.02291483,
+            "penaltyAmount": 5860.64386452,
+            "actualRate": 0.00245948,
+            "expectedRate": 0.0104444
+        },
+        {
+            "timestamp": "2026-01-23T16:00:00.000Z",
+            "ptsAmount": 5302553.93720486,
+            "tokensAmount": 9966.43054513,
+            "penaltyAmount": 5504.88121919,
+            "actualRate": 0.00295149,
+            "expectedRate": 0.0106667
+        },
+        {
+            "timestamp": "2026-01-24T16:00:00.000Z",
+            "ptsAmount": 5826186.76890652,
+            "tokensAmount": 11315.63841747,
+            "penaltyAmount": 6220.34021226,
+            "actualRate": 0.00305837,
+            "expectedRate": 0.0108889
+        },
+        {
+            "timestamp": "2026-01-25T16:00:00.000Z",
+            "ptsAmount": 6307782.11817212,
+            "tokensAmount": 11208.91940999,
+            "penaltyAmount": 6990.29886296,
+            "actualRate": 0.00292679,
+            "expectedRate": 0.0111111
+        },
+        {
+            "timestamp": "2026-01-26T16:00:00.000Z",
+            "ptsAmount": 7401737.90617276,
+            "tokensAmount": 12390.85304527,
+            "penaltyAmount": 6359.83102057,
+            "actualRate": 0.00269043,
+            "expectedRate": 0.0113333
+        },
+        {
+            "timestamp": "2026-01-27T16:00:00.000Z",
+            "ptsAmount": 7090618.19347845,
+            "tokensAmount": 12571.5561438,
+            "penaltyAmount": 7541.71062579,
+            "actualRate": 0.00299968,
+            "expectedRate": 0.0115556
+        },
+        {
+            "timestamp": "2026-01-28T16:00:00.000Z",
+            "ptsAmount": 6148137.49987277,
+            "tokensAmount": 10835.23410071,
+            "penaltyAmount": 7004.10922514,
+            "actualRate": 0.00292387,
+            "expectedRate": 0.0117778
+        },
+        {
+            "timestamp": "2026-01-29T16:00:00.000Z",
+            "ptsAmount": 5905491.2404086,
+            "tokensAmount": 11708.3044596,
+            "penaltyAmount": 6897.00297931,
+            "actualRate": 0.00318445,
+            "expectedRate": 0.012
+        },
+        {
+            "timestamp": "2026-01-30T16:00:00.000Z",
+            "ptsAmount": 5213189.99426875,
+            "tokensAmount": 11564.46913547,
+            "penaltyAmount": 7085.17979391,
+            "actualRate": 0.00359264,
+            "expectedRate": 0.0122222
+        },
+        {
+            "timestamp": "2026-01-31T16:00:00.000Z",
+            "ptsAmount": 5410482.80822631,
+            "tokensAmount": 11913.18536117,
+            "penaltyAmount": 7537.79649083,
+            "actualRate": 0.00363741,
+            "expectedRate": 0.0124444
+        },
+        {
+            "timestamp": "2026-02-01T16:00:00.000Z",
+            "ptsAmount": 4967611.15152043,
+            "tokensAmount": 11445.51963643,
+            "penaltyAmount": 7668.18575836,
+            "actualRate": 0.00387034,
+            "expectedRate": 0.0126667
+        },
+        {
+            "timestamp": "2026-02-02T16:00:00.000Z",
+            "ptsAmount": 3737738.41838495,
+            "tokensAmount": 10867.82213161,
+            "penaltyAmount": 5784.95152594,
+            "actualRate": 0.00447692,
+            "expectedRate": 0.0128889
+        },
+        {
+            "timestamp": "2026-02-03T16:00:00.000Z",
+            "ptsAmount": 3539575.56456847,
+            "tokensAmount": 10687.36863845,
+            "penaltyAmount": 6872.12914197,
+            "actualRate": 0.00503828,
+            "expectedRate": 0.0131111
+        },
+        {
+            "timestamp": "2026-02-04T16:00:00.000Z",
+            "ptsAmount": 3671774.62526889,
+            "tokensAmount": 13755.72895008,
+            "penaltyAmount": 4786.64016595,
+            "actualRate": 0.00512251,
+            "expectedRate": 0.0133333
+        },
+        {
+            "timestamp": "2026-02-05T16:00:00.000Z",
+            "ptsAmount": 3259996.22596536,
+            "tokensAmount": 10594.81398526,
+            "penaltyAmount": 6164.24524661,
+            "actualRate": 0.0052059,
+            "expectedRate": 0.0135556
+        },
+        {
+            "timestamp": "2026-02-06T16:00:00.000Z",
+            "ptsAmount": 2995214.40510649,
+            "tokensAmount": 10448.90777992,
+            "penaltyAmount": 6442.65261906,
+            "actualRate": 0.00574348,
+            "expectedRate": 0.0137778
+        },
+        {
+            "timestamp": "2026-02-07T16:00:00.000Z",
+            "ptsAmount": 3008267.77604004,
+            "tokensAmount": 12543.11053351,
+            "penaltyAmount": 5262.97216073,
+            "actualRate": 0.00598436,
+            "expectedRate": 0.014
+        },
+        {
+            "timestamp": "2026-02-08T16:00:00.000Z",
+            "ptsAmount": 3670452.43605088,
+            "tokensAmount": 12921.88665029,
+            "penaltyAmount": 7844.19193227,
+            "actualRate": 0.006043,
+            "expectedRate": 0.0142222
+        },
+        {
+            "timestamp": "2026-02-09T16:00:00.000Z",
+            "ptsAmount": 3116176.31177554,
+            "tokensAmount": 11056.35423366,
+            "penaltyAmount": 6264.36307271,
+            "actualRate": 0.00555251,
+            "expectedRate": 0.0144444
+        },
+        {
+            "timestamp": "2026-02-10T16:00:00.000Z",
+            "ptsAmount": 3286311.81021781,
+            "tokensAmount": 12110.9023659,
+            "penaltyAmount": 6915.76298447,
+            "actualRate": 0.00581816,
+            "expectedRate": 0.0146667
+        },
+        {
+            "timestamp": "2026-02-11T16:00:00.000Z",
+            "ptsAmount": 3279599.71767252,
+            "tokensAmount": 11944.08225353,
+            "penaltyAmount": 7766.85530725,
+            "actualRate": 0.00605379,
+            "expectedRate": 0.0148889
+        },
+        {
+            "timestamp": "2026-02-12T16:00:00.000Z",
+            "ptsAmount": 3441771.80497376,
+            "tokensAmount": 11039.04955745,
+            "penaltyAmount": 8508.00813416,
+            "actualRate": 0.005901,
+            "expectedRate": 0.0151111
+        },
+        {
+            "timestamp": "2026-02-13T16:00:00.000Z",
+            "ptsAmount": 3097760.4886861,
+            "tokensAmount": 12400.59801931,
+            "penaltyAmount": 7279.29374996,
+            "actualRate": 0.00639168,
+            "expectedRate": 0.0153333
+        },
+        {
+            "timestamp": "2026-02-14T16:00:00.000Z",
+            "ptsAmount": 2860120.76569556,
+            "tokensAmount": 11987.758591,
+            "penaltyAmount": 6819.35630428,
+            "actualRate": 0.00660234,
+            "expectedRate": 0.0155556
+        },
+        {
+            "timestamp": "2026-02-15T16:00:00.000Z",
+            "ptsAmount": 3126548.74208237,
+            "tokensAmount": 13567.69928016,
+            "penaltyAmount": 6751.0739607,
+            "actualRate": 0.00652571,
+            "expectedRate": 0.0157778
+        },
+        {
+            "timestamp": "2026-02-16T16:00:00.000Z",
+            "ptsAmount": 2846668.70916588,
+            "tokensAmount": 12420.15468144,
+            "penaltyAmount": 7085.39924803,
+            "actualRate": 0.00689404,
+            "expectedRate": 0.016
+        },
+        {
+            "timestamp": "2026-02-17T16:00:00.000Z",
+            "ptsAmount": 3245154.72124055,
+            "tokensAmount": 13564.51000561,
+            "penaltyAmount": 7508.07007134,
+            "actualRate": 0.00662418,
+            "expectedRate": 0.0162222
+        },
+        {
+            "timestamp": "2026-02-18T16:00:00.000Z",
+            "ptsAmount": 2497293.76166899,
+            "tokensAmount": 12141.68994462,
+            "penaltyAmount": 6128.86053434,
+            "actualRate": 0.00739144,
+            "expectedRate": 0.0164444
+        },
+        {
+            "timestamp": "2026-02-19T16:00:00.000Z",
+            "ptsAmount": 2860934.79565268,
+            "tokensAmount": 13500.99806445,
+            "penaltyAmount": 8172.62455522,
+            "actualRate": 0.0076758,
+            "expectedRate": 0.0166667
+        },
+        {
+            "timestamp": "2026-02-20T16:00:00.000Z",
+            "ptsAmount": 2163670.69421852,
+            "tokensAmount": 11316.55464524,
+            "penaltyAmount": 5809.3473582,
+            "actualRate": 0.007934,
+            "expectedRate": 0.0168889
+        },
+        {
+            "timestamp": "2026-02-21T16:00:00.000Z",
+            "ptsAmount": 2345286.94497125,
+            "tokensAmount": 11532.07789395,
+            "penaltyAmount": 7837.1039219,
+            "actualRate": 0.00834578,
+            "expectedRate": 0.0171111
+        },
+        {
+            "timestamp": "2026-02-22T16:00:00.000Z",
+            "ptsAmount": 2467186.97339984,
+            "tokensAmount": 11994.35533394,
+            "penaltyAmount": 7575.10928308,
+            "actualRate": 0.00819433,
+            "expectedRate": 0.0173333
+        },
+        {
+            "timestamp": "2026-02-23T16:00:00.000Z",
+            "ptsAmount": 2148314.98084136,
+            "tokensAmount": 11565.37820605,
+            "penaltyAmount": 7315.13850793,
+            "actualRate": 0.00883749,
+            "expectedRate": 0.0175556
+        },
+        {
+            "timestamp": "2026-02-24T16:00:00.000Z",
+            "ptsAmount": 2181009.26084291,
+            "tokensAmount": 12058.76852647,
+            "penaltyAmount": 7465.29214271,
+            "actualRate": 0.00899423,
+            "expectedRate": 0.0177778
+        },
+        {
+            "timestamp": "2026-02-25T16:00:00.000Z",
+            "ptsAmount": 2329908.17196704,
+            "tokensAmount": 11990.72816754,
+            "penaltyAmount": 8594.01020996,
+            "actualRate": 0.00890093,
+            "expectedRate": 0.018
+        },
+        {
+            "timestamp": "2026-02-26T16:00:00.000Z",
+            "ptsAmount": 2257481.15872856,
+            "tokensAmount": 11750.04669607,
+            "penaltyAmount": 8111.61405747,
+            "actualRate": 0.00887958,
+            "expectedRate": 0.0182222
+        },
+        {
+            "timestamp": "2026-02-27T16:00:00.000Z",
+            "ptsAmount": 2727389.20822086,
+            "tokensAmount": 14088.59720532,
+            "penaltyAmount": 8498.36837746,
+            "actualRate": 0.00837206,
+            "expectedRate": 0.0184444
+        },
+        {
+            "timestamp": "2026-02-28T16:00:00.000Z",
+            "ptsAmount": 2733209.7388967,
+            "tokensAmount": 15837.92566068,
+            "penaltyAmount": 6869.63888414,
+            "actualRate": 0.00833121,
+            "expectedRate": 0.0186667
+        },
+        {
+            "timestamp": "2026-03-01T16:00:00.000Z",
+            "ptsAmount": 3476523.27819043,
+            "tokensAmount": 16406.23622304,
+            "penaltyAmount": 10554.13628985,
+            "actualRate": 0.00790213,
+            "expectedRate": 0.0188889
+        },
+        {
+            "timestamp": "2026-03-02T16:00:00.000Z",
+            "ptsAmount": 3299064.33545015,
+            "tokensAmount": 15223.33148473,
+            "penaltyAmount": 9315.00928371,
+            "actualRate": 0.00752393,
+            "expectedRate": 0.0191111
+        },
+        {
+            "timestamp": "2026-03-03T16:00:00.000Z",
+            "ptsAmount": 3275890.80850719,
+            "tokensAmount": 16006.3224674,
+            "penaltyAmount": 8428.84787158,
+            "actualRate": 0.00754344,
+            "expectedRate": 0.0193333
+        },
+        {
+            "timestamp": "2026-03-04T16:00:00.000Z",
+            "ptsAmount": 1185539.40714127,
+            "tokensAmount": 5014.8001442,
+            "penaltyAmount": 4163.52053133,
+            "actualRate": 0.00807372,
+            "expectedRate": 0.0195556
+        },
+        {
+            "timestamp": "2026-03-05T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0197778
+        },
+        {
+            "timestamp": "2026-03-06T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.02
+        },
+        {
+            "timestamp": "2026-03-07T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0202222
+        },
+        {
+            "timestamp": "2026-03-08T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0204444
+        },
+        {
+            "timestamp": "2026-03-09T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0206667
+        },
+        {
+            "timestamp": "2026-03-10T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0208889
+        },
+        {
+            "timestamp": "2026-03-11T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0211111
+        },
+        {
+            "timestamp": "2026-03-12T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0213333
+        },
+        {
+            "timestamp": "2026-03-13T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0215556
+        },
+        {
+            "timestamp": "2026-03-14T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0217778
+        },
+        {
+            "timestamp": "2026-03-15T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.022
+        },
+        {
+            "timestamp": "2026-03-16T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0222222
+        },
+        {
+            "timestamp": "2026-03-17T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0224444
+        },
+        {
+            "timestamp": "2026-03-18T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0226667
+        },
+        {
+            "timestamp": "2026-03-19T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0228889
+        },
+        {
+            "timestamp": "2026-03-20T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0231111
+        },
+        {
+            "timestamp": "2026-03-21T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0233333
+        },
+        {
+            "timestamp": "2026-03-22T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0235556
+        },
+        {
+            "timestamp": "2026-03-23T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0237778
+        },
+        {
+            "timestamp": "2026-03-24T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.024
+        },
+        {
+            "timestamp": "2026-03-25T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0242222
+        },
+        {
+            "timestamp": "2026-03-26T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0244444
+        },
+        {
+            "timestamp": "2026-03-27T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0246667
+        },
+        {
+            "timestamp": "2026-03-28T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0248889
+        },
+        {
+            "timestamp": "2026-03-29T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0251111
+        },
+        {
+            "timestamp": "2026-03-30T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0253333
+        },
+        {
+            "timestamp": "2026-03-31T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0255556
+        },
+        {
+            "timestamp": "2026-04-01T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0257778
+        },
+        {
+            "timestamp": "2026-04-02T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.026
+        },
+        {
+            "timestamp": "2026-04-03T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0262222
+        },
+        {
+            "timestamp": "2026-04-04T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0264444
+        },
+        {
+            "timestamp": "2026-04-05T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0266667
+        },
+        {
+            "timestamp": "2026-04-06T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0268889
+        },
+        {
+            "timestamp": "2026-04-07T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0271111
+        },
+        {
+            "timestamp": "2026-04-08T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0273333
+        },
+        {
+            "timestamp": "2026-04-09T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0275556
+        },
+        {
+            "timestamp": "2026-04-10T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0277778
+        },
+        {
+            "timestamp": "2026-04-11T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.028
+        },
+        {
+            "timestamp": "2026-04-12T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0282222
+        },
+        {
+            "timestamp": "2026-04-13T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0284444
+        },
+        {
+            "timestamp": "2026-04-14T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0286667
+        },
+        {
+            "timestamp": "2026-04-15T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0288889
+        },
+        {
+            "timestamp": "2026-04-16T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0291111
+        },
+        {
+            "timestamp": "2026-04-17T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0293333
+        },
+        {
+            "timestamp": "2026-04-18T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0295556
+        },
+        {
+            "timestamp": "2026-04-19T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.0297778
+        },
+        {
+            "timestamp": "2026-04-20T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.03
+        },
+        {
+            "timestamp": "2026-04-21T16:00:00.000Z",
+            "ptsAmount": 0,
+            "tokensAmount": 0,
+            "penaltyAmount": 0,
+            "actualRate": null,
+            "expectedRate": 0.03
+        }
+    ],
+    "referenceLines": [
+        {
+            "timestamp": "2025-11-10T12:00:00.000Z",
+            "label": "Pause Conversion",
+            "style": "dashed"
+        },
+        {
+            "timestamp": "2025-12-10T00:00:00.000Z",
+            "label": "Resume Conversion",
+            "style": "dashed"
+        },
+        {
+            "timestamp": "2026-03-05T00:27:16.874Z",
+            "label": "Current Time",
+            "style": "solid"
+        },
+        {
+            "timestamp": "2026-04-20T16:00:00.000Z",
+            "label": "Season End",
+            "style": "dashed"
+        }
+    ]
+}

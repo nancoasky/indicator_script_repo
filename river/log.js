@@ -21,7 +21,7 @@ function logRiverPrice(currentDate, oldriverPriceInUsd, oldriverPtsPriceInUsd, r
 }
 
 /**
- * 打印river的官方质押情况
+ * 打印river的官方质押情况，统计范围为自2025-12-11以来
  * @param {*} currentDate 当前日期
  * @param {*} maxinumAPR 最大年化
  * @param {*} oldTotalOfficialStakedAmount 昨日质押量 
@@ -29,8 +29,8 @@ function logRiverPrice(currentDate, oldriverPriceInUsd, oldriverPtsPriceInUsd, r
  */
 function logRiverOfficialStaking(currentDate, maxinumAPR, oldTotalOfficialStakedAmount, riverStakingJson) {
 	console.log(`-------今日 ${currentDate} River官方质押情况🎺-------`)
-	console.log('✅ River最高APR ：'.concat(maxinumAPR).concat('%'));
-	console.log('✅ River质押总数 ：'.concat(util.formatDecimal(riverStakingJson.totalStakedAmount))
+	console.log('✅ River最高APR(12个月) ：'.concat(maxinumAPR).concat('%'));
+	console.log('✅ River质押总数(自2025-12-11以来) ：'.concat(util.formatDecimal(riverStakingJson.totalStakedAmount))
 		.concat(util.formatCompareIndication(oldTotalOfficialStakedAmount, riverStakingJson.totalStakedAmount)));
 	console.log('🧺质押3月总量：'.concat(util.formatDecimal(riverStakingJson.threemTotalStakedAmout))
 		.concat(' (🌟')
@@ -130,7 +130,7 @@ function log2026GalxeMintSatUSDAction(currentDate, oldTotal2026GalxeMintStatUSDC
 }
 
 /**
- * 打印river的积分转换情况
+ * 打印river的积分转换情况，统计范围为自2025-12-11以来
  * @param {*} currentDate 当前日期
  * @param {*} conversionInfo 积分对象
  * @param {*} oldPtsActualRate 昨日真实兑换比例
@@ -138,7 +138,7 @@ function log2026GalxeMintSatUSDAction(currentDate, oldTotal2026GalxeMintStatUSDC
  */
 function logPtsConversionInfo(currentDate, conversionInfo, oldPtsActualRate, oldtotalRiverConvertedAmount) {
 	console.log(`-------截止${currentDate} pts转换分析📃-------`)
-	console.log(`⏰ 积分兑换有效期：${conversionInfo.dynamicConversionStartTime} ~ ${conversionInfo.dynamicConversionEndTime} `);
+	console.log(`⏰ 积分兑换2.0有效期：${conversionInfo.dynamicConversionStartTime} ~ ${conversionInfo.dynamicConversionEndTime} `);
 	console.log(`✅ 已转换积分总量：${util.formatDecimal(conversionInfo.totalPtsConvertedAmount)}`);
 	console.log(`✅ 已转换RIVER总量：${util.formatDecimal(conversionInfo.totalRiverConvertedAmount)}${util.formatCompareIndication(oldtotalRiverConvertedAmount, conversionInfo.totalRiverConvertedAmount)}`);
 
