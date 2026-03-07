@@ -2,6 +2,7 @@ const axios = require('axios');
 const util = require('./util.js')
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer-core');
+const convert = require('../common/convert.js')
 
 /**
  * 通过puppteer组件来进行渲染获取页面元素
@@ -296,6 +297,36 @@ async function retrieveRiver2026PredictPriceCampaign() {
 	}
 }
 
+/**
+ * 生成积分兑换数据（xlsx格式）
+ * @param {*} url 积分兑换统计API地址
+ */
+async function retrieveRiverPtsConversionChartData2Xlsx(url) {
+	let ptsConversionJson = await retrieveRiverApiData(url);
+	if (ptsConversionJson && ptsConversionJson.data.length > 0) {
+		// 针对数据进行格式化
+		const formatRows = ptsConversionJson.data.map(item => {
+			return {
+				// 将 ISO 时间戳转为 YYYY-MM-DD HH:MM:SS 格式
+				timestamp: item.timestamp ? new Date(item.timestamp).toLocaleString('zh-CN', {
+					year: 'numeric',
+					month: '2-digit',
+					day: '2-digit'
+				}).replace(/\//g, '-') : '',
+				ptsAmount: item.ptsAmount,
+				tokensAmount: item.tokensAmount,
+				penaltyAmount: item.penaltyAmount,
+				actualRate: item.actualRate ?? '', // 处理null值
+				expectedRate: item.expectedRate ?? ''
+			};
+		});
+
+		convert.rows2Xlsx(formatRows, './pts_conversion_data.xlsx');
+	} else {
+		console.log('无兑换数据');
+	}
+}
+
 module.exports = {
 	retrieveTwitterReplyCount,
 	retrieveMaxinumAPR,
@@ -304,5 +335,6 @@ module.exports = {
 	retrieveRiverStakingAPRAndAmount,
 	retrieve4FUNItemCount,
 	retrieveTodayPtsConversionInfo,
-	retrieveRiver2026PredictPriceCampaign
+	retrieveRiver2026PredictPriceCampaign,
+	retrieveRiverPtsConversionChartData2Xlsx
 };

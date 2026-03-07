@@ -81,6 +81,11 @@ async function retrieveRiverIndicators() {
 			logUtil.log2025ChristmasAction(currentDate, rpyCount);
 		}
 	}
+
+	// 是否获取积分兑换统计数据
+	if (riverConfig.enableGenPtsConversionExcel) {
+		riverApi.retrieveRiverPtsConversionChartData2Xlsx(riverConfig.riverPtsConversionChartApiURL);
+	}
 }
 
 // 启动
