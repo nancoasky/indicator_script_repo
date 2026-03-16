@@ -12,8 +12,6 @@ async function retrieveRiverIndicators() {
 	let oldData = await util.readFileAsJson('to_be_compared.json');
 	// 获取river质押APR
 	let nowOfficialStakingMaxinumAPR = await riverApi.retrieveMaxinumAPR();
-	// 获取river质押相关信息
-	let riverStakingJson = await riverApi.retrieveRiverStakingAPRAndAmount(riverConfig.riverStakingApiURL);
 
 	// 获取river/riverpts的现货价格
 	let currentDate = util.getCurrentDate();
@@ -37,7 +35,10 @@ async function retrieveRiverIndicators() {
 	}
 
 	if (riverConfig.enableReportRiverOfficialStaking) {
-		logUtil.logRiverOfficialStaking(currentDate, nowOfficialStakingMaxinumAPR, oldData.totalOfficialStakedAmount, riverStakingJson);
+		// 获取river质押相关信息
+		let riverStakingJson = await riverApi.retrieveRiverStakingAmount(riverConfig.riverStakingStatisticURL);
+		logUtil.logRiverOfficialStaking(currentDate, nowOfficialStakingMaxinumAPR, oldData.oldTotalOfficialStakedAmount, riverStakingJson);
+		logUtil.logRiverOfficialUnStaking(currentDate, oldData.oldTotalClaimedAmount, riverStakingJson);
 	}
 
 	if (riverConfig.enableReport2025GalxeStakingAction) {

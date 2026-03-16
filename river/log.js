@@ -54,6 +54,36 @@ function logRiverOfficialStaking(currentDate, maxinumAPR, oldTotalOfficialStaked
 }
 
 /**
+ * 打印river的官方解质押情况，统计范围为自2025-12-11以来
+ * @param {*} currentDate 当前日期
+ * @param {*} riverStakingJson 质押数据
+ */
+function logRiverOfficialUnStaking(currentDate, oldTotalClaimedAmount, riverStakingJson) {
+	console.log(`-------今日 ${currentDate} River官方解质押情况🎺-------`)
+	console.log('✅ River解质押总数(自2025-12-11以来) ：'.concat(util.formatDecimal(riverStakingJson.totalClaimedAmount))
+		.concat(util.formatCompareIndication(oldTotalClaimedAmount, riverStakingJson.totalClaimedAmount)));
+	console.log('🧺质押3月总量：'.concat(util.formatDecimal(riverStakingJson.threemTotalClaimedAmout))
+		.concat(' (🌟')
+		.concat((riverStakingJson.threemTotalClaimedAmout * parseFloat(100) / riverStakingJson.threemTotalStakedAmout).toFixed(2))
+		.concat('%)')
+	);
+	console.log('🧺质押6月总量：'.concat(util.formatDecimal(riverStakingJson.sixmTotalClaimedAmout))
+		.concat(' (🌟')
+		.concat((riverStakingJson.sixmTotalClaimedAmout * parseFloat(100) / riverStakingJson.sixmTotalStakedAmout).toFixed(2))
+		.concat('%)')
+	);
+	console.log('🧺质押9月总量：'.concat(util.formatDecimal(riverStakingJson.nicemTotalClaimedAmout))
+		.concat(' (🌟')
+		.concat((riverStakingJson.nicemTotalClaimedAmout * parseFloat(100) / riverStakingJson.nicemTotalStakedAmout).toFixed(2))
+		.concat('%)'));
+	console.log('🧺质押12月总量：'.concat(util.formatDecimal(riverStakingJson.twmTotalClaimedAmout))
+		.concat(' (🌟')
+		.concat((riverStakingJson.twmTotalClaimedAmout * parseFloat(100) / riverStakingJson.twmTotalStakedAmout).toFixed(2))
+		.concat('%)')
+		.concat('\n'));
+}
+
+/**
  * 打印2025年的river银河任务质押情况
  * @param {*} currentDate 当前日期
  * @param {*} oldTotal2025GalxeStakingCount 昨日质押人数
@@ -253,6 +283,7 @@ function log2026SuiCreationAction(currentDate, riverPtsPriceInUsd) {
 module.exports = {
 	logRiverPrice,
 	logRiverOfficialStaking,
+	logRiverOfficialUnStaking,
 	log2025GalxeStakingAction,
 	log2026GalxeMintSatUSDAction,
 	logPtsConversionInfo,

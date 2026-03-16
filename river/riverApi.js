@@ -205,6 +205,81 @@ async function retrieveRiverStakingAPRAndAmount(url) {
 }
 
 /**
+ * 获取River的质押数量
+ * @param {*} url 地址
+ * @returns 
+ * {
+		'totalStakedAmount': totalStakedAmount.toFixed(2),
+		'threemTotalStakedAmout': aprJsonArr.data[0].stakedRiverAmount,
+		'sixmTotalStakedAmout': aprJsonArr.data[1].stakedRiverAmount,
+		'nicemTotalStakedAmout': aprJsonArr.data[2].stakedRiverAmount,
+		'twmTotalStakedAmout': aprJsonArr.data[3].stakedRiverAmount
+	}
+ */
+async function retrieveRiverStakingAmount(url) {
+	/**
+	 * {
+	"data": [
+		{
+			"durationEnum": 0,
+			"durationDays": 90,
+			"stakingCount": 16396,
+			"unstakingCount": 201,
+			"totalStakingAmount": "560270.752250946981975589",
+			"totalClaimedAmount": "15073.839575622731408474"
+		},
+		{
+			"durationEnum": 1,
+			"durationDays": 180,
+			"stakingCount": 3235,
+			"unstakingCount": 0,
+			"totalStakingAmount": "198687.823652549943981339",
+			"totalClaimedAmount": "0"
+		},
+		{
+			"durationEnum": 2,
+			"durationDays": 270,
+			"stakingCount": 1799,
+			"unstakingCount": 0,
+			"totalStakingAmount": "158863.815151134950594712",
+			"totalClaimedAmount": "0"
+		},
+		{
+			"durationEnum": 3,
+			"durationDays": 360,
+			"stakingCount": 4386,
+			"unstakingCount": 0,
+			"totalStakingAmount": "240794.567733232424521456",
+			"totalClaimedAmount": "0"
+		}
+	]
+}
+	 */
+	let aprJsonArr = await retrieveRiverApiData(url);
+
+	// total staked amount
+	let totalStakedAmount = 0.00
+	let totalClaimedAmount = 0.00
+	aprJsonArr.data.forEach(element => {
+		totalStakedAmount += parseFloat(element.totalStakingAmount);
+		totalClaimedAmount += parseFloat(element.totalClaimedAmount);
+	});
+
+	return {
+		'totalStakedAmount': totalStakedAmount.toFixed(2),
+		'totalClaimedAmount' : totalClaimedAmount.toFixed(2),
+		'threemTotalStakedAmout': aprJsonArr.data[0].totalStakingAmount,
+		'threemTotalClaimedAmout': aprJsonArr.data[0].totalClaimedAmount,
+		'sixmTotalStakedAmout': aprJsonArr.data[1].totalStakingAmount,
+		'sixmTotalClaimedAmout': aprJsonArr.data[1].totalClaimedAmount,
+		'nicemTotalStakedAmout': aprJsonArr.data[2].totalStakingAmount,
+		'nicemTotalClaimedAmout': aprJsonArr.data[2].totalClaimedAmount,
+		'twmTotalStakedAmout': aprJsonArr.data[3].totalStakingAmount,
+		'twmTotalClaimedAmout': aprJsonArr.data[3].totalClaimedAmount,
+	};
+}
+
+/**
  * 获取指定4fun上的yap人数
  * @param {*} url 地址
  * @returns 人数
@@ -333,6 +408,7 @@ module.exports = {
 	retrieveTokenPriceByCoinGecko,
 	fetchAndParseContent,
 	retrieveRiverStakingAPRAndAmount,
+	retrieveRiverStakingAmount,
 	retrieve4FUNItemCount,
 	retrieveTodayPtsConversionInfo,
 	retrieveRiver2026PredictPriceCampaign,
