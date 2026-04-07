@@ -1,11 +1,14 @@
 const riverApi = require('./riverApi.js')
 const util = require('./util.js')
 const logUtil = require('./log.js')
+const fs = require('fs')
+const path = require('path')
 
 /**
  * 检索对应的river指标信息
  */
 async function retrieveRiverIndicators() {
+	var todayIndicatorJson = {};
 	// 获取公用配置
 	let riverConfig = await util.readFileAsJson('river_env.json');
 	// 获取昨日数据配置
@@ -22,6 +25,8 @@ async function retrieveRiverIndicators() {
 
 	// 打印相关信息
 	if (riverConfig.enableReportRiverPrice) {
+		todayIndicatorJson.oldriverPriceInUsd = riverPriceInUsd;
+		todayIndicatorJson.oldriverPtsPriceInUsd = riverPtsPriceInUsd;
 		logUtil.logRiverPrice(currentDate, oldData.oldriverPriceInUsd, oldData.oldriverPtsPriceInUsd, riverPriceInUsd, riverPtsPriceInUsd);
 	}
 
@@ -39,6 +44,9 @@ async function retrieveRiverIndicators() {
 		let riverStakingJson = await riverApi.retrieveRiverStakingAmount(riverConfig.riverStakingStatisticURL);
 		logUtil.logRiverOfficialStaking(currentDate, nowOfficialStakingMaxinumAPR, oldData.oldTotalOfficialStakedAmount, riverStakingJson);
 		logUtil.logRiverOfficialUnStaking(currentDate, oldData.oldTotalClaimedAmount, riverStakingJson);
+		todayIndicatorJson.oldTotalOfficialStakedAmount = riverStakingJson.totalStakedAmount;
+		todayIndicatorJson.oldTotalClaimedAmount = riverStakingJson.totalClaimedAmount;
+		todayIndicatorJson.oldOfficialStakingMaxinumAPR = nowOfficialStakingMaxinumAPR;
 	}
 
 	if (riverConfig.enableReport2025GalxeStakingAction) {
@@ -64,6 +72,9 @@ async function retrieveRiverIndicators() {
 		let conversionInfo = await riverApi.retrieveTodayPtsConversionInfo();
 		if (conversionInfo) {
 			logUtil.logPtsConversionInfo(currentDate, conversionInfo, oldData.ptsActualRate, oldData.oldtotalRiverConvertedAmount);
+			todayIndicatorJson.ptsActualRate = conversionInfo.todayConversion.actualRate;
+			todayIndicatorJson.oldexpectedRate = conversionInfo.todayConversion.expectedRate;
+			todayIndicatorJson.oldtotalRiverConvertedAmount = conversionInfo.totalRiverConvertedAmount;
 		}
 	}
 	// 获取指定4FUN参与人数
@@ -71,6 +82,7 @@ async function retrieveRiverIndicators() {
 		let river4funItems = await riverApi.retrieve4FUNItemCount();
 		if (river4funItems) {
 			logUtil.logRiver4Fun(currentDate, oldData.river4funItems, river4funItems);
+			todayIndicatorJson.river4funItems = river4funItems;
 		}
 	}
 
@@ -87,6 +99,21 @@ async function retrieveRiverIndicators() {
 	if (riverConfig.enableGenPtsConversionExcel) {
 		riverApi.retrieveRiverPtsConversionChartData2Xlsx(riverConfig.riverPtsConversionChartApiURL);
 	}
+
+	// 构建完整路径
+	const outputDir = __dirname;
+    const fileName = `${currentDate}_to_be_compared.json`;
+    const filePath = path.join(outputDir, fileName);
+    
+    try {
+        // 写入文件
+        fs.writeFileSync(filePath, JSON.stringify(todayIndicatorJson, null, 2), 'utf8');
+        console.log(`✅ 文件保存成功: ${filePath}`);
+        return filePath;
+    } catch (error) {
+        console.error(`❌ 文件保存失败: ${error.message}`);
+        throw error;
+    }
 }
 
 // 启动
