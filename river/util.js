@@ -14,6 +14,7 @@ function isNumeric(value) {
 	return false;
 }
 
+
 /**
  * 获取当前日期，格式为yyyy-MM-dd
  * @returns 当前日期
@@ -25,6 +26,24 @@ function getCurrentDate() {
 		month: '2-digit',
 		day: '2-digit'
 	}).replace(/\//g, '-');
+}
+
+/**
+ * 获取当前日期的index天，格式为yyyy-MM-dd
+ * @param index 指定下标 -1表示前一天 +1表示后一天
+ * @returns 当前日期 yyyy-MM-dd
+ */
+function getCertainDate(index) {
+  let currentDate = new Date();
+  // setDate只接受一个参数（天数），index作为偏移量
+  currentDate.setDate(currentDate.getDate() + index);
+  
+  return currentDate.toLocaleDateString('zh-CN', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).replace(/\//g, '-');
 }
 
 /**
@@ -196,6 +215,7 @@ function parseAbbreviatedNumber(str) {
 module.exports = {
 	isNumeric,
 	getCurrentDate,
+	getCertainDate,
 	getCurrentChinaDateTime,
 	convertUTCAsChinaDate,
 	convertUTCAsChinaDatetime,

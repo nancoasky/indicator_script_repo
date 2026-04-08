@@ -9,15 +9,21 @@ const path = require('path')
  */
 async function retrieveRiverIndicators() {
 	var todayIndicatorJson = {};
+	let currentDate = util.getCurrentDate();
+	let yestodayDate = util.getCertainDate(-1);
 	// 获取公用配置
 	let riverConfig = await util.readFileAsJson('river_env.json');
 	// 获取昨日数据配置
-	let oldData = await util.readFileAsJson('to_be_compared.json');
+	let oldData;
+	if (fs.existsSync(`${yestodayDate}_to_be_compared.json`)) {
+		oldData = await util.readFileAsJson(`${yestodayDate}_to_be_compared.json`)
+	} else {
+		oldData = await util.readFileAsJson('to_be_compared.json');
+	}
 	// 获取river质押APR
 	let nowOfficialStakingMaxinumAPR = await riverApi.retrieveMaxinumAPR();
 
 	// 获取river/riverpts的现货价格
-	let currentDate = util.getCurrentDate();
 	let riverPriceData = await riverApi.retrieveTokenPriceByCoinGecko(riverConfig.riverContractAddress, 'usd,bnb');
 	let riverPriceInUsd = riverPriceData['usd'];
 	let riverPtsPriceData = await riverApi.retrieveTokenPriceByCoinGecko(riverConfig.riverPtsContractAddress, 'usd,bnb');
@@ -102,18 +108,18 @@ async function retrieveRiverIndicators() {
 
 	// 构建完整路径
 	const outputDir = __dirname;
-    const fileName = `${currentDate}_to_be_compared.json`;
-    const filePath = path.join(outputDir, fileName);
-    
-    try {
-        // 写入文件
-        fs.writeFileSync(filePath, JSON.stringify(todayIndicatorJson, null, 2), 'utf8');
-        console.log(`✅ 文件保存成功: ${filePath}`);
-        return filePath;
-    } catch (error) {
-        console.error(`❌ 文件保存失败: ${error.message}`);
-        throw error;
-    }
+	const fileName = `${currentDate}_to_be_compared.json`;
+	const filePath = path.join(outputDir, fileName);
+
+	try {
+		// 写入文件
+		fs.writeFileSync(filePath, JSON.stringify(todayIndicatorJson, null, 2), 'utf8');
+		console.log(`✅ 文件保存成功: ${filePath}`);
+		return filePath;
+	} catch (error) {
+		console.error(`❌ 文件保存失败: ${error.message}`);
+		throw error;
+	}
 }
 
 // 启动
