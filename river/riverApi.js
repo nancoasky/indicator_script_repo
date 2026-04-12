@@ -1,7 +1,7 @@
 const axios = require('axios');
 const util = require('./util.js')
 const cheerio = require('cheerio');
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 const convert = require('../common/convert.js')
 
 /**
@@ -14,8 +14,6 @@ async function retrievePageElementTextValueByPuppeteer(url, selector, timeout) {
 	// launch({ headless: true }) 表示不弹出浏览器窗口
 	const browser = await puppeteer.launch({
 		headless: "new",
-		channel: 'chrome',
-		// executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
 		args: ['--no-sandbox', '--disable-setuid-sandbox']
 	});
 
