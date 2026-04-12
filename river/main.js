@@ -114,8 +114,8 @@ async function retrieveRiverIndicators() {
 	try {
 		// 写入文件
 		fs.writeFileSync(filePath, JSON.stringify(todayIndicatorJson, null, 2), 'utf8');
-		console.log(`✅ 文件保存成功: ${filePath}`);
-		return filePath;
+		// console.log(`✅ 文件保存成功: ${filePath}`);
+		// return filePath;
 	} catch (error) {
 		console.error(`❌ 文件保存失败: ${error.message}`);
 		throw error;

@@ -15,8 +15,8 @@ function rows2Xlsx(formattedData, excelFilePath) {
 	XLSX.utils.book_append_sheet(workbook, worksheet, '转换数据'); // 工作表名称
 	XLSX.writeFile(workbook, excelFilePath);
 
-	console.log(`✅ JSON转换Excel成功！文件保存至：${excelFilePath}`);
-	console.log(`📊 转换数据总行数：${formattedData.length}`);
+	// console.log(`✅ JSON转换Excel成功！文件保存至：${excelFilePath}`);
+	// console.log(`📊 转换数据总行数：${formattedData.length}`);
 }
 
 
