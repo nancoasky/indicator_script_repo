@@ -7,7 +7,7 @@
 	"aprFactor": 2,
 	"enableReportRiverPrice" : true,
 	"enableReportRiverOfficialStaking" : true,
-	"enableReportRiverPtsConversionInfo" : true,
+	"enableReportRiverPtsConversionInfo" : false,
 	"enableReportRiver4funItems" : true,
 	"enableReport2025Christmas": false,
 	"enableReport2025GalxeStakingAction": false,
