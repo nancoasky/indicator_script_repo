@@ -14,5 +14,5 @@
 	"enableReport2026GalxeMintSatUSDAction": false,
 	"enableReport2026PredictPriceCampaign": false,
 	"enableReport2026SuiCreationAction" : false,
-	"enableGenPtsConversionExcel" : true
+	"enableGenPtsConversionExcel" : false
 }

@@ -22,6 +22,10 @@ async function retrieveRiverIndicators() {
 	}
 	// 获取river质押APR
 	let nowOfficialStakingMaxinumAPR = await riverApi.retrieveMaxinumAPR();
+	if (!nowOfficialStakingMaxinumAPR) {
+		console.error("❌ 获取River质押APR失败，将使用昨日数据");
+		nowOfficialStakingMaxinumAPR = oldData.oldOfficialStakingMaxinumAPR;
+	}
 
 	// 获取river/riverpts的现货价格
 	let riverPriceData = await riverApi.retrieveTokenPriceByCoinGecko(riverConfig.riverContractAddress, 'usd,bnb');
@@ -48,11 +52,15 @@ async function retrieveRiverIndicators() {
 	if (riverConfig.enableReportRiverOfficialStaking) {
 		// 获取river质押相关信息
 		let riverStakingJson = await riverApi.retrieveRiverStakingAmount(riverConfig.riverStakingStatisticURL);
-		logUtil.logRiverOfficialStaking(currentDate, nowOfficialStakingMaxinumAPR, oldData.oldTotalOfficialStakedAmount, riverStakingJson);
-		logUtil.logRiverOfficialUnStaking(currentDate, oldData.oldTotalClaimedAmount, riverStakingJson);
-		todayIndicatorJson.oldTotalOfficialStakedAmount = riverStakingJson.totalStakedAmount;
-		todayIndicatorJson.oldTotalClaimedAmount = riverStakingJson.totalClaimedAmount;
-		todayIndicatorJson.oldOfficialStakingMaxinumAPR = nowOfficialStakingMaxinumAPR;
+		if (riverStakingJson) {
+			logUtil.logRiverOfficialStaking(currentDate, nowOfficialStakingMaxinumAPR, oldData.oldTotalOfficialStakedAmount, riverStakingJson);
+			logUtil.logRiverOfficialUnStaking(currentDate, oldData.oldTotalClaimedAmount, riverStakingJson);
+			todayIndicatorJson.oldTotalOfficialStakedAmount = riverStakingJson.totalStakedAmount;
+			todayIndicatorJson.oldTotalClaimedAmount = riverStakingJson.totalClaimedAmount;
+			todayIndicatorJson.oldOfficialStakingMaxinumAPR = nowOfficialStakingMaxinumAPR;
+		} else {
+			console.error("❌ 获取River质押数据失败，跳过该部分输出");
+		}
 	}
 
 	if (riverConfig.enableReport2025GalxeStakingAction) {
