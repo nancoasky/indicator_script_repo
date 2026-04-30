@@ -1,8 +1,24 @@
 const axios = require('axios');
 const util = require('./util.js')
 const cheerio = require('cheerio');
-const puppeteer = require('puppeteer');
 const convert = require('../common/convert.js')
+const httpUtil = require('../common/httpUtil.js')
+const http = require('http');
+const https = require('https');
+
+// 配置连接池（单例，全局复用）
+const agentConfig = {
+	keepAlive: true,
+	keepAliveMsecs: 1000,
+	maxSockets: 50,
+	maxFreeSockets: 10,
+	timeout: 60000,
+	scheduling: 'lifo',
+};
+
+const httpAgent = new http.Agent(agentConfig);
+const httpsAgent = new https.Agent(agentConfig);
+
 
 /**
  * 通过puppteer组件来进行渲染获取页面元素
@@ -12,10 +28,7 @@ const convert = require('../common/convert.js')
  */
 async function retrievePageElementTextValueByPuppeteer(url, selector, timeout) {
 	// launch({ headless: true }) 表示不弹出浏览器窗口
-	const browser = await puppeteer.launch({
-		headless: "new",
-		args: ['--no-sandbox', '--disable-setuid-sandbox']
-	});
+	const browser = await httpUtil.launchBrowser();
 
 	const page = await browser.newPage();
 
@@ -60,47 +73,111 @@ async function retrieveTwitterReplyCount(url) {
  * @returns 质押收益率
  */
 async function retrieveMaxinumAPR() {
-	// let dataConfig = await util.readFileAsJson('river_env.json');
-	let url = 'https://app.river.inc/river';
-	let selector = 'span[class*="lg:text-[80px]"]';
-	let textValue = await retrievePageElementTextValueByPuppeteer(url, selector, 15000);
-	if (textValue) {
-		// 去除多余的%字符串
-		textValue = textValue.replace(/\s*%/g, '');
+	try {
+		// let dataConfig = await util.readFileAsJson('river_env.json');
+		let url = 'https://app.river.inc/river';
+		let selector = 'span[class*="lg:text-[80px]"]';
+		let textValue = await retrievePageElementTextValueByPuppeteer(url, selector, 15000);
+		if (textValue) {
+			// 去除多余的%字符串
+			textValue = textValue.replace(/\s*%/g, '');
+		}
+		return textValue || null;
+	} catch (error) {
+		console.error("获取APR失败:", error.message);
+		return null;
 	}
-	return textValue || "null";
 }
 
 /**
- * 
- * @param {*} url 请求路径
- * @returns json对象
+ * 延迟函数（用于重试等待）
+ * @param {number} ms 毫秒数
  */
-async function retrieveRiverApiData(url) {
-	try {
-		// 1. 使用 axios API数据
-		const response = await axios.get(url, {
-			// 模拟浏览器 User-Agent，防止部分网站拒绝爬虫访问
-			headers: {
-				'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
-				'Accept': 'application/json',
-				'Accept-Language': 'zh-CN,zh;q=0.8,en;q=0.6',
-				// 'Connection': 'keep-alive',
-				'Origin': 'https://app.river.inc'
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/**
+ * 判断是否需要重试的错误
+ * @param {Error} error 错误对象
+ * @returns {boolean}
+ */
+function isRetryableError(error) {
+	return (
+		error.code === 'ECONNRESET' ||           // 连接重置
+		error.code === 'ETIMEDOUT' ||            // 超时
+		error.code === 'ECONNREFUSED' ||         // 连接拒绝
+		error.message.includes('socket hang up') || // socket 挂起
+		error.message.includes('timeout') ||     // 超时
+		(error.response && error.response.status >= 500) // 服务端错误
+	);
+}
+
+/**
+ * 带重试的 API 请求函数
+ * @param {string} url 请求URL
+ * @param {Object} options 可选配置
+ * @returns {Promise<any>}
+ */
+async function retrieveRiverApiData(url, options = {}) {
+	const maxRetries = options.maxRetries || 3;      // 最大重试次数
+	const retryDelay = options.retryDelay || 1000;   // 初始延迟（毫秒）
+	const backoffMultiplier = options.backoffMultiplier || 2; // 退避倍数
+
+	let lastError = null;
+
+	for (let attempt = 1; attempt <= maxRetries; attempt++) {
+		try {
+			// 1. 使用 axios API数据
+			const response = await axios.get(url, {
+				// 模拟浏览器 User-Agent，防止部分网站拒绝爬虫访问
+				headers: {
+					'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
+					'Accept': 'application/json',
+					'Accept-Language': 'zh-CN,zh;q=0.8,en;q=0.6',
+					'Origin': 'https://app.river.inc',
+					...options.headers
+				},
+				httpAgent: httpAgent,
+				httpsAgent: httpsAgent,
+				timeout: options.timeout || 15000
+			});
+
+			// 成功，返回数据
+			if (response && response.data) {
+				if (attempt > 1) {
+					console.log(`✅ 请求成功 (重试 ${attempt - 1} 次后成功): ${url}`);
+				}
+				return response.data;
+			} else {
+				throw new Error('响应数据为空');
 			}
-		});
-		// console.log(response)
+		} catch (error) {
+			lastError = error;
 
-		if (response && response.data) {
-			return response.data;
-		} else {
-			console.error(`get ${url} response fail`);
+			// 判断是否应该重试
+			const shouldRetry = isRetryableError(error);
+
+			if (shouldRetry && attempt < maxRetries) {
+				// 计算等待时间（指数退避）
+				const waitTime = retryDelay * Math.pow(backoffMultiplier, attempt - 1);
+				console.warn(`⚠️ 请求失败 (尝试 ${attempt}/${maxRetries}): ${error.message}`);
+				console.warn(`   等待 ${waitTime}ms 后重试...`);
+				await sleep(waitTime);
+				continue;
+			} else {
+				// 不重试或已达最大重试次数
+				if (!shouldRetry) {
+					console.error(`❌ 请求失败 (不可重试的错误): ${error.message}`);
+				} else {
+					console.error(`❌ 请求失败 (已重试 ${maxRetries} 次): ${error.message}`);
+				}
+				return null;
+			}
 		}
-
-	} catch (error) {
-		console.error('请求发生错误:', error.message);
-		return null;
 	}
+
+	return null;
 }
 
 
@@ -185,6 +262,12 @@ async function retrieveRiverStakingAPRAndAmount(url) {
 	let riverConfig = await util.readFileAsJson('river_env.json');
 	let aprJsonArr = await retrieveRiverApiData(url);
 
+	// 处理API请求失败的情况
+	if (!aprJsonArr || !aprJsonArr.data) {
+		console.error("无法获取River质押APR数据，API请求失败");
+		return null;
+	}
+
 	// total staked amount
 	let totalStakedAmount = 0.00
 	aprJsonArr.data.forEach(element => {
@@ -255,6 +338,12 @@ async function retrieveRiverStakingAmount(url) {
 	 */
 	let aprJsonArr = await retrieveRiverApiData(url);
 
+	// 处理API请求失败的情况
+	if (!aprJsonArr || !aprJsonArr.data) {
+		console.error("无法获取River质押数据，API请求失败");
+		return null;
+	}
+
 	// total staked amount
 	let totalStakedAmount = 0.00
 	let totalClaimedAmount = 0.00
@@ -265,7 +354,7 @@ async function retrieveRiverStakingAmount(url) {
 
 	return {
 		'totalStakedAmount': totalStakedAmount.toFixed(2),
-		'totalClaimedAmount' : totalClaimedAmount.toFixed(2),
+		'totalClaimedAmount': totalClaimedAmount.toFixed(2),
 		'threemTotalStakedAmout': aprJsonArr.data[0].totalStakingAmount,
 		'threemTotalClaimedAmout': aprJsonArr.data[0].totalClaimedAmount,
 		'sixmTotalStakedAmout': aprJsonArr.data[1].totalStakingAmount,
