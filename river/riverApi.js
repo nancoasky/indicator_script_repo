@@ -372,7 +372,7 @@ async function retrieveRiverStakingAmount(url) {
  * @returns 人数
  */
 async function retrieve4FUNItemCount() {
-	let fourfunApiURL = 'https://api-v2.satoshiprotocol.org/twitter/account-list?itemsPerPage=10&currentPage=1&sortBy=scoreRank&direction=asc';
+	let fourfunApiURL = 'https://api-airdrop.river.inc/twitter/account-list?itemsPerPage=10&currentPage=1&sortBy=scoreRank&direction=asc';
 	let d = await retrieveRiverApiData(fourfunApiURL);
 	if (d) {
 		return d.totalItems;
