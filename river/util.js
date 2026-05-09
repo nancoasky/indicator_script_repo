@@ -29,6 +29,36 @@ function getCurrentDate() {
 }
 
 /**
+ * 获取当前日期时间，格式为yyyy-MM-dd HH:mm:ss
+ * @returns {string} 当前日期时间，格式为 "yyyy-MM-dd HH:mm:ss"
+ */
+function getCurrentDateTime() {
+    const now = new Date();
+    
+    const formatter = new Intl.DateTimeFormat('zh-CN', {
+        timeZone: 'Asia/Shanghai',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+    
+    const parts = formatter.formatToParts(now);
+    const dateTimeObj = {};
+    
+    parts.forEach(part => {
+        if (part.type !== 'literal') {
+            dateTimeObj[part.type] = part.value;
+        }
+    });
+    
+    return `${dateTimeObj.year}-${dateTimeObj.month}-${dateTimeObj.day} ${dateTimeObj.hour}:${dateTimeObj.minute}:${dateTimeObj.second}`;
+}
+
+/**
  * 获取当前日期的index天，格式为yyyy-MM-dd
  * @param index 指定下标 -1表示前一天 +1表示后一天
  * @returns 当前日期 yyyy-MM-dd
@@ -215,6 +245,7 @@ function parseAbbreviatedNumber(str) {
 module.exports = {
 	isNumeric,
 	getCurrentDate,
+	getCurrentDateTime,
 	getCertainDate,
 	getCurrentChinaDateTime,
 	convertUTCAsChinaDate,

@@ -83,7 +83,7 @@ async function retrieveRiverIndicators() {
 
 	// 获取指定的RiverPts转换信息
 	if (riverConfig.enableReportRiverPtsConversionInfo) {
-		let conversionInfo = await riverApi.retrieveTodayPtsConversionInfo();
+		let conversionInfo = await riverApi.retrieveTodayPtsConversionInfoV3();
 		if (conversionInfo) {
 			logUtil.logPtsConversionInfo(currentDate, conversionInfo, oldData.ptsActualRate, oldData.oldtotalRiverConvertedAmount);
 			todayIndicatorJson.ptsActualRate = conversionInfo.todayConversion.actualRate;

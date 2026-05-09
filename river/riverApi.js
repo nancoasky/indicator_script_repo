@@ -434,6 +434,67 @@ async function retrieveTodayPtsConversionInfo() {
 }
 
 /**
+ * 获取指定的riverpts转换信息(conversion3.0版本)
+ * @returns 
+ */
+async function retrieveTodayPtsConversionInfoV3() {
+	let conversionPtsApiURL = 'https://api-airdrop.river.inc/s2/pts-conversion-chart?interval=1d&startTime=1778076000000&endTime=1782828000000&phase=phase3';
+	let d = await retrieveRiverApiData(conversionPtsApiURL);
+	if (d) {
+		let conversionInfoJson = {};
+		conversionInfoJson.dynamicConversionStartTime = util.convertUTCAsChinaDate(1778076000000);
+		conversionInfoJson.dynamicConversionEndTime = util.convertUTCAsChinaDate(1782828000000);
+
+		let dotList = d.data;
+		// 过滤出今天的数据
+		let todayChinaTime = util.getCurrentDate();
+		/**
+		 * {
+			"timestamp": "2025-12-26T14:00:00.000Z",
+			"ptsAmount": 4271719.47878052,
+			"tokensAmount": 5494.61779219,
+			"penaltyAmount": 4184.13431284,
+			"actualRate": 0.00196142,
+			"expectedRate": 0.0072222
+		}
+		 */
+		let totalPtsConvertedAmount = 0;
+		let totalRiverConvertedAmount = 0;
+		let totalPenaltyAmount = 0;
+		let satisfyTodayJson;
+		let hasTodayData;
+		for (let i = 0; i < dotList.length; i++) {
+			let d = dotList[i];
+			let convertedChinaTime = util.convertUTCAsChinaDate(d.timestamp);
+			totalPtsConvertedAmount += d.ptsAmount;
+			totalPenaltyAmount += d.penaltyAmount;
+			totalRiverConvertedAmount += d.tokensAmount;
+			if (todayChinaTime === convertedChinaTime) {
+				if (d.convertAndStakePoints === 0) {
+					// 表明还未获取到今日数据，那使用昨日数据进行输出
+					satisfyTodayJson = dotList[i - 1];
+					hasTodayData = false;
+				} else {
+					hasTodayData = true;
+					satisfyTodayJson = d;
+				}
+				break;
+			}
+		}
+		// console.log(`totalPenaltyAmount : ${totalPenaltyAmount}`)
+		// 组装返回的json对象
+		conversionInfoJson.totalPtsConvertedAmount = totalPtsConvertedAmount;
+		conversionInfoJson.totalRiverConvertedAmount = totalRiverConvertedAmount;
+		conversionInfoJson.todayConversion = satisfyTodayJson;
+		conversionInfoJson.hasTodayData = hasTodayData;
+
+		return conversionInfoJson;
+	} else {
+		return null;
+	}
+}
+
+/**
  * 检索river的2026年新年价格预测活动榜单前20
  * @returns 20条最接近当前价格记录
  * 
@@ -498,6 +559,7 @@ module.exports = {
 	retrieveRiverStakingAmount,
 	retrieve4FUNItemCount,
 	retrieveTodayPtsConversionInfo,
+	retrieveTodayPtsConversionInfoV3,
 	retrieveRiver2026PredictPriceCampaign,
 	retrieveRiverPtsConversionChartData2Xlsx
 };

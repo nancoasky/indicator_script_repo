@@ -172,13 +172,17 @@ function logPtsConversionInfo(currentDate, conversionInfo, oldPtsActualRate, old
 	console.log(`✅ 已转换积分总量：${util.formatDecimal(conversionInfo.totalPtsConvertedAmount)}`);
 	console.log(`✅ 已转换RIVER总量：${util.formatDecimal(conversionInfo.totalRiverConvertedAmount)}${util.formatCompareIndication(oldtotalRiverConvertedAmount, conversionInfo.totalRiverConvertedAmount)}`);
 
-	let conversionProgress = conversionInfo.totalRiverConvertedAmount * 100 / parseFloat(30000000)
+	let conversionProgress = conversionInfo.totalRiverConvertedAmount * 100 / parseFloat(30000000-2268713.94048668)
 	console.log(`✅ 已转换进度(30M$RIVER)：${conversionProgress.toFixed(2)}% \n`);
 
-	console.log(`-------今日 ${currentDate} pts转换分析📃-------`)
+	if (conversionInfo.hasTodayData) {
+		console.log(`-------今日 ${currentDate} pts转换分析📃-------`)
+	} else {
+		console.log(`-------昨日 ${util.getCertainDate(-1)} pts转换分析📃-------`)
+	}
 	console.log(`✅ 积分兑换总量：${util.formatDecimal(conversionInfo.todayConversion.ptsAmount)} `);
 	console.log(`✅ 已兑换RIVER量：${util.formatDecimal(conversionInfo.todayConversion.tokensAmount)} `);
-	console.log(`✅ 理想最大兑换利率：${conversionInfo.todayConversion.expectedRate} `);
+	console.log(`✅ 理想最大兑换利率：0.01 `);
 	console.log(`✅ 实际最大兑换利率：${conversionInfo.todayConversion.actualRate}${util.formatCompareIndication(oldPtsActualRate, conversionInfo.todayConversion.actualRate)} \n`);
 }
 
