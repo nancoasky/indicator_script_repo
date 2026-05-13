@@ -50,7 +50,7 @@ async function retrieveRiverIndicators() {
 	}
 
 	if (riverConfig.enableReportRiverOfficialStaking) {
-		// 获取river质押相关信息
+		// 获取river质押2.0相关信息
 		let riverStakingJson = await riverApi.retrieveRiverStakingAmount(riverConfig.riverStakingStatisticURL);
 		if (riverStakingJson) {
 			logUtil.logRiverOfficialStaking(currentDate, nowOfficialStakingMaxinumAPR, oldData.oldTotalOfficialStakedAmount, riverStakingJson);
@@ -59,7 +59,21 @@ async function retrieveRiverIndicators() {
 			todayIndicatorJson.oldTotalClaimedAmount = riverStakingJson.totalClaimedAmount;
 			todayIndicatorJson.oldOfficialStakingMaxinumAPR = nowOfficialStakingMaxinumAPR;
 		} else {
-			console.error("❌ 获取River质押数据失败，跳过该部分输出");
+			console.error("❌ 获取River2.0质押数据失败，跳过该部分输出");
+		}
+	}
+
+	if (riverConfig.enableReportRiverOfficialStakingV3) {
+		// 获取river质押3.0相关信息
+		let riverStakingJson = await riverApi.retrieveRiverStakingAmount(riverConfig.riverStakingStatisticV3URL);
+		if (riverStakingJson) {
+			logUtil.logRiverOfficialStaking(currentDate, nowOfficialStakingMaxinumAPR, oldData.oldTotalOfficialStakedAmount, riverStakingJson);
+			logUtil.logRiverOfficialUnStaking(currentDate, oldData.oldTotalClaimedAmount, riverStakingJson);
+			todayIndicatorJson.oldTotalOfficialStakedAmount = riverStakingJson.totalStakedAmount;
+			todayIndicatorJson.oldTotalClaimedAmount = riverStakingJson.totalClaimedAmount;
+			todayIndicatorJson.oldOfficialStakingMaxinumAPR = nowOfficialStakingMaxinumAPR;
+		} else {
+			console.error("❌ 获取River3.0质押数据失败，跳过该部分输出");
 		}
 	}
 

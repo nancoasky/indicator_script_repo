@@ -367,6 +367,182 @@ async function retrieveRiverStakingAmount(url) {
 }
 
 /**
+ * 获取River的质押数量
+ * @param {*} url 地址
+ * @returns 
+ * {
+		'totalStakedAmount': totalStakedAmount.toFixed(2),
+		'totalClaimedAmount': totalClaimedAmount.toFixed(2),
+		'step1StakeJson': aprJsonArr.data[0],
+		'step2StakeJson': aprJsonArr.data[1],
+		'step3StakeJson': aprJsonArr.data[2],
+		'step4StakeJson': aprJsonArr.data[3],
+		'step5StakeJson': aprJsonArr.data[4],
+		'step6StakeJson': aprJsonArr.data[5],
+		'step7StakeJson': aprJsonArr.data[6],
+		'step8StakeJson': aprJsonArr.data[7],
+	}
+ */
+async function retrieveRiverStakingAmountV3(url) {
+	/**
+	 * 
+	 * {
+    "phase": "phase3",
+    "data": [
+        {
+            "bucketType": "seasonUnlockOption",
+            "seasonId": "0",
+            "unlockOptionIndex": 0,
+            "unlockTime": 1790863200,
+            "penaltyBps": 7000,
+            "seasonStartTime": 1778076000,
+            "seasonEndTime": 1782828000,
+            "stakingCount": 124,
+            "unstakingCount": 0,
+            "directStakeCount": 12,
+            "convertAndStakeCount": 112,
+            "totalStakingAmount": "1153.091387917368099082",
+            "totalClaimedAmount": "0"
+        },
+        {
+            "bucketType": "seasonUnlockOption",
+            "seasonId": "0",
+            "unlockOptionIndex": 1,
+            "unlockTime": 1798812000,
+            "penaltyBps": 6000,
+            "seasonStartTime": 1778076000,
+            "seasonEndTime": 1782828000,
+            "stakingCount": 22,
+            "unstakingCount": 0,
+            "directStakeCount": 4,
+            "convertAndStakeCount": 18,
+            "totalStakingAmount": "167.7191687354907456",
+            "totalClaimedAmount": "0"
+        },
+        {
+            "bucketType": "seasonUnlockOption",
+            "seasonId": "0",
+            "unlockOptionIndex": 2,
+            "unlockTime": 1806588000,
+            "penaltyBps": 5000,
+            "seasonStartTime": 1778076000,
+            "seasonEndTime": 1782828000,
+            "stakingCount": 50,
+            "unstakingCount": 0,
+            "directStakeCount": 2,
+            "convertAndStakeCount": 48,
+            "totalStakingAmount": "1182.02798677962362435",
+            "totalClaimedAmount": "0"
+        },
+        {
+            "bucketType": "seasonUnlockOption",
+            "seasonId": "0",
+            "unlockOptionIndex": 3,
+            "unlockTime": 1814450400,
+            "penaltyBps": 4000,
+            "seasonStartTime": 1778076000,
+            "seasonEndTime": 1782828000,
+            "stakingCount": 23,
+            "unstakingCount": 0,
+            "directStakeCount": 2,
+            "convertAndStakeCount": 21,
+            "totalStakingAmount": "408.514108008575122996",
+            "totalClaimedAmount": "0"
+        },
+        {
+            "bucketType": "seasonUnlockOption",
+            "seasonId": "0",
+            "unlockOptionIndex": 4,
+            "unlockTime": 1822399200,
+            "penaltyBps": 3000,
+            "seasonStartTime": 1778076000,
+            "seasonEndTime": 1782828000,
+            "stakingCount": 53,
+            "unstakingCount": 0,
+            "directStakeCount": 6,
+            "convertAndStakeCount": 47,
+            "totalStakingAmount": "974.734561526266193192",
+            "totalClaimedAmount": "0"
+        },
+        {
+            "bucketType": "seasonUnlockOption",
+            "seasonId": "0",
+            "unlockOptionIndex": 5,
+            "unlockTime": 1830348000,
+            "penaltyBps": 2000,
+            "seasonStartTime": 1778076000,
+            "seasonEndTime": 1782828000,
+            "stakingCount": 44,
+            "unstakingCount": 0,
+            "directStakeCount": 4,
+            "convertAndStakeCount": 40,
+            "totalStakingAmount": "859.642777936252234705",
+            "totalClaimedAmount": "0"
+        },
+        {
+            "bucketType": "seasonUnlockOption",
+            "seasonId": "0",
+            "unlockOptionIndex": 6,
+            "unlockTime": 1838210400,
+            "penaltyBps": 1000,
+            "seasonStartTime": 1778076000,
+            "seasonEndTime": 1782828000,
+            "stakingCount": 36,
+            "unstakingCount": 0,
+            "directStakeCount": 1,
+            "convertAndStakeCount": 35,
+            "totalStakingAmount": "1067.983548657450153929",
+            "totalClaimedAmount": "0"
+        },
+        {
+            "bucketType": "seasonUnlockOption",
+            "seasonId": "0",
+            "unlockOptionIndex": 7,
+            "unlockTime": 1846072800,
+            "penaltyBps": 0,
+            "seasonStartTime": 1778076000,
+            "seasonEndTime": 1782828000,
+            "stakingCount": 217,
+            "unstakingCount": 0,
+            "directStakeCount": 14,
+            "convertAndStakeCount": 203,
+            "totalStakingAmount": "2616.188388158608415421",
+            "totalClaimedAmount": "0"
+        }
+    ]
+}
+	 */
+	let aprJsonArr = await retrieveRiverApiData(url);
+
+	// 处理API请求失败的情况
+	if (!aprJsonArr || !aprJsonArr.data) {
+		console.error("无法获取River质押数据，API请求失败");
+		return null;
+	}
+
+	// total staked amount
+	let totalStakedAmount = 0.00
+	let totalClaimedAmount = 0.00
+	aprJsonArr.data.forEach(element => {
+		totalStakedAmount += parseFloat(element.totalStakingAmount);
+		totalClaimedAmount += parseFloat(element.totalClaimedAmount);
+	});
+
+	return {
+		'totalStakedAmount': totalStakedAmount.toFixed(2),
+		'totalClaimedAmount': totalClaimedAmount.toFixed(2),
+		'step1StakeJson': aprJsonArr.data[0],
+		'step2StakeJson': aprJsonArr.data[1],
+		'step3StakeJson': aprJsonArr.data[2],
+		'step4StakeJson': aprJsonArr.data[3],
+		'step5StakeJson': aprJsonArr.data[4],
+		'step6StakeJson': aprJsonArr.data[5],
+		'step7StakeJson': aprJsonArr.data[6],
+		'step8StakeJson': aprJsonArr.data[7],
+	};
+}
+
+/**
  * 获取指定4fun上的yap人数
  * @param {*} url 地址
  * @returns 人数

@@ -28,7 +28,7 @@ function logRiverPrice(currentDate, oldriverPriceInUsd, oldriverPtsPriceInUsd, r
  * @param {*} nowTotalStakedAmount 今日质押量
  */
 function logRiverOfficialStaking(currentDate, maxinumAPR, oldTotalOfficialStakedAmount, riverStakingJson) {
-	console.log(`-------今日 ${currentDate} River官方质押情况🎺-------`)
+	console.log(`-------今日 ${currentDate} River官方2.0质押情况🎺-------`)
 	console.log('✅ River最高APR(12个月) ：'.concat(maxinumAPR).concat('%'));
 	console.log('✅ River质押总数(自2025-12-11以来) ：'.concat(util.formatDecimal(riverStakingJson.totalStakedAmount))
 		.concat(util.formatCompareIndication(oldTotalOfficialStakedAmount, riverStakingJson.totalStakedAmount)));
