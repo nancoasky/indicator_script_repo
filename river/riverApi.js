@@ -470,7 +470,7 @@ async function retrieveTodayPtsConversionInfoV3() {
 			totalPenaltyAmount += d.penaltyAmount;
 			totalRiverConvertedAmount += d.tokensAmount;
 			if (todayChinaTime === convertedChinaTime) {
-				if (d.convertAndStakePoints === 0) {
+				if (d.expectedRate === 0) {
 					// 表明还未获取到今日数据，那使用昨日数据进行输出
 					satisfyTodayJson = dotList[i - 1];
 					hasTodayData = false;

@@ -3,7 +3,7 @@
 	"riverPtsContractAddress": "0xfc6be825925b7a83d131e33b46efef9084f0e014",
 	"riverStakingApiURL": "https://api-airdrop.river.inc/staking/estimate-apr",
 	"riverStakingStatisticURL": "https://api-airdrop.river.inc/staking/staking-statistics",
-	"riverPtsConversionChartApiURL":"https://api-airdrop.river.inc/s2/pts-conversion-chart?interval=1d",
+	"riverPtsConversionChartApiURL":"https://api-airdrop.river.inc/s2/pts-conversion-chart?interval=1d&startTime=1778076000000&endTime=1782828000000&phase=phase3",
 	"aprFactor": 2,
 	"enableReportRiverPrice" : true,
 	"enableReportRiverOfficialStaking" : true,
@@ -14,5 +14,5 @@
 	"enableReport2026GalxeMintSatUSDAction": false,
 	"enableReport2026PredictPriceCampaign": false,
 	"enableReport2026SuiCreationAction" : false,
-	"enableGenPtsConversionExcel" : false
+	"enableGenPtsConversionExcel" : true
 }
