@@ -65,13 +65,11 @@ async function retrieveRiverIndicators() {
 
 	if (riverConfig.enableReportRiverOfficialStakingV3) {
 		// 获取river质押3.0相关信息
-		let riverStakingJson = await riverApi.retrieveRiverStakingAmount(riverConfig.riverStakingStatisticV3URL);
+		let riverStakingJson = await riverApi.retrieveRiverStakingAmountV3(riverConfig.riverStakingStatisticV3URL);
 		if (riverStakingJson) {
-			logUtil.logRiverOfficialStaking(currentDate, nowOfficialStakingMaxinumAPR, oldData.oldTotalOfficialStakedAmount, riverStakingJson);
-			logUtil.logRiverOfficialUnStaking(currentDate, oldData.oldTotalClaimedAmount, riverStakingJson);
-			todayIndicatorJson.oldTotalOfficialStakedAmount = riverStakingJson.totalStakedAmount;
-			todayIndicatorJson.oldTotalClaimedAmount = riverStakingJson.totalClaimedAmount;
-			todayIndicatorJson.oldOfficialStakingMaxinumAPR = nowOfficialStakingMaxinumAPR;
+			logUtil.logRiverOfficialStakingV3(currentDate, oldData.oldTotalOfficialStakedAmount, riverStakingJson);
+			todayIndicatorJson.oldTotalOfficialStakedAmountV3 = riverStakingJson.totalStakedAmount;
+			todayIndicatorJson.oldTotalClaimedAmountV3 = riverStakingJson.totalClaimedAmount;
 		} else {
 			console.error("❌ 获取River3.0质押数据失败，跳过该部分输出");
 		}

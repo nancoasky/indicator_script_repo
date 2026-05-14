@@ -94,6 +94,42 @@ function convertUTCAsChinaDate(isoString) {
 }
 
 /**
+ * 将时间戳转换为东八区时间格式（推荐）
+ * @param {number} timestamp - 时间戳（秒级或毫秒级）
+ * @returns {string} 格式化的时间字符串 yyyy-MM-dd HH:mm:ss
+ */
+function convertTimestampAsChinaDateTime(timestamp) {
+    // 判断是否为秒级时间戳
+    const isSeconds = String(timestamp).length === 10;
+    const milliseconds = isSeconds ? timestamp * 1000 : timestamp;
+    
+    const date = new Date(milliseconds);
+    
+    // 使用 Intl.DateTimeFormat 格式化东八区时间
+    const formatter = new Intl.DateTimeFormat('zh-CN', {
+        timeZone: 'Asia/Shanghai',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+    
+    // 格式化并替换分隔符
+    const parts = formatter.formatToParts(date);
+    const result = {};
+    parts.forEach(part => {
+        if (part.type !== 'literal') {
+            result[part.type] = part.value;
+        }
+    });
+    
+    return `${result.year}-${result.month}-${result.day} ${result.hour}:${result.minute}:${result.second}`;
+}
+
+/**
  * 获取当前的中国时间
  * @returns yyyy-MM-dd HH:mm:ss
  */
@@ -242,6 +278,39 @@ function parseAbbreviatedNumber(str) {
 	return unit ? value * multipliers[unit] : value;
 }
 
+/**
+ * 将数字转换为对应的中文表情符号
+ * @param {number} num - 数字（1-9）
+ * @returns {string} 对应的表情符号，如 1️⃣
+ * @throws {Error} 当数字超出范围时抛出错误
+ */
+function numberToEmoji(num) {
+    // 验证输入是否为数字且在有效范围内
+    if (typeof num !== 'number' || isNaN(num)) {
+        throw new Error('请输入有效的数字');
+    }
+    
+    if (num < 1 || num > 9) {
+        throw new Error('数字范围必须在 1-9 之间');
+    }
+    
+    // 使用 Unicode 编码映射
+    // 数字表情的 Unicode 范围：U+0030 到 U+0039 加上 U+FE0F U+20E3
+    const emojiMap = {
+        1: '1️⃣',
+        2: '2️⃣',
+        3: '3️⃣',
+        4: '4️⃣',
+        5: '5️⃣',
+        6: '6️⃣',
+        7: '7️⃣',
+        8: '8️⃣',
+        9: '9️⃣'
+    };
+    
+    return emojiMap[num];
+}
+
 module.exports = {
 	isNumeric,
 	getCurrentDate,
@@ -250,8 +319,10 @@ module.exports = {
 	getCurrentChinaDateTime,
 	convertUTCAsChinaDate,
 	convertUTCAsChinaDatetime,
+	convertTimestampAsChinaDateTime,
 	readFileAsJson,
 	formatDecimal,
 	formatCompareIndication,
-	parseAbbreviatedNumber
+	parseAbbreviatedNumber,
+	numberToEmoji
 };

@@ -1,4 +1,5 @@
 const util = require('./util.js');
+const Table = require('cli-table3');
 
 
 /**
@@ -54,12 +55,68 @@ function logRiverOfficialStaking(currentDate, maxinumAPR, oldTotalOfficialStaked
 }
 
 /**
+ * 打印river的官方质押情况，统计范围为自2026-05-06以来
+ * @param {*} currentDate 当前日期
+ * @param {*} oldTotalOfficialStakedAmount 昨日质押量 
+ * @param {*} nowTotalStakedAmount 今日质押量
+ */
+function logRiverOfficialStakingV3(currentDate, oldTotalOfficialStakedAmount, riverStakingJson) {
+	console.log(`-------今日 ${currentDate} River官方3.0质押情况🎺-------`)
+	console.log('✅ River质押总数(自2026-05-06以来) ：'.concat(util.formatDecimal(riverStakingJson.totalStakedAmount))
+		.concat(util.formatCompareIndication(oldTotalOfficialStakedAmount, riverStakingJson.totalStakedAmount))
+		.concat('\n'));
+	// 准备数据
+	const allData = [];
+
+	for (let i = 0; i < 8; i++) {
+		const stepKey = `step${i + 1}StakeJson`;
+		const stepData = riverStakingJson[stepKey];
+
+		if (!stepData) continue;
+
+		const stepNum = i + 1;
+		const discount = ((10000 - stepData.penaltyBps) / 1000);
+		const unlockDate = util.convertTimestampAsChinaDateTime(stepData.unlockTime);
+		const weeklyReward = i > 3 ? ((36000 / stepData.totalStakingAmount) * 10).toFixed(2) : '-';
+		const totalStaking = parseFloat(stepData.totalStakingAmount).toFixed(2);
+		const totalClaimed = parseFloat(stepData.totalClaimedAmount).toFixed(2);
+
+		allData.push([
+			`✨${stepNum}`,
+			unlockDate,
+			discount,
+			stepData.directStakeCount,
+			stepData.convertAndStakeCount,
+			totalStaking,
+			totalClaimed,
+			weeklyReward
+		]);
+	}
+
+	// 创建表格实例
+	const table = new Table({
+		head: ['周期', '解锁日期', '折扣(折)', '直接质押笔数', '兑换质押笔数', '质押总量', '解质押总量', '周奖励推测(10 River)'],
+		colWidths: [10, 22, 10, 16, 16, 14, 14, 24],
+		chars: { 'mid': '', 'left-mid': '', 'mid-mid': '', 'right-mid': '' },
+		style: { head: [], border: [] }
+	});
+
+	// 添加数据行
+	allData.forEach(row => {
+		table.push(row);
+	});
+
+	// 打印表格
+	console.log(table.toString());
+}
+
+/**
  * 打印river的官方解质押情况，统计范围为自2025-12-11以来
  * @param {*} currentDate 当前日期
  * @param {*} riverStakingJson 质押数据
  */
 function logRiverOfficialUnStaking(currentDate, oldTotalClaimedAmount, riverStakingJson) {
-	console.log(`-------今日 ${currentDate} River官方解质押情况🎺-------`)
+	console.log(`-------今日 ${currentDate} River官方解质押2.0情况🎺-------`)
 	console.log('✅ River解质押总数(自2025-12-11以来) ：'.concat(util.formatDecimal(riverStakingJson.totalClaimedAmount))
 		.concat(util.formatCompareIndication(oldTotalClaimedAmount, riverStakingJson.totalClaimedAmount)));
 	console.log('💰解质押3月总量：'.concat(util.formatDecimal(riverStakingJson.threemTotalClaimedAmout))
@@ -168,11 +225,11 @@ function log2026GalxeMintSatUSDAction(currentDate, oldTotal2026GalxeMintStatUSDC
  */
 function logPtsConversionInfo(currentDate, conversionInfo, oldPtsActualRate, oldtotalRiverConvertedAmount) {
 	console.log(`-------截止${currentDate} pts转换分析📃-------`)
-	console.log(`⏰ 积分兑换2.0有效期：${conversionInfo.dynamicConversionStartTime} ~ ${conversionInfo.dynamicConversionEndTime} `);
+	console.log(`⏰ 积分兑换3.0有效期：${conversionInfo.dynamicConversionStartTime} ~ ${conversionInfo.dynamicConversionEndTime} `);
 	console.log(`✅ 已转换积分总量：${util.formatDecimal(conversionInfo.totalPtsConvertedAmount)}`);
 	console.log(`✅ 已转换RIVER总量：${util.formatDecimal(conversionInfo.totalRiverConvertedAmount)}${util.formatCompareIndication(oldtotalRiverConvertedAmount, conversionInfo.totalRiverConvertedAmount)}`);
 
-	let conversionProgress = conversionInfo.totalRiverConvertedAmount * 100 / parseFloat(30000000-2268713.94048668)
+	let conversionProgress = conversionInfo.totalRiverConvertedAmount * 100 / parseFloat(30000000 - 2268713.94048668)
 	console.log(`✅ 已转换进度(30M$RIVER)：${conversionProgress.toFixed(2)}% \n`);
 
 	if (conversionInfo.hasTodayData) {
@@ -287,6 +344,7 @@ function log2026SuiCreationAction(currentDate, riverPtsPriceInUsd) {
 module.exports = {
 	logRiverPrice,
 	logRiverOfficialStaking,
+	logRiverOfficialStakingV3,
 	logRiverOfficialUnStaking,
 	log2025GalxeStakingAction,
 	log2026GalxeMintSatUSDAction,

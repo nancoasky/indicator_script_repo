@@ -733,6 +733,7 @@ module.exports = {
 	fetchAndParseContent,
 	retrieveRiverStakingAPRAndAmount,
 	retrieveRiverStakingAmount,
+	retrieveRiverStakingAmountV3,
 	retrieve4FUNItemCount,
 	retrieveTodayPtsConversionInfo,
 	retrieveTodayPtsConversionInfoV3,
