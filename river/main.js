@@ -29,9 +29,9 @@ async function retrieveRiverIndicators() {
 
 	// 获取river/riverpts的现货价格
 	let riverPriceData = await riverApi.retrieveTokenPriceByCoinGecko(riverConfig.riverContractAddress, 'usd,bnb');
-	let riverPriceInUsd = riverPriceData['usd'];
+	let riverPriceInUsd = riverPriceData ? riverPriceData['usd'] : oldData.oldriverPriceInUsd;
 	let riverPtsPriceData = await riverApi.retrieveTokenPriceByCoinGecko(riverConfig.riverPtsContractAddress, 'usd,bnb');
-	let riverPtsPriceInUsd = riverPtsPriceData['usd'];
+	let riverPtsPriceInUsd = riverPtsPriceData ? riverPtsPriceData['usd'] : oldData.oldriverPtsPriceInUsd;
 
 	// 打印相关信息
 	if (riverConfig.enableReportRiverPrice) {
