@@ -67,7 +67,7 @@ async function retrieveRiverIndicators() {
 		// 获取river质押3.0相关信息
 		let riverStakingJson = await riverApi.retrieveRiverStakingAmountV3(riverConfig.riverStakingStatisticV3URL);
 		if (riverStakingJson) {
-			logUtil.logRiverOfficialStakingV3(currentDate, oldData.oldTotalOfficialStakedAmount, riverStakingJson);
+			logUtil.logRiverOfficialStakingV3(currentDate, oldData.oldTotalOfficialStakedAmountV3, riverStakingJson);
 			todayIndicatorJson.oldTotalOfficialStakedAmountV3 = riverStakingJson.totalStakedAmount;
 			todayIndicatorJson.oldTotalClaimedAmountV3 = riverStakingJson.totalClaimedAmount;
 		} else {
