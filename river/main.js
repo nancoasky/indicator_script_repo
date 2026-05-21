@@ -67,9 +67,11 @@ async function retrieveRiverIndicators() {
 		// 获取river质押3.0相关信息
 		let riverStakingJson = await riverApi.retrieveRiverStakingAmountV3(riverConfig.riverStakingStatisticV3URL);
 		if (riverStakingJson) {
-			logUtil.logRiverOfficialStakingV3(currentDate, oldData.oldTotalOfficialStakedAmountV3, riverStakingJson);
+			logUtil.logRiverOfficialStakingV3(currentDate, oldData, riverStakingJson, todayIndicatorJson);
 			todayIndicatorJson.oldTotalOfficialStakedAmountV3 = riverStakingJson.totalStakedAmount;
 			todayIndicatorJson.oldTotalClaimedAmountV3 = riverStakingJson.totalClaimedAmount;
+			// 每个周期的兑换总量留存
+
 		} else {
 			console.error("❌ 获取River3.0质押数据失败，跳过该部分输出");
 		}

@@ -57,30 +57,56 @@ function logRiverOfficialStaking(currentDate, maxinumAPR, oldTotalOfficialStaked
 /**
  * 打印river的官方质押情况，统计范围为自2026-05-06以来
  * @param {*} currentDate 当前日期
- * @param {*} oldTotalOfficialStakedAmount 昨日质押量 
- * @param {*} nowTotalStakedAmount 今日质押量
+ * @param {*} oldDataObj 昨日质押量 
+ * @param {*} riverStakingJson 今日质押数据
+ * @param {*} todayIndicatorJson 今日指标存储对象
  */
-function logRiverOfficialStakingV3(currentDate, oldTotalOfficialStakedAmount, riverStakingJson) {
+function logRiverOfficialStakingV3(currentDate, oldDataObj, riverStakingJson, todayIndicatorJson) {
+	todayIndicatorJson.oldTotalOfficialStakedAmountV3 = riverStakingJson.totalStakedAmount;
+	todayIndicatorJson.oldTotalClaimedAmountV3 = riverStakingJson.totalClaimedAmount;
+
 	console.log(`-------今日 ${currentDate} River官方3.0质押情况🎺-------`)
 	console.log('✅ River质押总数(自2026-05-06以来) ：'.concat(util.formatDecimal(riverStakingJson.totalStakedAmount))
-		.concat(util.formatCompareIndication(oldTotalOfficialStakedAmount, riverStakingJson.totalStakedAmount))
+		.concat(util.formatCompareIndication(oldDataObj.oldTotalOfficialStakedAmountV3, riverStakingJson.totalStakedAmount))
 		.concat('\n'));
-	// 准备数据
-	const allData = [];
 
+	// 质押总笔数3.0
+	let totalStakingCount = 0;
 	for (let i = 0; i < 8; i++) {
 		const stepKey = `step${i + 1}StakeJson`;
 		const stepData = riverStakingJson[stepKey];
 
 		if (!stepData) continue;
+		totalStakingCount += stepData.directStakeCount + stepData.convertAndStakeCount;
+	}
 
+	// 准备数据
+	const allData = [];
+
+	for (let i = 0; i < 8; i++) {
 		const stepNum = i + 1;
+		const stepKeyPrefix = `step${stepNum}`;
+		const stepKey = `${stepKeyPrefix}StakeJson`;
+		const stepData = riverStakingJson[stepKey];
+
+		if (!stepData) continue;
+
 		const discount = ((10000 - stepData.penaltyBps) / 1000);
 		const unlockDate = util.convertTimestampAsChinaDateTime(stepData.unlockTime);
 		const weeklyReward = i > 3 ? ((36000 / stepData.totalStakingAmount) * 10).toFixed(2) : '-';
 		const allStakeCount = stepData.directStakeCount + stepData.convertAndStakeCount;
+
+		// 计算笔数占比
+		const allStRatio = (allStakeCount * 100 / totalStakingCount).toFixed(2);
 		const totalStaking = parseFloat(stepData.totalStakingAmount).toFixed(2);
+		const stakingRatio = (totalStaking * 100 / riverStakingJson.totalStakedAmount).toFixed(2);
 		const totalClaimed = parseFloat(stepData.totalClaimedAmount).toFixed(2);
+		const claimedRatio = (totalClaimed * 100 / riverStakingJson.totalStakedAmount).toFixed(2);
+
+		// 获取旧值（需要转换为数字）
+		const oldAllStRatio = oldDataObj[`${stepKeyPrefix}allStRatio`] ? parseFloat(oldDataObj[`${stepKeyPrefix}allStRatio`]) : 0;
+		const oldStakingRatio = oldDataObj[`${stepKeyPrefix}stakingRatio`] ? parseFloat(oldDataObj[`${stepKeyPrefix}stakingRatio`]) : 0;
+		const oldClaimedRatio = oldDataObj[`${stepKeyPrefix}claimedRatio`] ? parseFloat(oldDataObj[`${stepKeyPrefix}claimedRatio`]) : 0;
 
 		allData.push([
 			`✨${stepNum}`,
@@ -88,17 +114,22 @@ function logRiverOfficialStakingV3(currentDate, oldTotalOfficialStakedAmount, ri
 			discount,
 			stepData.directStakeCount,
 			stepData.convertAndStakeCount,
-			allStakeCount,
-			totalStaking,
-			totalClaimed,
+			`${allStakeCount} (${allStRatio}%${covnertUpOrDownStr(oldAllStRatio, parseFloat(allStRatio))})`,
+			`${totalStaking} (${stakingRatio}%${covnertUpOrDownStr(oldStakingRatio, parseFloat(stakingRatio))})`,
+			`${totalClaimed} (${claimedRatio}%${covnertUpOrDownStr(oldClaimedRatio, parseFloat(claimedRatio))})`,
 			weeklyReward
 		]);
+
+		// backup - 存储字符串格式
+		todayIndicatorJson[`${stepKeyPrefix}allStRatio`] = allStRatio;
+		todayIndicatorJson[`${stepKeyPrefix}stakingRatio`] = stakingRatio;
+		todayIndicatorJson[`${stepKeyPrefix}claimedRatio`] = claimedRatio;
 	}
 
 	// 创建表格实例
 	const table = new Table({
 		head: ['周期', '解锁日期', '折扣(折)', '直接质押笔数', '兑换质押笔数', '总质押笔数', '质押总量', '解质押总量', '周奖励推测(10 River)'],
-		colWidths: [10, 22, 10, 16, 16, 16, 14, 14, 24],
+		colWidths: [10, 22, 10, 16, 16, 20, 20, 20, 24],
 		chars: { 'mid': '', 'left-mid': '', 'mid-mid': '', 'right-mid': '' },
 		style: { head: [], border: [] }
 	});
@@ -110,6 +141,34 @@ function logRiverOfficialStakingV3(currentDate, oldTotalOfficialStakedAmount, ri
 
 	// 打印表格
 	console.log(table.toString());
+}
+
+function covnertUpOrDownStr(oldValue, newValue) {
+	// 检查null或undefined
+	if (oldValue == null || newValue == null) {
+		return '❓'; // 返回问号而不是抛出错误
+	}
+
+	// 确保参数为数字类型，如果不是则转换
+	const oldNum = parseFloat(oldValue);
+	const newNum = parseFloat(newValue);
+
+	if (isNaN(oldNum) || isNaN(newNum)) {
+		return '❓'; // 无效数字返回问号
+	}
+
+	if (oldNum === 0 || newNum === 0) {
+        return '';
+    }
+
+	// 比较并返回结果
+	if (newNum > oldNum) {
+		return '📈';
+	} else if (newNum < oldNum) {
+		return '📉';
+	} else {
+		return '';
+	}
 }
 
 /**
