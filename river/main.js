@@ -29,9 +29,9 @@ async function retrieveRiverIndicators() {
 
 	// 获取river/riverpts的现货价格
 	let riverPriceData = await riverApi.retrieveTokenPriceByCoinGecko(riverConfig.riverContractAddress, 'usd,bnb');
-	let riverPriceInUsd = riverPriceData['usd'];
+	let riverPriceInUsd = riverPriceData ? riverPriceData['usd'] : oldData.oldriverPriceInUsd;
 	let riverPtsPriceData = await riverApi.retrieveTokenPriceByCoinGecko(riverConfig.riverPtsContractAddress, 'usd,bnb');
-	let riverPtsPriceInUsd = riverPtsPriceData['usd'];
+	let riverPtsPriceInUsd = riverPtsPriceData ? riverPtsPriceData['usd'] : oldData.oldriverPtsPriceInUsd;
 
 	// 打印相关信息
 	if (riverConfig.enableReportRiverPrice) {
@@ -67,7 +67,7 @@ async function retrieveRiverIndicators() {
 		// 获取river质押3.0相关信息
 		let riverStakingJson = await riverApi.retrieveRiverStakingAmountV3(riverConfig.riverStakingStatisticV3URL);
 		if (riverStakingJson) {
-			logUtil.logRiverOfficialStakingV3(currentDate, oldData.oldTotalOfficialStakedAmount, riverStakingJson);
+			logUtil.logRiverOfficialStakingV3(currentDate, oldData.oldTotalOfficialStakedAmountV3, riverStakingJson);
 			todayIndicatorJson.oldTotalOfficialStakedAmountV3 = riverStakingJson.totalStakedAmount;
 			todayIndicatorJson.oldTotalClaimedAmountV3 = riverStakingJson.totalClaimedAmount;
 		} else {

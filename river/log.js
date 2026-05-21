@@ -78,6 +78,7 @@ function logRiverOfficialStakingV3(currentDate, oldTotalOfficialStakedAmount, ri
 		const discount = ((10000 - stepData.penaltyBps) / 1000);
 		const unlockDate = util.convertTimestampAsChinaDateTime(stepData.unlockTime);
 		const weeklyReward = i > 3 ? ((36000 / stepData.totalStakingAmount) * 10).toFixed(2) : '-';
+		const allStakeCount = stepData.directStakeCount + stepData.convertAndStakeCount;
 		const totalStaking = parseFloat(stepData.totalStakingAmount).toFixed(2);
 		const totalClaimed = parseFloat(stepData.totalClaimedAmount).toFixed(2);
 
@@ -87,6 +88,7 @@ function logRiverOfficialStakingV3(currentDate, oldTotalOfficialStakedAmount, ri
 			discount,
 			stepData.directStakeCount,
 			stepData.convertAndStakeCount,
+			allStakeCount,
 			totalStaking,
 			totalClaimed,
 			weeklyReward
@@ -95,8 +97,8 @@ function logRiverOfficialStakingV3(currentDate, oldTotalOfficialStakedAmount, ri
 
 	// 创建表格实例
 	const table = new Table({
-		head: ['周期', '解锁日期', '折扣(折)', '直接质押笔数', '兑换质押笔数', '质押总量', '解质押总量', '周奖励推测(10 River)'],
-		colWidths: [10, 22, 10, 16, 16, 14, 14, 24],
+		head: ['周期', '解锁日期', '折扣(折)', '直接质押笔数', '兑换质押笔数', '总质押笔数', '质押总量', '解质押总量', '周奖励推测(10 River)'],
+		colWidths: [10, 22, 10, 16, 16, 16, 14, 14, 24],
 		chars: { 'mid': '', 'left-mid': '', 'mid-mid': '', 'right-mid': '' },
 		style: { head: [], border: [] }
 	});
@@ -121,7 +123,7 @@ function logRiverOfficialUnStaking(currentDate, oldTotalClaimedAmount, riverStak
 		.concat(util.formatCompareIndication(oldTotalClaimedAmount, riverStakingJson.totalClaimedAmount)));
 	console.log('💰解质押3月总量：'.concat(util.formatDecimal(riverStakingJson.threemTotalClaimedAmout))
 		.concat(' (🌟')
-		.concat((riverStakingJson.threemTotalClaimedAmout * parseFloat(100) / riverStakingJson.threemTotalStakedAmout).toFixed(2))
+		.concat((riverStakingJson.threemTotalClaimedAmout * parseFloat(100) / (parseFloat(riverStakingJson.threemTotalStakedAmout) + parseFloat(riverStakingJson.threemTotalClaimedAmout))).toFixed(2))
 		.concat('%)')
 	);
 	console.log('💰解质押6月总量：'.concat(util.formatDecimal(riverStakingJson.sixmTotalClaimedAmout))
