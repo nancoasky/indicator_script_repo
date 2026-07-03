@@ -67,7 +67,7 @@ function logRiverOfficialStakingV3(currentDate, oldDataObj, riverStakingJson, to
 
 	console.log(`-------今日 ${currentDate} River官方3.0质押情况🎺-------`)
 	console.log('✅ River质押总数(自2026-05-06以来) ：'.concat(util.formatDecimal(riverStakingJson.totalStakedAmount))
-		.concat(util.formatCompareIndication(oldDataObj.oldTotalOfficialStakedAmountV3, riverStakingJson.totalStakedAmount))
+		// .concat(util.formatCompareIndication(oldDataObj.oldTotalOfficialStakedAmountV3, riverStakingJson.totalStakedAmount))
 		.concat('\n'));
 
 	// 质押总笔数3.0
@@ -93,7 +93,7 @@ function logRiverOfficialStakingV3(currentDate, oldDataObj, riverStakingJson, to
 
 		const discount = ((10000 - stepData.penaltyBps) / 1000);
 		const unlockDate = util.convertTimestampAsChinaDateTime(stepData.unlockTime);
-		const weeklyReward = i > 3 ? ((36000 / stepData.totalStakingAmount) * 10).toFixed(2) : '-';
+		// const weeklyReward = i > 3 ? ((36000 / stepData.totalStakingAmount) * 10).toFixed(2) : '-';
 		const allStakeCount = stepData.directStakeCount + stepData.convertAndStakeCount;
 
 		// 计算笔数占比
@@ -116,8 +116,7 @@ function logRiverOfficialStakingV3(currentDate, oldDataObj, riverStakingJson, to
 			stepData.convertAndStakeCount,
 			`${allStakeCount} (${allStRatio}%${covnertUpOrDownStr(oldAllStRatio, parseFloat(allStRatio))})`,
 			`${totalStaking} (${stakingRatio}%${covnertUpOrDownStr(oldStakingRatio, parseFloat(stakingRatio))})`,
-			`${totalClaimed} (${claimedRatio}%${covnertUpOrDownStr(oldClaimedRatio, parseFloat(claimedRatio))})`,
-			weeklyReward
+			`${totalClaimed} (${claimedRatio}%${covnertUpOrDownStr(oldClaimedRatio, parseFloat(claimedRatio))})`
 		]);
 
 		// backup - 存储字符串格式
@@ -128,8 +127,97 @@ function logRiverOfficialStakingV3(currentDate, oldDataObj, riverStakingJson, to
 
 	// 创建表格实例
 	const table = new Table({
-		head: ['周期', '解锁日期', '折扣(折)', '直接质押笔数', '兑换质押笔数', '总质押笔数', '质押总量', '解质押总量', '周奖励推测(10 River)'],
-		colWidths: [10, 22, 10, 16, 16, 20, 20, 20, 24],
+		head: ['周期', '解锁日期', '折扣(折)', '直接质押笔数', '兑换质押笔数', '总质押笔数', '质押总量', '解质押总量'],
+		colWidths: [10, 22, 10, 16, 16, 20, 20, 20],
+		chars: { 'mid': '', 'left-mid': '', 'mid-mid': '', 'right-mid': '' },
+		style: { head: [], border: [] }
+	});
+
+	// 添加数据行
+	allData.forEach(row => {
+		table.push(row);
+	});
+
+	// 打印表格
+	console.log(table.toString());
+}
+
+/**
+ * 打印river的官方质押情况，统计范围为自2026-05-06以来
+ * @param {*} currentDate 当前日期
+ * @param {*} oldDataObj 昨日质押量 
+ * @param {*} riverStakingJson 今日质押数据
+ * @param {*} todayIndicatorJson 今日指标存储对象
+ */
+function logRiverOfficialStakingV4(currentDate, oldDataObj, riverStakingJson, todayIndicatorJson) {
+	todayIndicatorJson.oldTotalOfficialStakedAmountV4 = riverStakingJson.totalStakedAmount;
+	todayIndicatorJson.oldTotalClaimedAmountV4 = riverStakingJson.totalClaimedAmount;
+
+	console.log(`-------今日 ${currentDate} River官方4.0质押情况🎺-------`)
+	console.log('✅ River质押总数(自2026-05-06以来) ：'.concat(util.formatDecimal(riverStakingJson.totalStakedAmount))
+		.concat(util.formatCompareIndication(oldDataObj.oldTotalOfficialStakedAmountV4, riverStakingJson.totalStakedAmount))
+		.concat('\n'));
+
+	// 质押总笔数4.0
+	let totalStakingCount = 0;
+	for (let i = 0; i < 8; i++) {
+		const stepKey = `step${i + 1}StakeJson`;
+		const stepData = riverStakingJson[stepKey];
+
+		if (!stepData) continue;
+		totalStakingCount += stepData.directStakeCount + stepData.convertAndStakeCount;
+	}
+
+	// 准备数据
+	const allData = [];
+	// const weeklyRewards = [2400, 4800, 9600, 19200, 28800, 38400, 48000, 57600];
+
+	for (let i = 0; i < 8; i++) {
+		const stepNum = i + 1;
+		const stepKeyPrefix = `step${stepNum}`;
+		const stepKey = `${stepKeyPrefix}StakeJson`;
+		const stepData = riverStakingJson[stepKey];
+
+		if (!stepData) continue;
+
+		const discount = ((10000 - stepData.penaltyBps) / 1000);
+		const unlockDate = util.convertTimestampAsChinaDateTime(stepData.unlockTime);
+		// const weeklyReward = (weeklyRewards[i] / (stepData.totalStakingAmount + 10) * 10).toFixed(2);
+		const allStakeCount = stepData.directStakeCount + stepData.convertAndStakeCount;
+
+		// 计算笔数占比
+		const allStRatio = (allStakeCount * 100 / totalStakingCount).toFixed(2);
+		const totalStaking = parseFloat(stepData.totalStakingAmount).toFixed(2);
+		const stakingRatio = (totalStaking * 100 / riverStakingJson.totalStakedAmount).toFixed(2);
+		const totalClaimed = parseFloat(stepData.totalClaimedAmount).toFixed(2);
+		const claimedRatio = (totalClaimed * 100 / riverStakingJson.totalStakedAmount).toFixed(2);
+
+		// 获取旧值（需要转换为数字）
+		const oldAllStRatio = oldDataObj[`${stepKeyPrefix}allStRatio`] ? parseFloat(oldDataObj[`${stepKeyPrefix}allStRatio`]) : 0;
+		const oldStakingRatio = oldDataObj[`${stepKeyPrefix}stakingRatio`] ? parseFloat(oldDataObj[`${stepKeyPrefix}stakingRatio`]) : 0;
+		const oldClaimedRatio = oldDataObj[`${stepKeyPrefix}claimedRatio`] ? parseFloat(oldDataObj[`${stepKeyPrefix}claimedRatio`]) : 0;
+
+		allData.push([
+			`✨${stepNum}`,
+			unlockDate,
+			discount,
+			stepData.directStakeCount,
+			stepData.convertAndStakeCount,
+			`${allStakeCount} (${allStRatio}%${covnertUpOrDownStr(oldAllStRatio, parseFloat(allStRatio))})`,
+			`${totalStaking} (${stakingRatio}%${covnertUpOrDownStr(oldStakingRatio, parseFloat(stakingRatio))})`,
+			`${totalClaimed} (${claimedRatio}%${covnertUpOrDownStr(oldClaimedRatio, parseFloat(claimedRatio))})`
+		]);
+
+		// backup - 存储字符串格式
+		todayIndicatorJson[`${stepKeyPrefix}allStRatio`] = allStRatio;
+		todayIndicatorJson[`${stepKeyPrefix}stakingRatio`] = stakingRatio;
+		todayIndicatorJson[`${stepKeyPrefix}claimedRatio`] = claimedRatio;
+	}
+
+	// 创建表格实例
+	const table = new Table({
+		head: ['周期', '解锁日期', '折扣(折)', '直接质押笔数', '兑换质押笔数', '总质押笔数', '质押总量', '解质押总量'],
+		colWidths: [10, 22, 10, 16, 16, 20, 20, 20],
 		chars: { 'mid': '', 'left-mid': '', 'mid-mid': '', 'right-mid': '' },
 		style: { head: [], border: [] }
 	});
@@ -158,8 +246,8 @@ function covnertUpOrDownStr(oldValue, newValue) {
 	}
 
 	if (oldNum === 0 || newNum === 0) {
-        return '';
-    }
+		return '';
+	}
 
 	// 比较并返回结果
 	if (newNum > oldNum) {
@@ -287,21 +375,21 @@ function log2026GalxeMintSatUSDAction(currentDate, oldTotal2026GalxeMintStatUSDC
 function logPtsConversionInfo(currentDate, conversionInfo, oldPtsActualRate, oldtotalRiverConvertedAmount) {
 	console.log(`-------截止${currentDate} pts转换分析📃-------`)
 	console.log(`⏰ 积分兑换3.0有效期：${conversionInfo.dynamicConversionStartTime} ~ ${conversionInfo.dynamicConversionEndTime} `);
-	console.log(`✅ 已转换积分总量：${util.formatDecimal(conversionInfo.totalPtsConvertedAmount)}`);
-	console.log(`✅ 已转换RIVER总量：${util.formatDecimal(conversionInfo.totalRiverConvertedAmount)}${util.formatCompareIndication(oldtotalRiverConvertedAmount, conversionInfo.totalRiverConvertedAmount)}`);
+	console.log(`✅ 已转换积分总量：${util.formatDecimal(conversionInfo.totalPtsConvertedAmountV4)}`);
+	console.log(`✅ 已转换RIVER总量：${util.formatDecimal(conversionInfo.totalRiverConvertedAmountV4)}${util.formatCompareIndication(oldtotalRiverConvertedAmount, conversionInfo.totalRiverConvertedAmountV4)}`);
 
-	let conversionProgress = conversionInfo.totalRiverConvertedAmount * 100 / parseFloat(30000000 - 2268713.94048668)
+	let conversionProgress = conversionInfo.totalRiverConvertedAmountV4 * 100 / parseFloat(30000000 - 2268713.94048668)
 	console.log(`✅ 已转换进度(30M$RIVER)：${conversionProgress.toFixed(2)}% \n`);
 
-	if (conversionInfo.hasTodayData) {
+	if (conversionInfo.hasTodayDataV4) {
 		console.log(`-------今日 ${currentDate} pts转换分析📃-------`)
 	} else {
 		console.log(`-------昨日 ${util.getCertainDate(-1)} pts转换分析📃-------`)
 	}
-	console.log(`✅ 积分兑换总量：${util.formatDecimal(conversionInfo.todayConversion.ptsAmount)} `);
-	console.log(`✅ 已兑换RIVER量：${util.formatDecimal(conversionInfo.todayConversion.tokensAmount)} `);
+	console.log(`✅ 积分兑换总量：${util.formatDecimal(conversionInfo.todayConversionV4.ptsAmount)} `);
+	console.log(`✅ 已兑换RIVER量：${util.formatDecimal(conversionInfo.todayConversionV4.tokensAmount)} `);
 	console.log(`✅ 理想最大兑换利率：0.01 `);
-	console.log(`✅ 实际最大兑换利率：${conversionInfo.todayConversion.actualRate}${util.formatCompareIndication(oldPtsActualRate, conversionInfo.todayConversion.actualRate)} \n`);
+	console.log(`✅ 实际最大兑换利率：${conversionInfo.todayConversionV4.actualRate}${util.formatCompareIndication(oldPtsActualRate, conversionInfo.todayConversionV4.actualRate)} \n`);
 }
 
 /**
@@ -406,6 +494,7 @@ module.exports = {
 	logRiverPrice,
 	logRiverOfficialStaking,
 	logRiverOfficialStakingV3,
+	logRiverOfficialStakingV4,
 	logRiverOfficialUnStaking,
 	log2025GalxeStakingAction,
 	log2026GalxeMintSatUSDAction,

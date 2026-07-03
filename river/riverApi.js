@@ -659,10 +659,71 @@ async function retrieveTodayPtsConversionInfoV3() {
 		}
 		// console.log(`totalPenaltyAmount : ${totalPenaltyAmount}`)
 		// 组装返回的json对象
-		conversionInfoJson.totalPtsConvertedAmount = totalPtsConvertedAmount;
-		conversionInfoJson.totalRiverConvertedAmount = totalRiverConvertedAmount;
-		conversionInfoJson.todayConversion = satisfyTodayJson;
-		conversionInfoJson.hasTodayData = hasTodayData;
+		conversionInfoJson.totalPtsConvertedAmountV3 = totalPtsConvertedAmount;
+		conversionInfoJson.totalRiverConvertedAmountV3 = totalRiverConvertedAmount;
+		conversionInfoJson.todayConversionV3 = satisfyTodayJson;
+		conversionInfoJson.hasTodayDataV3 = hasTodayData;
+
+		return conversionInfoJson;
+	} else {
+		return null;
+	}
+}
+
+/**
+ * 获取指定的riverpts转换信息(conversion4.0版本)
+ * @returns 
+ */
+async function retrieveTodayPtsConversionInfoV4() {
+	let conversionPtsApiURL = 'https://api-airdrop.river.inc/s2/pts-conversion-chart?interval=1d&startTime=1782914400000&endTime=1790776800000&phase=phase4';
+	let d = await retrieveRiverApiData(conversionPtsApiURL);
+	if (d) {
+		let conversionInfoJson = {};
+		conversionInfoJson.dynamicConversionStartTime = util.convertUTCAsChinaDate(1782914400000);
+		conversionInfoJson.dynamicConversionEndTime = util.convertUTCAsChinaDate(1790776800000);
+
+		let dotList = d.data;
+		// 过滤出今天的数据
+		let todayChinaTime = util.getCurrentDate();
+		/**
+		 * {
+			"timestamp": "2025-12-26T14:00:00.000Z",
+			"ptsAmount": 4271719.47878052,
+			"tokensAmount": 5494.61779219,
+			"penaltyAmount": 4184.13431284,
+			"actualRate": 0.00196142,
+			"expectedRate": 0.0072222
+		}
+		 */
+		let totalPtsConvertedAmount = 0;
+		let totalRiverConvertedAmount = 0;
+		let totalPenaltyAmount = 0;
+		let satisfyTodayJson;
+		let hasTodayData;
+		for (let i = 0; i < dotList.length; i++) {
+			let d = dotList[i];
+			let convertedChinaTime = util.convertUTCAsChinaDate(d.timestamp);
+			totalPtsConvertedAmount += d.ptsAmount;
+			totalPenaltyAmount += d.penaltyAmount;
+			totalRiverConvertedAmount += d.tokensAmount;
+			if (todayChinaTime === convertedChinaTime) {
+				if (d.expectedRate === 0) {
+					// 表明还未获取到今日数据，那使用昨日数据进行输出
+					satisfyTodayJson = dotList[i - 1];
+					hasTodayData = false;
+				} else {
+					hasTodayData = true;
+					satisfyTodayJson = d;
+				}
+				break;
+			}
+		}
+		// console.log(`totalPenaltyAmount : ${totalPenaltyAmount}`)
+		// 组装返回的json对象
+		conversionInfoJson.totalPtsConvertedAmountV4 = totalPtsConvertedAmount;
+		conversionInfoJson.totalRiverConvertedAmountV4 = totalRiverConvertedAmount;
+		conversionInfoJson.todayConversionV4 = satisfyTodayJson;
+		conversionInfoJson.hasTodayDataV4 = hasTodayData;
 
 		return conversionInfoJson;
 	} else {
@@ -737,6 +798,7 @@ module.exports = {
 	retrieve4FUNItemCount,
 	retrieveTodayPtsConversionInfo,
 	retrieveTodayPtsConversionInfoV3,
+	retrieveTodayPtsConversionInfoV4,
 	retrieveRiver2026PredictPriceCampaign,
 	retrieveRiverPtsConversionChartData2Xlsx
 };

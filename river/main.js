@@ -70,8 +70,18 @@ async function retrieveRiverIndicators() {
 			logUtil.logRiverOfficialStakingV3(currentDate, oldData, riverStakingJson, todayIndicatorJson);
 			todayIndicatorJson.oldTotalOfficialStakedAmountV3 = riverStakingJson.totalStakedAmount;
 			todayIndicatorJson.oldTotalClaimedAmountV3 = riverStakingJson.totalClaimedAmount;
-			// 每个周期的兑换总量留存
+		} else {
+			console.error("❌ 获取River3.0质押数据失败，跳过该部分输出");
+		}
+	}
 
+	if (riverConfig.enableReportRiverOfficialStakingV4) {
+		// 获取river质押3.0相关信息
+		let riverStakingJson = await riverApi.retrieveRiverStakingAmountV3(riverConfig.riverStakingStatisticV4URL);
+		if (riverStakingJson) {
+			logUtil.logRiverOfficialStakingV4(currentDate, oldData, riverStakingJson, todayIndicatorJson);
+			todayIndicatorJson.oldTotalOfficialStakedAmountV4 = riverStakingJson.totalStakedAmount;
+			todayIndicatorJson.oldTotalClaimedAmountV4 = riverStakingJson.totalClaimedAmount;
 		} else {
 			console.error("❌ 获取River3.0质押数据失败，跳过该部分输出");
 		}
@@ -97,12 +107,12 @@ async function retrieveRiverIndicators() {
 
 	// 获取指定的RiverPts转换信息
 	if (riverConfig.enableReportRiverPtsConversionInfo) {
-		let conversionInfo = await riverApi.retrieveTodayPtsConversionInfoV3();
+		let conversionInfo = await riverApi.retrieveTodayPtsConversionInfoV4();
 		if (conversionInfo) {
 			logUtil.logPtsConversionInfo(currentDate, conversionInfo, oldData.ptsActualRate, oldData.oldtotalRiverConvertedAmount);
-			todayIndicatorJson.ptsActualRate = conversionInfo.todayConversion.actualRate;
-			todayIndicatorJson.oldexpectedRate = conversionInfo.todayConversion.expectedRate;
-			todayIndicatorJson.oldtotalRiverConvertedAmount = conversionInfo.totalRiverConvertedAmount;
+			todayIndicatorJson.ptsActualRate = conversionInfo.todayConversionV4.actualRate;
+			todayIndicatorJson.oldexpectedRate = conversionInfo.todayConversionV4.expectedRate;
+			todayIndicatorJson.oldtotalRiverConvertedAmount = conversionInfo.totalRiverConvertedAmountV4;
 		}
 	}
 	// 获取指定4FUN参与人数
