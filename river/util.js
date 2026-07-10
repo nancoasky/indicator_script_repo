@@ -184,6 +184,22 @@ function convertUTCAsChinaDatetime(utcDate) {
 	return formattedDate;
 }
 
+/**
+ * 判断当前时间是否大于东八区（UTC+8）的 22 点整
+ * @returns {boolean} 若当前东八区时间 > 22:00:00 则返回 true，否则 false
+ */
+function isAfter22Beijing() {
+    const now = new Date();
+    // 当前 UTC 时间戳加上 8 小时的毫秒数，得到东八区时间对应的 Date 对象
+    const beijingTime = new Date(now.getTime() + 8 * 60 * 60 * 1000);
+    const hours = beijingTime.getUTCHours();
+    const minutes = beijingTime.getUTCMinutes();
+    const seconds = beijingTime.getUTCSeconds();
+
+    // 严格大于 22:00:00
+    return hours > 22 || (hours === 22 && (minutes > 0 || seconds > 0));
+}
+
 
 
 /**
@@ -324,5 +340,6 @@ module.exports = {
 	formatDecimal,
 	formatCompareIndication,
 	parseAbbreviatedNumber,
-	numberToEmoji
+	numberToEmoji,
+	isAfter22Beijing
 };
