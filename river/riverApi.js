@@ -75,7 +75,7 @@ async function retrieveTwitterReplyCount(url) {
 async function retrieveMaxinumAPR() {
 	try {
 		// let dataConfig = await util.readFileAsJson('river_env.json');
-		let url = 'https://app.river.inc/river';
+		let url = 'https://app.riverai.inc/river';
 		let selector = 'span[class*="lg:text-[80px]"]';
 		let textValue = await retrievePageElementTextValueByPuppeteer(url, selector, 15000);
 		if (textValue) {
@@ -135,7 +135,7 @@ async function retrieveRiverApiData(url, options = {}) {
 					'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
 					'Accept': 'application/json',
 					'Accept-Language': 'zh-CN,zh;q=0.8,en;q=0.6',
-					'Origin': 'https://app.river.inc',
+					'Origin': 'https://app.riverai.inc',
 					...options.headers
 				},
 				httpAgent: httpAgent,
@@ -548,7 +548,7 @@ async function retrieveRiverStakingAmountV3(url) {
  * @returns 人数
  */
 async function retrieve4FUNItemCount() {
-	let fourfunApiURL = 'https://api-airdrop.river.inc/twitter/account-list?itemsPerPage=10&currentPage=1&sortBy=scoreRank&direction=asc';
+	let fourfunApiURL = 'https://api-airdrop.riverai.inc/twitter/account-list?itemsPerPage=10&currentPage=1&sortBy=scoreRank&direction=asc';
 	let d = await retrieveRiverApiData(fourfunApiURL);
 	if (d) {
 		return d.totalItems;
@@ -562,7 +562,7 @@ async function retrieve4FUNItemCount() {
  * @returns 
  */
 async function retrieveTodayPtsConversionInfo() {
-	let conversionPtsApiURL = 'https://api-airdrop.river.inc/s2/pts-conversion-chart?interval=1d';
+	let conversionPtsApiURL = 'https://api-airdrop.riverai.inc/s2/pts-conversion-chart?interval=1d';
 	let d = await retrieveRiverApiData(conversionPtsApiURL);
 	if (d) {
 		let conversionInfoJson = {};
@@ -614,7 +614,7 @@ async function retrieveTodayPtsConversionInfo() {
  * @returns 
  */
 async function retrieveTodayPtsConversionInfoV3() {
-	let conversionPtsApiURL = 'https://api-airdrop.river.inc/s2/pts-conversion-chart?interval=1d&startTime=1778076000000&endTime=1782828000000&phase=phase3';
+	let conversionPtsApiURL = 'https://api-airdrop.riverai.inc/s2/pts-conversion-chart?interval=1d&startTime=1778076000000&endTime=1782828000000&phase=phase3';
 	let d = await retrieveRiverApiData(conversionPtsApiURL);
 	if (d) {
 		let conversionInfoJson = {};
@@ -675,7 +675,7 @@ async function retrieveTodayPtsConversionInfoV3() {
  * @returns 
  */
 async function retrieveTodayPtsConversionInfoV4() {
-	let conversionPtsApiURL = 'https://api-airdrop.river.inc/s2/pts-conversion-chart?interval=1d&startTime=1782914400000&endTime=1790776800000&phase=phase4';
+	let conversionPtsApiURL = 'https://api-airdrop.riverai.inc/s2/pts-conversion-chart?interval=1d&startTime=1782914400000&endTime=1790776800000&phase=phase4';
 	let d = await retrieveRiverApiData(conversionPtsApiURL);
 	if (d) {
 		let conversionInfoJson = {};
@@ -753,7 +753,7 @@ async function retrieveTodayPtsConversionInfoV4() {
 		}
  */
 async function retrieveRiver2026PredictPriceCampaign() {
-	let campaignApiURL = 'https://api-airdrop.river.inc/twitter-user-predict/list?itemsPerPage=20&currentPage=1';
+	let campaignApiURL = 'https://api-airdrop.riverai.inc/twitter-user-predict/list?itemsPerPage=20&currentPage=1';
 	let d = await retrieveRiverApiData(campaignApiURL);
 	if (d) {
 		return {
